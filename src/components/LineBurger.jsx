@@ -12,7 +12,6 @@ function LineBurger() {
     >
       <path
         d="M2 2H26"
-        
         strokeWidth={3}
         strokeLinecap="round"
         strokeLinejoin="round"

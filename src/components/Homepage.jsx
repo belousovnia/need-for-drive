@@ -12,17 +12,20 @@ function Homepage() {
         </header>
 
         <div className='homepage__content'>
-          <h1 className='homepage__title'>
-            Каршеринг
-          </h1>
-          <h1 className='homepage__logo homepage__logo_big'>
-            Need for drive
-          </h1>
-          <p className='homepage__p'>
-            Поминутная аренда авто твоего города
-          </p>
+          <div className='homepage__content-text-wrapper'>
+            <h1 className='homepage__title'>
+              Каршеринг
+            </h1>
+            <h1 className='homepage__logo homepage__logo_big'>
+              Need for drive
+            </h1>
+            <p className='homepage__p'>
+              Поминутная аренда авто твоего города
+            </p>
+          </div>
           
-          <button className='main-button' >
+          
+          <button className='main-button homepage__button' >
             <p className='main-button__title'>
               Забронировать
             </p>
