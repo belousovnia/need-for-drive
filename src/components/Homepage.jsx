@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Location from './Location';
 import Slider from './Slider';
 
@@ -25,11 +26,11 @@ function Homepage() {
           </div>
           
           
-          <button className='main-button homepage__button' >
+          <Link to="/order" className='main-button homepage__button' >
             <p className='main-button__title'>
               Забронировать
             </p>
-          </button>
+          </Link>
         </div>
 
         <footer className='homepage__footer'>

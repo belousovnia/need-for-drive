@@ -1,0 +1,51 @@
+@import "general";
+
+.main-button {
+  color: $grayLight;
+  background: linear-gradient(to right, #0EC261, #039F67);
+  border: 0;
+  border-radius: 8px;
+  width: 250px;
+  text-decoration: none;
+}
+
+.main-button__title {
+  margin: 0;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  font-size: 18px;
+  font-family: $mainFont;
+  text-align: center;
+}
+
+.main-button:hover {
+  filter: brightness(90%);
+}
+
+.main-button:focus {
+  filter: brightness(90%);
+}
+
+.main-button:active {
+  filter: brightness(80%);
+}
+
+.main-button_green {
+  background: linear-gradient(to right, #0EC261, #039F67);
+  width: 164px;
+}
+
+.main-button_blue {
+  background: linear-gradient(to right, #0C7B67, #132949);
+  width: 164px;
+}
+
+.main-button_red {
+  background: linear-gradient(to right, #7B0C3B, #493013);
+  width: 164px;
+}
+
+.main-button_purple {
+  background: linear-gradient(to right, #720C7B, #281349);
+  width: 164px;
+}

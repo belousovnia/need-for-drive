@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 import { changeHeadHiding } from './store/actions';
 import IconsSocialMedia from './components/IconsSocialMedia';
 import Homepage from './components/Homepage';
+import OrderPage from './components/OrderPage';
 
 function App(props) {
   const { headHiding, changeHeadHiding } = props;
@@ -64,6 +65,7 @@ function App(props) {
       <div className='content'>
         <Routes>
           <Route path='/' element={<Homepage/>}/>
+          <Route path='/order' element={<OrderPage/>}/>
         </Routes>
       </div>
     </div>

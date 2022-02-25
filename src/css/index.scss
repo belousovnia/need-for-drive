@@ -1,0 +1,68 @@
+@import "general";
+@import "homePage.scss";
+@import "orderPage.scss";
+@import "header.scss";
+@import "slider.scss";
+@import "mainButton.scss";
+
+body { 
+    margin: 0;
+    padding: 0;
+}
+
+.app {
+    width: 100vw;
+    height: 100vh;
+    margin: 0; 
+    padding: 0;
+    display: flex;
+    z-index: -10;
+}
+
+.content {
+    width: calc(100% - 64px) ;
+    height: 100vh;
+    margin-left: $widthHeader;
+    background-color: $mainBlack;
+    display: flex;
+    z-index: 0;
+}
+
+// --------------------------------------------------------
+
+@media screen and (max-width: 500px) {
+    .header__container-button-background {
+        display: none;
+    }
+
+    .button-burger {
+
+        background-color: #00000000;
+    }
+
+    .button-burger__svg-line {
+        stroke: $mainBlack;
+    }
+
+    .content {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .header {
+        margin-left: 0;
+    }
+
+    .language_active {
+        display: none;
+    }
+
+    .header__link {
+        font-size: 22px;
+    }
+
+    .header__left-block {
+        padding-left: 28px;
+    }
+}
+

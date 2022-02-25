@@ -1,0 +1,164 @@
+@import "general";
+
+.header {
+  width: auto;
+  height: 100%;
+  display: flex;
+  position: fixed;
+  left: -150%;
+  transition: 300ms;
+  z-index: 1;
+  margin-left: 64px;
+}
+
+.header__active {
+  left: 0;
+}
+
+.header__container-button-background {
+  position: fixed;
+  width: 64px;
+  height: 100%;
+  background-color: $mainBlack ;
+}
+
+.button-burger {
+  position: absolute;
+  height: 36px;
+  width: 36px;
+  background-color: $mainBlack;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 0;
+  z-index: 10;
+  padding: 0;
+  outline: none;
+  top: 33px;
+  left: 14px;
+}
+
+.button-burger__svg-line {
+  width: 100%;
+  padding-bottom: 4px;
+  stroke: $grayLight;
+}
+
+.button-burger:hover {
+  .button-burger__svg-line {
+      stroke: $mainAccent;
+  }
+}
+
+.button-burger__cross {
+  stroke: $grayLight;
+}
+
+.button-burger__cross:hover {
+  stroke: $mainAccent;
+}
+
+.language {
+  background-color: $mainBlack;
+  z-index: 10;
+  color: $grayLight;
+  font-size: 18px;
+  font-family: $mainFont;
+  border: 0;
+  outline: none;
+  position: absolute;
+  bottom: 33px;
+  left: 11px;
+}
+
+.language:hover {
+  color: $mainAccent;
+}
+
+.header__left-block {
+  width: $widtuHomepage;
+  min-width: 614px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 64px;
+  
+  position: relative;
+  z-index: 2;
+  box-sizing: border-box;
+  background-color:$mainBlack;
+}
+
+.header__content {
+  position: fixed;
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 12;
+}
+
+.header__transparent-block {
+  width: $widtuHomepage;
+  height: 100vh;
+  background-color: $mainBlack ;
+  opacity: 0.9;
+  z-index: 2;
+  position: relative;
+}
+
+// --------------------------------------------------------
+
+.header__link {
+  position: relative;
+  width: auto;
+  text-decoration: none;
+  color: $grayLight;
+  font-size: 32px;
+  font-family: $mainFont;
+  margin-bottom: 15px;
+  z-index: 6; 
+}
+
+.header__link:hover {
+  color: $mainAccent;
+}
+
+.icons-social-media {
+  padding-top: 10px;
+}
+
+.icons-social-media__icon:hover {
+  fill: $mainAccent;
+}
+
+.icons-social-media__icon {
+  height: 32px;
+  width: 32px;
+  margin-right: 32px;
+  fill: $grayLight;
+}
+
+// --------------------------------------------------------
+
+@media screen and (max-width: 1100px) {
+
+  .header__left-block {
+      min-width: 0;
+  }
+
+  .header__transparent-block {
+      display: none;
+  }
+
+  .header__left-block {
+      width: 100vw;
+  }
+
+  .header__link {
+      font-size: 28px;
+  }
+}
+
