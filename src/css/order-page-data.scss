@@ -1,0 +1,13 @@
+@import "general.scss";
+
+.order-page-data {
+  padding-left: 32px;
+}
+
+.order-page-data__title {
+  font-family: $mainFont;
+  text-align: end;
+  font-size: 18px;
+  margin-top: 0;
+  margin-bottom: 32px;
+}

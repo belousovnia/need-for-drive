@@ -1,0 +1,29 @@
+@import 'general.scss';
+
+.step-1 {
+  
+}
+
+.step-1__items-block {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+.step-1__items-city {
+  display: flex;
+  margin-bottom: 16px;
+  
+}
+
+.step-1_items-p {
+  font-family: $mainFont;
+  font-weight: 300;
+  font-size: 14px;
+  margin: 0;
+  margin-right: 8px;
+}
+
+.step-1__items-point {
+  display: flex;
+}

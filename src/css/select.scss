@@ -1,0 +1,100 @@
+@import "general.scss";
+
+.select {
+  
+}
+
+.select__input-wrapped {
+  border-bottom: 1px solid $grayDark;
+  padding-right: 8px;
+  padding-left: 8px;
+  min-width: 224px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.select__input {
+  border: 0;
+  font-family: $mainFont;
+  font-size: 14px;
+  font-weight: lighter;
+  outline:none;
+}
+
+.select__cross {
+  
+}
+
+.select__cross_off {
+  display: none;
+}
+
+.select__list {
+  display: flex;
+  flex-direction: column;
+  width: 240px;
+  box-sizing: border-box;
+  overflow: auto;
+  height: auto;
+  position: absolute;
+  background-color: #ffffff;
+}
+
+.select-city__bar {
+}
+
+.select__bar {
+  max-height: 95px;
+  border: 1px solid $grayLight;
+  display: none;
+  padding-top: 8px;
+  
+  .simplebar-track {
+    max-width: 5px;
+    border-left: 1px solid $grayLight;
+  }
+
+  .simplebar-scrollbar:before {
+    margin-left: -1px;
+    width: 2px;
+  }
+
+  .simplebar-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .simplebar-wrapper {
+    display: flex;
+  }
+}
+
+.simplebar-mask{
+  width: 220px;
+  display: flex;
+}
+
+.select__bar-wrapped {
+  position: absolute;
+  display: flex;
+  width: 100%;
+}
+
+.select__list_active {
+  display: flex;
+}
+
+.select__item {
+  border: 0;
+  background-color: #ffffff;
+  font-family: $mainFont;
+  text-align: left;
+  color: $grayDark;
+  font-size: 14px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}

@@ -1,0 +1,53 @@
+@import "general.scss";
+
+.order-page {
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.order-page__header-wrapped {
+  width: 100%;
+  max-width: $widthOrderPage;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 32px;
+  margin-bottom: 32px;
+  padding-left: 16px;
+  padding-right: 16px;
+  box-sizing: border-box;
+}
+
+.order-page__main-block {
+  max-width: $widthOrderPage;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 16px;
+  padding-left: 16px;
+  box-sizing: border-box;
+}
+
+.order-page__form {
+  margin-top: 32px;
+}
+
+.order-page__data-wrapped {
+  border-left: 1px solid $grayLight;
+  padding-top: 32px;
+}
+
+.order-page__data {
+  
+}
+
+@media screen and (max-width: $widthModile) {
+  .order-page__header-wrapped {
+    margin-top: 16px;
+  }
+}

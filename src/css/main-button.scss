@@ -7,6 +7,7 @@
   border-radius: 8px;
   width: 250px;
   text-decoration: none;
+  display: block;
 }
 
 .main-button__title {
@@ -48,4 +49,11 @@
 .main-button_purple {
   background: linear-gradient(to right, #720C7B, #281349);
   width: 164px;
+}
+
+@media screen and (max-width: $widthModile) {
+  .main-button_homepage {
+    width: 100vw;
+    border-radius: 0;
+  } 
 }
