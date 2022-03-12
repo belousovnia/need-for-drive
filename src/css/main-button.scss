@@ -31,6 +31,12 @@
   filter: brightness(80%);
 }
 
+.main-button_bloked {
+  background: $grayLight;
+  color: #ffffff;
+  pointer-events: none;
+}
+
 .main-button_green {
   background: linear-gradient(to right, #0EC261, #039F67);
   width: 164px;
@@ -51,9 +57,23 @@
   width: 164px;
 }
 
+.main-button_order {
+  width: 100%;
+}
+
+@media screen and (max-width: $widthTable) {
+  .main-button_order {
+    width: 300px;
+  }
+}
+
 @media screen and (max-width: $widthModile) {
   .main-button_homepage {
     width: 100vw;
     border-radius: 0;
   } 
+
+  .main-button_order {
+    width: 100%;
+  }
 }

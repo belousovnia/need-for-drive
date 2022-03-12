@@ -1,7 +1,7 @@
 import React from 'react';
 import HomepageHeader from './HomepageHeader';
 import Header from './Header';
-import StageLine from './StageLine';
+import StepLine from './StepLine';
 import { Link, Outlet } from 'react-router-dom';
 import OrderPageData from './OrderPageData';
 
@@ -14,7 +14,7 @@ function OrderPage() {
           <div className='order-page__header-wrapped'>
             <HomepageHeader modifier='homepage-header_order-page'/>
           </div>
-          <StageLine/>
+          <StepLine/>
           <div className='order-page__main-block'>
             <div className='order-page__form'>
               <Outlet/>

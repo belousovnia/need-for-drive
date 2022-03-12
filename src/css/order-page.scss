@@ -15,8 +15,8 @@
   margin-right: auto;
   margin-top: 32px;
   margin-bottom: 32px;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-left: 32px;
+  padding-right: 32px;
   box-sizing: border-box;
 }
 
@@ -28,26 +28,50 @@
   height: 100%;
   display: flex;
   justify-content: space-between;
-  padding-right: 16px;
-  padding-left: 16px;
+  padding-right: 32px;
+  padding-left: 32px;
   box-sizing: border-box;
 }
 
 .order-page__form {
   margin-top: 32px;
+  width: calc(100% - 325px - 32px);
+  padding-right: 32px;
+  max-width: 736px;
 }
 
 .order-page__data-wrapped {
   border-left: 1px solid $grayLight;
   padding-top: 32px;
+  padding-left: 32px;
+  min-width: 325px;
+  box-sizing: border-box;
 }
 
-.order-page__data {
-  
+@media screen and (max-width: $widthTable) {
+  .order-page__main-block {
+    flex-direction: column;
+  }
+
+  .order-page__form {
+    width: 100%;
+  }
+
+  .order-page__data-wrapped {
+    border-left: 0;
+    padding-left: 0;
+    width: 100%;
+    max-width: 736px;
+  }
 }
 
 @media screen and (max-width: $widthModile) {
   .order-page__header-wrapped {
     margin-top: 16px;
+    
+  }
+
+  .order-page__data-wrapped {
+      min-width: 0;  
   }
 }

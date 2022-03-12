@@ -5,9 +5,16 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { changePointAutocomplete } from '../store/actions';
+import { changePoint } from '../store/actions';
 
 function SelectPoint(props) {
-  const { pointAutocomplete, changePointAutocomplete } = props;
+  const { 
+    pointAutocomplete, 
+    changePointAutocomplete, 
+    changePoint,
+    point,
+  } = props;
+
   const data = props.data;
   
   function changeSelectActive(newValue) {
@@ -43,6 +50,7 @@ function SelectPoint(props) {
                     onClick={() => {
                       changeSelectValue(dataItem.name);
                       checkCross();
+                      changePoint(dataItem.name);
                     }}
                   >
                     {dataItem.name}
@@ -68,16 +76,6 @@ function SelectPoint(props) {
 
   // --------------------------------------------------------
 
-  document.addEventListener('click', (e) => {
-    let targetSelect = document.getElementById('input-point');
-    let target = e.target;
-
-    if (targetSelect !== target) {
-      let select = document.getElementById('select-point__bar');
-      select.classList.remove('select__list_active');
-    };  
-  });
-
   useEffect(() => {
     changeAutocomplete()
     let input = document.getElementById('input-point');
@@ -85,12 +83,24 @@ function SelectPoint(props) {
       changeSelectActive(true);
       changeAutocomplete();
       checkCross();
+      changePoint(input.value);
     });
     input.addEventListener('focus', () => {
       changeSelectActive(true);
       changeAutocomplete();
     });
-    
+    document.addEventListener('click', (e) => {
+      let targetSelect = document.getElementById('input-point');
+      let target = e.target;
+
+      if (targetSelect !== target) {
+        try {
+          let select = document.getElementById('select-point__bar');
+          select.classList.remove('select__list_active');
+        } catch {};
+      };  
+    });
+    checkCross();
   }, []);
 
   return ( 
@@ -103,7 +113,7 @@ function SelectPoint(props) {
         className="select__input"
         id="input-point"
         placeholder="Начните вводить пункт..."
-        defaultValue={''}
+        defaultValue={point}
       />
       <svg
         className='select__cross select__cross_off'
@@ -116,6 +126,7 @@ function SelectPoint(props) {
         onClick={() => {
           changeSelectValue('');
           checkCross();
+          changePoint('');
         }}
       >
         <path
@@ -141,12 +152,14 @@ function SelectPoint(props) {
 const putStateToProps = (state) => {
   return {
     pointAutocomplete: state.pointAutocomplete,
+    point: state.point,
   };
 };
 
 const putActionToProps = (dispatch) => {
   return {
     changePointAutocomplete: bindActionCreators(changePointAutocomplete, dispatch),
+    changePoint: bindActionCreators(changePoint, dispatch),
   };
 };
 

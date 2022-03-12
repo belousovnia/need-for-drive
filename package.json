@@ -4,7 +4,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@2gis/mapgl": "^1.24.0",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
@@ -14,6 +13,7 @@
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
+    "react-yandex-maps": "^4.6.0",
     "redux": "^4.1.2",
     "simplebar-react": "^2.3.6",
     "web-vitals": "^2.1.4"

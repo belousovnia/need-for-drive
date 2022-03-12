@@ -1,4 +1,5 @@
 import { getData } from "./generalFunction";
+import { secretMap } from "./secret";
 
 //  Получает данные с сервера и формирует массив из данных
 // городов со свойством points в котором находятся данные 
@@ -27,4 +28,28 @@ export async function getCityPoint() {
   };
 
   return newData;
+};
+
+export async function getGeocoderPoint(data) {
+  let responseData = [];
+  data = await data;
+
+  for (let city in data){
+    for (let item in data[city].points){
+      const dataItem = data[city].points[item];
+      let address =`${data[city].name}, ${dataItem.address}`;
+      try {
+        let newItem = await fetch(`https://geocode-maps.yandex.ru/1.x/?apikey=${secretMap}&geocode=${address}&format=json`).then((response) => {
+          return response.json();
+        });
+        responseData.push({
+          'geocoderData': newItem.response.GeoObjectCollection.featureMember[0].GeoObject,
+          'mainData': dataItem,
+        });
+      } catch (err){
+        console.log('Ошибка запроса геокодирования');
+      };
+    };
+  };
+  return responseData;
 };

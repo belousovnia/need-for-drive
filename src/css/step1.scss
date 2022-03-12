@@ -1,22 +1,27 @@
 @import 'general.scss';
 
 .step-1 {
-  
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin-bottom: 32px;
 }
 
 .step-1__items-block {
   display: flex;
   flex-direction: column;
-  align-items: end;
+  align-items: flex-end;
+  width: auto;
+  margin-bottom: 45px;
 }
 
 .step-1__items-city {
   display: flex;
-  margin-bottom: 16px;
-  
+  margin-bottom: 24px;
 }
 
-.step-1_items-p {
+.step-1__items-p {
   font-family: $mainFont;
   font-weight: 300;
   font-size: 14px;
@@ -24,6 +29,13 @@
   margin-right: 8px;
 }
 
+.step-1_items-p_point {
+  width: 100%;
+}
+
 .step-1__items-point {
+  width: auto;
+  height: auto;
   display: flex;
+  align-items: end;
 }

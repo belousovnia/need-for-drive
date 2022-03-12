@@ -23,7 +23,7 @@
 }
 
 .button-burger {
-  position: absolute;
+  position: fixed;
   height: 36px;
   width: 36px;
   background-color: $mainBlack;
@@ -52,6 +52,7 @@
 }
 
 .button-burger__cross {
+  position: fixed;
   stroke: $grayLight;
 }
 
@@ -67,7 +68,7 @@
   font-family: $mainFont;
   border: 0;
   outline: none;
-  position: absolute;
+  position: fixed;
   bottom: 33px;
   left: 11px;
 }
@@ -191,6 +192,7 @@
 
   .button-burger {
     background-color: #00000000;
+    position: absolute;
   }
 
   .button-burger__svg-line {

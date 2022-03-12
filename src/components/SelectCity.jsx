@@ -5,9 +5,17 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { changeCityAutocomplete } from '../store/actions';
+import { changeCity } from '../store/actions';
+import { changePoint } from '../store/actions';
 
 function Selectcity(props) {
-  const { cityAutocomplete, changeCityAutocomplete } = props;
+  const { 
+    cityAutocomplete, 
+    changeCityAutocomplete,
+    changeCity,
+    city,
+    changePoint,
+  } = props;
   const data = props.data;
   
   function changeSelectActive(newValue) {
@@ -27,6 +35,7 @@ function Selectcity(props) {
   function changeSelectValuPoint(newValue) {
     let input = document.getElementById('input-point');
     input.value = newValue;
+    changePoint(newValue);
   };
 
   async function changeAutocomplete() {
@@ -48,6 +57,7 @@ function Selectcity(props) {
                   checkCross();
                   changeSelectValuPoint('');
                   checkCrossPoint();
+                  changeCity(dataItem.name)
                 }}
               >
                 {dataItem.name}
@@ -82,15 +92,7 @@ function Selectcity(props) {
 
 // --------------------------------------------------------
 
-  document.addEventListener('click', (e) => {
-    let targetSelect = document.getElementById('input-city');
-    let target = e.target;
-
-    if (targetSelect !== target) {
-      let select = document.getElementById('select-city__bar');
-      select.classList.remove('select__list_active');
-    };  
-  });
+  
 
   useEffect(() => {
     let input = document.getElementById('input-city');
@@ -98,6 +100,7 @@ function Selectcity(props) {
       changeSelectActive(true);
       checkCross();
       changeAutocomplete();
+      changeCity(input.value);
       changeSelectValuPoint('');
       checkCrossPoint();
     });
@@ -105,7 +108,18 @@ function Selectcity(props) {
       changeSelectActive(true);
       changeAutocomplete();
     });
-    
+    document.addEventListener('click', (e) => {
+      let targetSelect = document.getElementById('input-city');
+      let target = e.target;
+  
+      if (targetSelect !== target) {
+        try {
+          let select = document.getElementById('select-city__bar');
+            select.classList.remove('select__list_active');
+        } catch {};
+      };  
+    }); 
+    checkCross();
   }, []);
 
   return ( 
@@ -119,7 +133,7 @@ function Selectcity(props) {
           className="select__input"
           id="input-city"
           placeholder="Начните вводить город..."
-          defaultValue={''}
+          defaultValue={city}
         />
         <svg
           className='select__cross select__cross_off'
@@ -135,6 +149,7 @@ function Selectcity(props) {
             changeAutocomplete();
             changeSelectValuPoint('');
             checkCrossPoint();
+            changeCity('');
           }}
         >
           <path
@@ -160,12 +175,15 @@ function Selectcity(props) {
 const putStateToProps = (state) => {
   return {
     cityAutocomplete: state.cityAutocomplete,
+    city: state.city,
   };
 };
 
 const putActionToProps = (dispatch) => {
   return {
     changeCityAutocomplete: bindActionCreators(changeCityAutocomplete, dispatch),
+    changeCity: bindActionCreators(changeCity, dispatch),
+    changePoint: bindActionCreators(changePoint, dispatch),
   };
 };
 

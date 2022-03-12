@@ -10,6 +10,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 .homepage {
   width: 50%;
   min-width: 614px;
@@ -136,8 +140,8 @@
   margin-right: auto;
   margin-top: 32px;
   margin-bottom: 32px;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-left: 32px;
+  padding-right: 32px;
   box-sizing: border-box;
 }
 
@@ -149,23 +153,49 @@
   height: 100%;
   display: flex;
   justify-content: space-between;
-  padding-right: 16px;
-  padding-left: 16px;
+  padding-right: 32px;
+  padding-left: 32px;
   box-sizing: border-box;
 }
 
 .order-page__form {
   margin-top: 32px;
+  width: calc(100% - 325px - 32px);
+  padding-right: 32px;
+  max-width: 736px;
 }
 
 .order-page__data-wrapped {
   border-left: 1px solid #EEEEEE;
   padding-top: 32px;
+  padding-left: 32px;
+  min-width: 325px;
+  box-sizing: border-box;
 }
 
+@media screen and (max-width: 1024px) {
+  .order-page__main-block {
+    flex-direction: column;
+  }
+
+  .order-page__form {
+    width: 100%;
+  }
+
+  .order-page__data-wrapped {
+    border-left: 0;
+    padding-left: 0;
+    width: 100%;
+    max-width: 736px;
+  }
+}
 @media screen and (max-width: 767px) {
   .order-page__header-wrapped {
     margin-top: 16px;
+  }
+
+  .order-page__data-wrapped {
+    min-width: 0;
   }
 }
 .header {
@@ -191,7 +221,7 @@
 }
 
 .button-burger {
-  position: absolute;
+  position: fixed;
   height: 36px;
   width: 36px;
   background-color: #121212;
@@ -218,6 +248,7 @@
 }
 
 .button-burger__cross {
+  position: fixed;
   stroke: #EEEEEE;
 }
 
@@ -233,7 +264,7 @@
   font-family: "Roboto", Medium;
   border: 0;
   outline: none;
-  position: absolute;
+  position: fixed;
   bottom: 33px;
   left: 11px;
 }
@@ -348,6 +379,7 @@
 
   .button-burger {
     background-color: #00000000;
+    position: absolute;
   }
 
   .button-burger__svg-line {
@@ -564,6 +596,12 @@
   filter: brightness(80%);
 }
 
+.main-button_bloked {
+  background: #EEEEEE;
+  color: #ffffff;
+  pointer-events: none;
+}
+
 .main-button_green {
   background: linear-gradient(to right, #0EC261, #039F67);
   width: 164px;
@@ -584,10 +622,23 @@
   width: 164px;
 }
 
+.main-button_order {
+  width: 100%;
+}
+
+@media screen and (max-width: 1024px) {
+  .main-button_order {
+    width: 300px;
+  }
+}
 @media screen and (max-width: 767px) {
   .main-button_homepage {
     width: 100vw;
     border-radius: 0;
+  }
+
+  .main-button_order {
+    width: 100%;
   }
 }
 .homepage-header {
@@ -628,6 +679,10 @@
   height: auto;
 }
 
+.homepage-header_order-page {
+  box-sizing: border-box;
+}
+
 @media screen and (max-width: 1024px) {
   .homepage-header__logo_big {
     font-size: 32px;
@@ -652,8 +707,8 @@
   max-width: 1272px;
   margin-right: auto;
   margin-left: auto;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-left: 32px;
+  padding-right: 32px;
   box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
@@ -669,6 +724,7 @@
 
 .stage-line__link_active {
   pointer-events: auto;
+  color: #0EC261;
 }
 
 .stage-line__arrow {
@@ -677,7 +733,9 @@
 }
 
 .order-page-data {
-  padding-left: 32px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 32px;
 }
 
 .order-page-data__title {
@@ -688,14 +746,70 @@
   margin-bottom: 32px;
 }
 
+.information-list {
+  padding-left: 0;
+}
+
+.information-list__line {
+  display: flex;
+  width: 292px;
+}
+
+.information-list__line::after {
+  background: url("https://i.stack.imgur.com/otJN0.png") repeat-x bottom;
+  content: "";
+  flex-grow: 1;
+  order: 2;
+}
+
+.information-list__title {
+  order: 1;
+  font-family: "Roboto", Medium;
+  font-weight: 300;
+  margin-right: 5px;
+  display: flex;
+  align-items: flex-end;
+  font-size: 14px;
+}
+
+.information-list__chapter {
+  max-width: 45%;
+  order: 3;
+  font-family: "Roboto", Medium;
+  color: #999999;
+  text-align: right;
+  font-size: 14px;
+  padding-left: 5px;
+}
+
+@media screen and (max-width: 1024px) {
+  .order-page-data__title {
+    text-align: left;
+  }
+
+  .information-list__line {
+    width: auto;
+  }
+}
+@media screen and (max-width: 767px) {
+  .order-page-data__title {
+    margin-bottom: 16px;
+  }
+}
+.select {
+  width: 180px;
+  height: 100%;
+  min-width: 180px;
+}
+
 .select__input-wrapped {
   border-bottom: 1px solid #999999;
   padding-right: 8px;
   padding-left: 8px;
-  min-width: 224px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  box-sizing: border-box;
 }
 
 .select__input {
@@ -704,6 +818,12 @@
   font-size: 14px;
   font-weight: lighter;
   outline: none;
+  width: 100%;
+}
+
+.select__cross {
+  width: 8px;
+  height: 8px;
 }
 
 .select__cross_off {
@@ -713,7 +833,7 @@
 .select__list {
   display: flex;
   flex-direction: column;
-  width: 240px;
+  width: 180px;
   box-sizing: border-box;
   overflow: auto;
   height: auto;
@@ -772,18 +892,28 @@
   padding-bottom: 4px;
 }
 
+.step-1 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin-bottom: 32px;
+}
+
 .step-1__items-block {
   display: flex;
   flex-direction: column;
-  align-items: end;
+  align-items: flex-end;
+  width: auto;
+  margin-bottom: 45px;
 }
 
 .step-1__items-city {
   display: flex;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 
-.step-1_items-p {
+.step-1__items-p {
   font-family: "Roboto", Medium;
   font-weight: 300;
   font-size: 14px;
@@ -791,8 +921,22 @@
   margin-right: 8px;
 }
 
+.step-1_items-p_point {
+  width: 100%;
+}
+
 .step-1__items-point {
+  width: auto;
+  height: auto;
   display: flex;
+  align-items: end;
+}
+
+.my-map {
+  margin-top: 16px;
+  width: 100%;
+  height: 352px;
+  max-width: 736px;
 }
 
 body {

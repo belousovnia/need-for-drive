@@ -11,8 +11,8 @@
   max-width: $widthOrderPage;
   margin-right: auto;
   margin-left: auto;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-left: 32px;
+  padding-right: 32px;
   box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
@@ -32,6 +32,7 @@
 
 .stage-line__link_active {
   pointer-events: auto;
+  color: $mainAccent;
 }
 
 .stage-line__arrow {
