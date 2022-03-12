@@ -746,6 +746,11 @@
   margin-bottom: 32px;
 }
 
+.order-page-data__price {
+  font-family: "Roboto", Medium;
+  font-size: 16px;
+}
+
 .information-list {
   padding-left: 0;
 }

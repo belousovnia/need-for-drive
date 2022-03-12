@@ -162,6 +162,9 @@ function OrderPageData(props) {
       <ul class="information-list">
         {buildOrderTitle()}
       </ul>
+      <p className='order-page-data__price'>
+        <b>Цена: </b>от 8 000 до 12 000 ₽
+      </p>
       <Link 
         to={`/order/${linkChange()}`}      
         className='main-button main-button_homepage main-button_bloked main-button_order'
