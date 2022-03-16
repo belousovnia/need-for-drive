@@ -1,4 +1,4 @@
-import { React, useEffect } from 'react';
+import { React, useEffect, useMemo } from 'react';
 import SelectCity from './SelectCity';
 import { getCityPoint } from './dataFunction/dataStep1';
 import SelectPoint from './SelectPoint';
@@ -12,8 +12,8 @@ function Step1(props) {
     changeListFinalPoint,
   } = props;
 
-  let dataStep1 = getCityPoint()
-
+  const dataStep1 = useMemo(() => getCityPoint(), []); 
+  
   async function buildingNewListFinalPoint() {
     const data = await dataStep1;
     let newList = [];

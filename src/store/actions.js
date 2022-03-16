@@ -12,6 +12,10 @@ import {
   ACTION_CHANGE_LIST_FINAL_POINT,
   ACTION_CHANGE_STATUS_STEP1,
   ACTION_CHANGE_ORDER_DATA,
+  ACTION_CHANGE_TILES,
+  ACTION_CHANGE_CATEGORY_LIST,
+  ACTION_CHANGE_CATEGORY_FILTER,
+  ACTION_CHANGE_CAR,
 } from "./type";
 
 export function changeHeadHiding(newStatus) {
@@ -128,3 +132,33 @@ export function changeOrderData(newStatus) {
     payload: newStatus
   };
 };
+
+export function changeTiles(newStatus) {
+  return {
+    type: ACTION_CHANGE_TILES,
+    payload: newStatus
+  };
+};
+
+export function changeCategoryList(newStatus) {
+  return {
+    type: ACTION_CHANGE_CATEGORY_LIST,
+    payload: newStatus
+  };
+};
+
+export function changeCategoryFilter(newStatus) {
+  return {
+    type: ACTION_CHANGE_CATEGORY_FILTER,
+    payload: newStatus
+  };
+};
+
+export function changeCar(newStatus) {
+  return {
+    type: ACTION_CHANGE_CAR,
+    payload: newStatus
+  };
+};
+
+

@@ -12,6 +12,10 @@ import {
   ACTION_CHANGE_LIST_FINAL_POINT,
   ACTION_CHANGE_STATUS_STEP1,
   ACTION_CHANGE_ORDER_DATA,
+  ACTION_CHANGE_TILES,
+  ACTION_CHANGE_CATEGORY_LIST,
+  ACTION_CHANGE_CATEGORY_FILTER,
+  ACTION_CHANGE_CAR,
 } from "./type";
 
 const initialState = {
@@ -28,6 +32,12 @@ const initialState = {
   address: '',
   statusStep1: false,
   orderData: {},
+  tiles: [
+    <div className="step-2__loading" key="step-2__loading-1"></div>
+  ],
+  categoryList: [],
+  categoryFilter: 'Все модели',
+  car: undefined,
 };
 
 export const rootReduser = (state = initialState, action) => {
@@ -57,7 +67,16 @@ export const rootReduser = (state = initialState, action) => {
     case ACTION_CHANGE_STATUS_STEP1:
       return {...state, statusStep1: action.payload};
     case ACTION_CHANGE_ORDER_DATA: 
-      return {...state, orderData: action.payload} 
+      return {...state, orderData: action.payload}
+    case ACTION_CHANGE_TILES: 
+      return {...state, tiles: action.payload}
+    case ACTION_CHANGE_CATEGORY_LIST: 
+      return {...state, categoryList: action.payload}
+    case ACTION_CHANGE_CATEGORY_FILTER: 
+      return {...state, categoryFilter: action.payload}
+    case ACTION_CHANGE_CAR: 
+      return {...state, car: action.payload}    
     };
   return state;
 };
+

@@ -13,3 +13,9 @@ export async function getData(address){
   
   return data.data;
 };
+
+// Принимает строку и возвращает строку с пробелами через каждые 3 символа с конца.
+export function prettify(num) {
+  let n = num.toString();
+  return n.replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, "$1" + ' ');
+};

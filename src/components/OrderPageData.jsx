@@ -17,11 +17,36 @@ function OrderPageData(props) {
     statusStep1,
     orderData,
     changeOrderData,
+    car,
   } = props;
 
-  
+  console.log(car);
+
   let location = useLocation().pathname;
-    
+
+  function redirectStep() {
+    let nowStep = 1;
+    switch (location) {
+      case '/order/step-1':
+        break;
+      case '/order/step-2':
+        nowStep = 2;
+        break;
+      case '/order/step-3':
+        nowStep = 3;
+        break;
+      case '/order/step-4':
+        nowStep = 4;
+        break;
+      case '/order/step-5':
+        nowStep = 5;
+        break;
+    };
+    if (nowStep > step) {
+      window.location = '#/order/step-1';
+    };
+  };
+
   function getLocation() {
     switch (location) {
       case '/order/step-1':
@@ -87,30 +112,30 @@ function OrderPageData(props) {
   };
 
   function changeButtonData() {
+    let newData = {};
     switch (getLocation()) {
       case 1:
-        return changeOrderData({
+        newData = {
           'city': city,
           'point': point,
           'address': getAddress(),
-        });
+        };
+        break;
       case 2:
-        return {
-
-        };
+        newData = {
+          'city': city,
+          'point': point,
+          'address': getAddress(),
+          'car': car,
+        }
+        break;
       case 3:
-        return {
-
-        };
+        break;
       case 4:
-        return {
-
-        };
+        break;
       case 5:
-        return {
-
-        };
     };
+    changeOrderData(newData);
   };
 
   // ------------------------------------------------------
@@ -118,12 +143,23 @@ function OrderPageData(props) {
   function buildOrderTitle() {
     let listTitle = [];
     if (orderData.address != undefined && 
-      orderData.city != undefined) {
+      orderData.city != undefined &&
+      orderData.point != undefined) {
       listTitle.push(
-        <li className='information-list__line'>
-          <span class="information-list__title">Пункт выдачи</span>
-          <span class="information-list__chapter">
+        <li key={'lt1'} className='information-list__line'>
+          <span className="information-list__title">Пункт выдачи</span>
+          <span className="information-list__chapter">
             {`${orderData.city}, ${orderData.address}`}
+          </span>
+        </li>
+      );
+    };
+    if (orderData.car != undefined) {
+      listTitle.push(
+        <li key={'lt2'} className='information-list__line'>
+          <span className="information-list__title">Модель</span>
+          <span className="information-list__chapter">
+            {orderData.car.name}
           </span>
         </li>
       );
@@ -132,17 +168,22 @@ function OrderPageData(props) {
   };
 
   function checkButton() {
+    let button = document.getElementById('order-page-data__button');
     switch (getLocation()) {
-      case 1: {
-        let button = document.getElementById('order-page-data__button');
+      case 1: 
         if (statusStep1) {
           button.classList.remove('main-button_bloked');
         } else {
           button.classList.add('main-button_bloked');
         };
-      } case 2: {
-
-      }
+        break
+      case 2: 
+        if (car == undefined) {
+          button.classList.add('main-button_bloked');
+        } else {
+          button.classList.remove('main-button_bloked');
+        };
+        break
     };   
   };
 
@@ -154,12 +195,14 @@ function OrderPageData(props) {
 
   useEffect(() => {
     checkButton();
-  }, [step, statusStep1]);
+  }, [step, statusStep1, car, location]);
+
+  useEffect(() => redirectStep(), [location])
 
   return ( 
     <div className='order-page-data'>
       <h1 className='order-page-data__title'>Ваш заказ:</h1>
-      <ul class="information-list">
+      <ul className="information-list">
         {buildOrderTitle()}
       </ul>
       <p className='order-page-data__price'>
@@ -192,6 +235,7 @@ const putStateToProps = (state) => {
     city: state.city,
     statusStep1: state.statusStep1,
     orderData: state.orderData,
+    car: state.car,
   };
 };
 
