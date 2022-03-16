@@ -55,7 +55,7 @@ function MyMap(props) {
   };
 
   useEffect(() => {
-    // buildingPoints();
+    buildingPoints();
     checkPoint();
   }, []);
 
