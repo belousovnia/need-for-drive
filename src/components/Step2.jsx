@@ -37,7 +37,7 @@ function Step2(props) {
         defaultInput =  
           <input
             type='radio' 
-            className='step-2__category-input'
+            className='radio-button__input'
             name='inputCategory'
             id={`category${count}`} 
             defaultChecked
@@ -46,21 +46,21 @@ function Step2(props) {
         defaultInput =  
           <input
             type='radio' 
-            className='step-2__category-input'
+            className='radio-button__input'
             name='inputCategory'
             id={`category${count}`} 
           />
       };
       let newItem = 
-        <div className='step-2__category' key={receivedData[i].id}>
+        <div className='radio-button__container' key={receivedData[i].id}>
           {defaultInput}
           <label
-            className='step-2__category-label' 
+            className='radio-button__label' 
             htmlFor={`category${count}`}
             onClick={() => changeCategoryFilter(receivedData[i].name)}
           >
-            <div className='step-2__category-point'/>
-            <p className='step-2__category-title'>{receivedData[i].name}</p>
+            <div className='radio-button__point'/>
+            <p className='radio-button__title'>{receivedData[i].name}</p>
           </label>
         </div>  
       count = count + 1;  
@@ -113,7 +113,7 @@ function Step2(props) {
                 }}
               >
                 <p className='step-2__tile-name'>{item.name}</p>
-                <p className='step-2__tile-price'>{prettify(item.priceMin)} - {prettify(item.priceMin)}₽</p>
+                <p className='step-2__tile-price'>{prettify(item.priceMin)} - {prettify(item.priceMax)}₽</p>
                 <div className='step-2__tile-img-wrapped'>
                   <img 
                     className='step-2__tile-img' 
@@ -135,7 +135,7 @@ function Step2(props) {
   // ------------------------------------------------------
 
   useEffect(() => {
-    changeTiles([<div className="step-2__loading" key="step-2__loading-1"></div>]);
+    changeTiles([<div className="loading" key="loading-1"></div>]);
     buildTile();
     buildButton();
   }, [categoryFilter]);

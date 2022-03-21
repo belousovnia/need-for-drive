@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { changeStatusStep1 } from '../store/actions';
 import { changeOrderData } from '../store/actions';
+import { prettify } from './dataFunction/generalFunction';
 
 function OrderPageData(props) {
   const { 
@@ -18,9 +19,14 @@ function OrderPageData(props) {
     orderData,
     changeOrderData,
     car,
+    color,
+    startDate,
+    endDate,
+    rate,
+    fullTank,
+    childChair,
+    rightWheel,
   } = props;
-
-  console.log(car);
 
   let location = useLocation().pathname;
 
@@ -111,6 +117,53 @@ function OrderPageData(props) {
     };
   };
 
+  function getRentalPrice() {
+    let periot = endDate - startDate;
+    let unit = rate.rateTypeId.unit;
+    let rentalPrice;
+
+    if (unit == 'мин') {
+      rentalPrice = Math.floor(periot / 60000);
+    } else {
+      const [days, nameUnit] = unit.split(' ');
+      if (unit == 'сутки') {
+        rentalPrice = Math.ceil(periot / 86400000);
+      } else if (nameUnit == 'дней') {
+        rentalPrice = Math.ceil(periot / (86400000 * days));
+      };
+    };
+    rentalPrice =  rentalPrice * rate.price;
+    if (fullTank) rentalPrice = rentalPrice + 500;
+    if (childChair) rentalPrice = rentalPrice + 200;
+    if (rightWheel) rentalPrice = rentalPrice + 1600;
+    if (rentalPrice > car.priceMax) rentalPrice = car.priceMax;
+    if (rentalPrice < car.priceMin) rentalPrice = car.priceMin;
+
+    return rentalPrice;
+  };
+
+  function getRentalPeriod() {
+    let periot = endDate - startDate;
+
+    let min = Math.ceil(periot / 60000);
+    let hours = Math.floor(min / 60);
+    min = Math.round(min % 60);
+    let day = Math.floor(hours / 24);
+    hours = Math.floor(hours % 24);
+
+    let itemDay = '';
+    let itemHours = '';
+    let itemMin = '';
+
+    if (day != 0) {itemDay = `${day}д `};
+    if (hours != 0) {itemHours = `${hours}ч `};
+    if (min != 0) {itemMin = `${min}м`};
+    
+    let rentalPeriod = `${itemDay}${itemHours}${itemMin}`;
+ 
+    return rentalPeriod;
+  };
+
   function changeButtonData() {
     let newData = {};
     switch (getLocation()) {
@@ -130,6 +183,21 @@ function OrderPageData(props) {
         }
         break;
       case 3:
+        newData = {
+          'city': city,
+          'point': point,
+          'address': getAddress(),
+          'car': car,
+          'color': color,     
+          'startDate': startDate,
+          'endDate': endDate,
+          'rate': rate,
+          'fullTank': fullTank,
+          'childChair': childChair,
+          'rightWheel': rightWheel,
+          'price': getRentalPrice(),
+          'rentalPeriod': getRentalPeriod(),
+        }
         break;
       case 4:
         break;
@@ -164,6 +232,66 @@ function OrderPageData(props) {
         </li>
       );
     };
+    if (orderData.color != undefined) {
+      listTitle.push(
+        <li key={'lt3'} className='information-list__line'>
+          <span className="information-list__title">Цвет</span>
+          <span className="information-list__chapter">
+            {orderData.color}
+          </span>
+        </li>
+      );
+    };
+    if (orderData.rentalPeriod != undefined) {
+      listTitle.push(
+        <li key={'lt4'} className='information-list__line'>
+          <span className="information-list__title">Длительность аренды</span>
+          <span className="information-list__chapter">
+            {orderData.rentalPeriod}
+          </span>
+        </li>
+      );
+    };
+    if (orderData.rate != undefined) {
+      listTitle.push(
+        <li key={'lt5'} className='information-list__line'>
+          <span className="information-list__title">Тариф</span>
+          <span className="information-list__chapter">
+            {orderData.rate.rateTypeId.name}
+          </span>
+        </li>
+      );
+    };
+    if (orderData.fullTank) {
+      listTitle.push(
+        <li key={'lt6'} className='information-list__line'>
+          <span className="information-list__title">Полный бак</span>
+          <span className="information-list__chapter">
+            Да
+          </span>
+        </li>
+      );
+    };
+    if (orderData.childChair) {
+      listTitle.push(
+        <li key={'lt7'} className='information-list__line'>
+          <span className="information-list__title">Детское кресло</span>
+          <span className="information-list__chapter">
+            Да
+          </span>
+        </li>
+      );
+    };
+    if (orderData.rightWheel) {
+      listTitle.push(
+        <li key={'lt8'} className='information-list__line'>
+          <span className="information-list__title">Правый руль</span>
+          <span className="information-list__chapter">
+            Да
+          </span>
+        </li>
+      );
+    };
     return listTitle;
   };
 
@@ -176,16 +304,51 @@ function OrderPageData(props) {
         } else {
           button.classList.add('main-button_bloked');
         };
-        break
+        break;
       case 2: 
         if (car == undefined) {
           button.classList.add('main-button_bloked');
         } else {
           button.classList.remove('main-button_bloked');
         };
-        break
+        break;
+      case 3:
+        if (
+          color == undefined ||
+          startDate == null ||
+          endDate == null ||
+          startDate >= endDate ||
+          rate == ''
+        ) {
+          button.classList.add('main-button_bloked');  
+        } else {
+          button.classList.remove('main-button_bloked');
+        };
+        break;
     };   
   };
+
+  function buildPrise() {
+    if(orderData.price != undefined) {
+      return (
+        <p className='order-page-data__price'>
+          <b>Цена: </b>{`${prettify(orderData.price)}₽`} 
+        </p>
+      );
+    } else if (orderData.car != undefined) {
+      return (
+        <p className='order-page-data__price'>
+          <b>Цена: </b>{`от ${prettify(orderData.car.priceMin)} до ${prettify(orderData.car.priceMax)} ₽`}
+        </p>
+      );
+    } else  {
+      return (
+        <p className='order-page-data__price'>
+          <b>Цена: </b>от 8 000 до 12 000 ₽
+        </p>
+      );
+    };
+  }; 
 
   // ------------------------------------------------------
 
@@ -195,9 +358,20 @@ function OrderPageData(props) {
 
   useEffect(() => {
     checkButton();
-  }, [step, statusStep1, car, location]);
+  }, [
+    step, 
+    statusStep1, 
+    car, 
+    location, 
+    endDate, 
+    startDate, 
+    color, 
+    rate
+  ]);
 
-  useEffect(() => redirectStep(), [location])
+  useEffect(() => {
+    redirectStep();
+  }, [location])
 
   return ( 
     <div className='order-page-data'>
@@ -205,9 +379,7 @@ function OrderPageData(props) {
       <ul className="information-list">
         {buildOrderTitle()}
       </ul>
-      <p className='order-page-data__price'>
-        <b>Цена: </b>от 8 000 до 12 000 ₽
-      </p>
+      {buildPrise()}
       <Link 
         to={`/order/${linkChange()}`}      
         className='main-button main-button_homepage main-button_bloked main-button_order'
@@ -236,6 +408,13 @@ const putStateToProps = (state) => {
     statusStep1: state.statusStep1,
     orderData: state.orderData,
     car: state.car,
+    color: state.color,
+    startDate: state.startDate,
+    endDate: state.endDate,
+    rate: state.rate,
+    fullTank: state.fullTank,
+    childChair: state.childChair,
+    rightWheel: state.rightWheel,
   };
 };
 

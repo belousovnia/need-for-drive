@@ -4,7 +4,6 @@ import { secretMap } from "./secret";
 export async function getCar() {
   let data = await getData('car');
   let carList = [];
-  console.log(data);
 
   for (let i in data) {
     let type = data[i].categoryId.name

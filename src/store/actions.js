@@ -16,6 +16,15 @@ import {
   ACTION_CHANGE_CATEGORY_LIST,
   ACTION_CHANGE_CATEGORY_FILTER,
   ACTION_CHANGE_CAR,
+  ACTION_CHANGE_COLOR_LIST,
+  ACTION_CHANGE_COLOR,
+  ACTION_CHANGE_START_DATE,
+  ACTION_CHANGE_END_DATE,
+  ACTION_CHANGE_RATE,
+  ACTION_CHANGE_RATE_LIST,
+  ACTION_CHANGE_FULL_TANK,
+  ACTION_CHANGE_CHILD_CHAIR,
+  ACTION_CHANGE_RIGHT_WHEEL,
 } from "./type";
 
 export function changeHeadHiding(newStatus) {
@@ -161,4 +170,65 @@ export function changeCar(newStatus) {
   };
 };
 
+export function changeColorList(newStatus) {
+  return {
+    type: ACTION_CHANGE_COLOR_LIST,
+    payload: newStatus
+  };
+};
 
+export function changeColor(newStatus) {
+  return {
+    type: ACTION_CHANGE_COLOR,
+    payload: newStatus
+  };
+};
+
+export function changeStartDate(newStatus) {
+  return {
+    type: ACTION_CHANGE_START_DATE,
+    payload: newStatus
+  };
+};
+
+export function changeEndDate(newStatus) {
+  return {
+    type: ACTION_CHANGE_END_DATE,
+    payload: newStatus
+  };
+};
+
+export function changeRate(newStatus) {
+  return {
+    type: ACTION_CHANGE_RATE,
+    payload: newStatus
+  };
+};
+
+export function changeRateList(newStatus) {
+  return {
+    type: ACTION_CHANGE_RATE_LIST,
+    payload: newStatus
+  };
+};
+
+export function changeFullTank(newStatus) {
+  return {
+    type: ACTION_CHANGE_FULL_TANK,
+    payload: newStatus
+  };
+};
+
+export function changeChildChair(newStatus) {
+  return {
+    type: ACTION_CHANGE_CHILD_CHAIR,
+    payload: newStatus
+  };
+};
+
+export function changeRightWheel(newStatus) {
+  return {
+    type: ACTION_CHANGE_RIGHT_WHEEL,
+    payload: newStatus
+  };
+};
