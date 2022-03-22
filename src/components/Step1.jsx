@@ -7,10 +7,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { changeListFinalPoint } from '../store/actions';
 
-function Step1(props) {
-  const {
-    changeListFinalPoint,
-  } = props;
+function Step1({changeListFinalPoint}) {
 
   const dataStep1 = useMemo(() => getCityPoint(), []); 
   
@@ -28,9 +25,7 @@ function Step1(props) {
     changeListFinalPoint(newList);
   };
 
-  useEffect(() => {
-    buildingNewListFinalPoint()
-  }, []);
+  useEffect(buildingNewListFinalPoint, []);
 
   return ( 
     <div className='step-1'> 
@@ -51,9 +46,7 @@ function Step1(props) {
 };
 
 const putStateToProps = (state) => {
-  return {
-    listFinalPoint: state.listFinalPoint,
-  };
+  return {...state};
 };
 
 const putActionToProps = (dispatch) => {
