@@ -1,0 +1,116 @@
+@import "general.scss";
+
+.homepage {
+  width: 50%;
+  min-width: 614px;
+  height: 100%;
+  background-color: #ffffff;
+  padding-top: 32px;
+  padding-bottom: 32px;
+  padding-left: 63px;
+  padding-right: 63px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.homepage__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.homepage__title {
+  font-family: $mainFont;
+  font-size: 70px;
+  margin: 0;
+  font-weight: bold;
+}
+
+.homepage__p {
+  font-family: $mainFont;
+  color: $grayDark;
+  font-size: 26px;
+  font-weight: lighter;
+  margin-bottom: 50px;
+  width: auto;
+}
+
+.homepage__footer {
+  font-family: $mainFont;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.homepage__footer-title {
+  font-size: 13px;
+  color: $grayDark;
+}
+
+.homepage__number {
+  font-size: 13px;
+}
+
+@media screen and (max-width: $widthTable) {
+  .homepage {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+@media screen and (max-width: $widthTable) {
+  .homepage__title {
+      font-size: 32px;
+  }
+
+  .homepage__p {
+      font-size: 18px;
+  }
+}
+
+@media screen and (max-width: $widthModile) {
+  .homepage {
+    padding: 0;
+    justify-content: flex-start;
+  }
+
+  .homepage-header {
+    flex-direction: column;
+    align-items: end;
+    padding: 16px;
+    box-sizing: border-box;   
+  }
+
+  .homepage__content {
+    padding-top: 8vh;
+  }
+
+  .homepage__content-text-wrapper {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .homepage__footer {
+    position: absolute;
+    bottom: 0;
+    padding: 16px;
+    box-sizing: border-box;
+    background-color: $mainBlack;
+    flex-direction: column;
+    align-items: end;
+  }
+
+  .homepage__footer-title {
+    color: $grayLight;
+    margin: 0;
+    margin-bottom: 8px;
+  }
+
+  .homepage__number {
+    color: $mainAccent;
+    margin: 0;
+  }
+}

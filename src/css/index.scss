@@ -1,0 +1,52 @@
+@import "general.scss";
+@import "homepage.scss";
+@import "order-page.scss";
+@import "header.scss";
+@import "slider.scss";
+@import "main-button.scss";
+@import "homepage-header.scss";
+@import "stage-line.scss";
+@import "order-page-data.scss";
+@import "select.scss";
+@import "step1.scss";
+@import "step2.scss";
+@import "step3.scss";
+@import "step4.scss";
+@import "step5.scss";
+@import "my-map.scss";
+
+html {
+    overflow-x: hidden;
+    margin-right: calc(-1 * (100vw - 100%));
+}
+
+body { 
+    margin: 0;
+    padding: 0;
+}
+
+.app {
+    width: 100vw;
+    height: 100vh;
+    margin: 0; 
+    padding: 0;
+    display: flex;
+    z-index: -10;
+}
+
+.content {
+    width: calc(100% - 64px) ;
+    height: 100vh;
+    margin-left: $widthHeader;
+    background-color: $mainBlack;
+    display: flex;
+    z-index: 0;
+}
+
+@media screen and (max-width: $widthModile) {
+    .content {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+

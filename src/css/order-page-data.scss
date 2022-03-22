@@ -1,0 +1,77 @@
+@import "general.scss";
+
+.order-page-data {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 32px;
+}
+
+.order-page-data__title {
+  font-family: $mainFont;
+  text-align: end;
+  font-size: 18px;
+  margin-top: 0;
+  margin-bottom: 32px;
+}
+
+.order-page-data__price {
+  font-family: $mainFont;
+  font-size: 16px;
+}
+
+.order-page-data__container-title {
+}
+
+.information-list {
+  padding-left: 0;
+}
+
+.information-list__line {
+  display: flex;
+  width: 292px;
+  margin-bottom: 16px;
+}
+
+.information-list__line::after {
+  background: url('https://i.stack.imgur.com/otJN0.png') repeat-x bottom; 
+  content: "";
+  flex-grow: 1;
+  order: 2;
+}
+
+.information-list__title {
+  order: 1;
+  font-family: $mainFont;
+  font-weight: 300;
+  margin-right: 5px;
+  display: flex;
+  align-items: flex-end;
+  font-size: 14px;
+}
+
+.information-list__chapter {
+  
+  max-width: 45%;
+  order: 3;
+  font-family: $mainFont;
+  color: $grayDark;
+  text-align: right;
+  font-size: 14px;
+  padding-left: 5px;
+}
+
+@media screen and (max-width: $widthTable) {
+  .order-page-data__title {
+    text-align: left;
+  }
+
+  .information-list__line {
+    width: auto;
+  }
+}
+
+@media screen and (max-width: $widthModile) {
+  .order-page-data__title {
+    margin-bottom: 16px;
+  }
+}

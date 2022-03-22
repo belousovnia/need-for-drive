@@ -1,0 +1,58 @@
+@import "general.scss";
+
+.homepage-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.homepage-header__logo {
+  margin: 0;
+  font-size: 32px;
+  font-family: $mainFont;
+  color: $mainAccent;
+}
+
+.location {
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.location__svg {
+  width: 20px;
+  height: 18px;
+}
+
+.location__title {
+  margin: 0;
+  font-family: $mainFont;
+  color: $grayDark;
+}
+
+.homepage-header__logo_big {
+  font-size: 70px;
+  height: auto;
+}
+
+.homepage-header_order-page {
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: $widthTable) {
+  .homepage-header__logo_big {
+    font-size: 32px;
+  }
+}
+
+@media screen and (max-width: $widthModile) {
+  .homepage-header {
+    flex-direction: column;
+    align-items: end;
+    padding: 16px;
+    box-sizing: border-box;   
+  }
+}

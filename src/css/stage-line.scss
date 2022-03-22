@@ -1,0 +1,41 @@
+@import "general.scss";
+
+.stage-line {
+  border-top: 1px solid $grayLight;
+  border-bottom: 1px solid $grayLight;
+}
+
+.stage-line__content {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  max-width: $widthOrderPage;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 32px;
+  padding-right: 32px;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.stage-line__link {
+  font-family: $mainFont;
+  font-weight: Bold;
+  text-decoration: none;
+  color: $grayDark;
+  pointer-events: none;
+}
+
+.stage-line__link-wrapped {
+  
+}
+
+.stage-line__link_active {
+  pointer-events: auto;
+  color: $mainAccent;
+}
+
+.stage-line__arrow {
+  padding-left: 16px;
+  padding-right: 16px;
+}
