@@ -70,7 +70,7 @@ function StepLine(props) {
       </div>
     </div>
   );
-}
+};
 
 const putStateToProps = (state) => {
   return {

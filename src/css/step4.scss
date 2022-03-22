@@ -1,5 +1,27 @@
 @import 'general.scss';
 
 .step-4 {
+}
+
+.step-4_data-car-block {
+  width: 100%;
+  height: 116px;
+  min-width: 126px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.step-4_information {
   
-} 
+}
+
+.step-4_car-img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+@media screen and (max-width: $widthTable) {
+  .step-4_data-car-block {
+    max-width: 736px;
+  }
+}
