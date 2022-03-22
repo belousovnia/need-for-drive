@@ -160,12 +160,7 @@ function Step2(props) {
 };
 
 const putStateToProps = (state) => {
-  return {
-    tiles: state.tiles,
-    categoryList: state.categoryList,
-    categoryFilter: state.categoryFilter,
-    car: state.car,
-  };
+  return {...state};
 };
 
 const putActionToProps = (dispatch) => {

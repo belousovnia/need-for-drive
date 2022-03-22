@@ -7,26 +7,8 @@ import { bindActionCreators } from 'redux';
 function StepLine(props) {
   const {step} = props;
 
-  function link1() {
-    if (step >= 1) {
-      return 'stage-line__link_active';
-    };
-  };
-
-  function link2() {
-    if (step >= 2) {
-      return 'stage-line__link_active';
-    };
-  };
-
-  function link3() {
-    if (step >= 3) {
-      return 'stage-line__link_active';
-    };
-  };
-
-  function link4() {
-    if (step >= 4) {
+  function link(num) {
+    if (step >= num) {
       return 'stage-line__link_active';
     };
   };
@@ -36,7 +18,7 @@ function StepLine(props) {
       <div className='stage-line__content'>
         <Link 
           to='/order/step-1' 
-          className={`stage-line__link ${link1()}`}
+          className={`stage-line__link ${link(1)}`}
         >
           Местоположение
         </Link>
@@ -44,7 +26,7 @@ function StepLine(props) {
           <Arrow/>
           <Link 
             to='/order/step-2' 
-            className={`stage-line__link ${link2()}`}
+            className={`stage-line__link ${link(2)}`}
           >
             Модель
           </Link>
@@ -53,7 +35,7 @@ function StepLine(props) {
           <Arrow/>
           <Link 
             to='/order/step-3' 
-            className={`stage-line__link ${link3()}`}
+            className={`stage-line__link ${link(3)}`}
           >
             Дополнительно
           </Link>
@@ -62,7 +44,7 @@ function StepLine(props) {
           <Arrow/>
           <Link 
             to='/order/step-4' 
-            className={`stage-line__link ${link4()}`}
+            className={`stage-line__link ${link(4)}`}
           >
             Итого
           </Link>
@@ -73,9 +55,7 @@ function StepLine(props) {
 };
 
 const putStateToProps = (state) => {
-  return {
-    step: state.step,
-  };
+  return {...state};
 };
 
 const putActionToProps = (dispatch) => {

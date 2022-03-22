@@ -9,6 +9,8 @@ import { changeCity } from '../store/actions';
 import { changePoint } from '../store/actions';
 
 function Selectcity(props) {
+  const data = props.data;
+
   const { 
     cityAutocomplete, 
     changeCityAutocomplete,
@@ -16,7 +18,6 @@ function Selectcity(props) {
     city,
     changePoint,
   } = props;
-  const data = props.data;
   
   function changeSelectActive(newValue) {
     let select = document.getElementById('select-city__bar')
@@ -39,35 +40,34 @@ function Selectcity(props) {
   };
 
   async function changeAutocomplete() {
+    const dataAwait = await data;
     const strSearch = document.getElementById("input-city").value;
     let pattern = new RegExp('\_' + strSearch, 'i');
     let newAutocomplete = [];
 
-    data.then((i) => {
-      for (let item in i){
-        const dataItem = i[item];
-    
-        if (pattern.test('_' + dataItem.name)){
-          let newItem = 
-              <button 
-                key={dataItem.id}
-                className='select__item'
-                onClick={() => {
-                  changeSelectValue(dataItem.name);
-                  checkCross();
-                  changeSelectValuPoint('');
-                  checkCrossPoint();
-                  changeCity(dataItem.name)
-                }}
-              >
-                {dataItem.name}
-              </button>
-          newAutocomplete.push(newItem);
-        };
-
+    for (let item in dataAwait){
+      const dataItem = dataAwait[item];
+  
+      if (pattern.test('_' + dataItem.name)){
+        let newItem = 
+            <button 
+              key={dataItem.id}
+              className='select__item'
+              onClick={() => {
+                changeSelectValue(dataItem.name);
+                checkCross();
+                changeSelectValuPoint('');
+                checkCrossPoint();
+                changeCity(dataItem.name)
+              }}
+            >
+              {dataItem.name}
+            </button>
+        newAutocomplete.push(newItem);
       };
-      changeCityAutocomplete(newAutocomplete);
-    });
+
+    };
+    changeCityAutocomplete(newAutocomplete);
   };
 
   function checkCross() {
@@ -108,9 +108,8 @@ function Selectcity(props) {
       changeSelectActive(true);
       changeAutocomplete();
     });
-    document.addEventListener('click', (e) => {
+    document.addEventListener('click', ({target}) => {
       let targetSelect = document.getElementById('input-city');
-      let target = e.target;
   
       if (targetSelect !== target) {
         try {
