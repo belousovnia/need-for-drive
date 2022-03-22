@@ -331,18 +331,7 @@ function Step3(props) {
 };
 
 const putStateToProps = (state) => {
-  return {
-    colorList: state.colorList,
-    color: state.color,
-    orderData: state.orderData,
-    startDate: state.startDate,
-    endDate: state.endDate,
-    rate: state.rate,
-    rateList: state.rateList,
-    fullTank: state.fullTank,
-    childChair: state.childChair,
-    rightWheel: state.rightWheel,
-  };
+  return {...state};
 };
 
 const putActionToProps = (dispatch) => {
