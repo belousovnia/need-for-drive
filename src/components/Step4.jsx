@@ -2,16 +2,22 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+
 function Step4(props) {
   const { orderData } = props;
-
-  console.log(orderData);
+  
+  if (orderData.car === undefined) window.location = '#/order/step-1'; 
 
   return ( 
     <div className='step-4'> 
-      <div className='step-4_data-car-block'>
-        <div className='step-4_information'>
-          <h1></h1>
+      <div className='step-4__data-car-block'>
+        <div className='step-4__information'>
+          <h1 className='step-4__information-title'>
+            {}
+          </h1>
+          <p className='step-4__information-number'>
+            {}
+          </p>
         </div>
         <img
           className='step-4_car-img' 
@@ -26,9 +32,7 @@ function Step4(props) {
 };
 
 const putStateToProps = (state) => {
-  return {
-    orderData: state.orderData,
-  };
+  return {...state};
 };
 
 const putActionToProps = (dispatch) => {

@@ -29,6 +29,9 @@ function OrderPageData(props) {
   } = props;
 
   let location = useLocation().pathname;
+  
+  const formSome = (i) => i[0].toUpperCase() === city.toUpperCase() &&
+  i[1].toUpperCase() === point.toUpperCase()
 
   function redirectStep() {
     let nowStep = 1;
@@ -68,29 +71,8 @@ function OrderPageData(props) {
     };
   };
   
-  function checkForm() {
-    for (let i in listFinalPoint) {
-      if (listFinalPoint[i][0].toUpperCase() == city.toUpperCase() &&
-      listFinalPoint[i][1].toUpperCase() == point.toUpperCase()) {
-        return true;
-      }; 
-    };
-    return false;
-  };
-
   function linkChange() {
-    switch (getLocation()) {
-      case 1:
-        return 'step-2';
-      case 2:
-        return 'step-3';
-      case 3:
-        return 'step-4';
-      case 4:
-        return 'step-5';
-      case 5:
-        return 'step-1';
-    };
+    return `step-${getLocation() + 1}`;
   };
 
   function titleChange() {
@@ -165,54 +147,47 @@ function OrderPageData(props) {
   };
 
   function changeButtonData() {
-    let newData = {};
     switch (getLocation()) {
       case 1:
-        newData = {
-          'city': city,
-          'point': point,
+        changeOrderData({
+          city,
+          point,
           'address': getAddress(),
-        };
+        });
         break;
       case 2:
-        newData = {
-          'city': city,
-          'point': point,
+        changeOrderData({
+          city,
+          point,
           'address': getAddress(),
-          'car': car,
-        }
+          car,
+        });
         break;
       case 3:
-        newData = {
-          'city': city,
-          'point': point,
+        changeOrderData({
+          city,
+          point,
           'address': getAddress(),
-          'car': car,
-          'color': color,     
-          'startDate': startDate,
-          'endDate': endDate,
-          'rate': rate,
-          'fullTank': fullTank,
-          'childChair': childChair,
-          'rightWheel': rightWheel,
+          car,
+          color,     
+          startDate,
+          endDate,
+          rate,
+          fullTank,
+          childChair,
+          rightWheel,
           'price': getRentalPrice(),
           'rentalPeriod': getRentalPeriod(),
-        }
+        });
         break;
-      case 4:
-        break;
-      case 5:
     };
-    changeOrderData(newData);
   };
 
   // ------------------------------------------------------
 
   function buildOrderTitle() {
     let listTitle = [];
-    if (orderData.address != undefined && 
-      orderData.city != undefined &&
-      orderData.point != undefined) {
+    if (orderData.address && orderData.city && orderData.point) {
       listTitle.push(
         <li key={'lt1'} className='information-list__line'>
           <span className="information-list__title">Пункт выдачи</span>
@@ -222,7 +197,7 @@ function OrderPageData(props) {
         </li>
       );
     };
-    if (orderData.car != undefined) {
+    if (orderData.car) {
       listTitle.push(
         <li key={'lt2'} className='information-list__line'>
           <span className="information-list__title">Модель</span>
@@ -232,7 +207,7 @@ function OrderPageData(props) {
         </li>
       );
     };
-    if (orderData.color != undefined) {
+    if (orderData.color) {
       listTitle.push(
         <li key={'lt3'} className='information-list__line'>
           <span className="information-list__title">Цвет</span>
@@ -242,7 +217,7 @@ function OrderPageData(props) {
         </li>
       );
     };
-    if (orderData.rentalPeriod != undefined) {
+    if (orderData.rentalPeriod) {
       listTitle.push(
         <li key={'lt4'} className='information-list__line'>
           <span className="information-list__title">Длительность аренды</span>
@@ -252,7 +227,7 @@ function OrderPageData(props) {
         </li>
       );
     };
-    if (orderData.rate != undefined) {
+    if (orderData.rate) {
       listTitle.push(
         <li key={'lt5'} className='information-list__line'>
           <span className="information-list__title">Тариф</span>
@@ -350,15 +325,19 @@ function OrderPageData(props) {
     };
   }; 
 
+  function orderButtonOnClick() {
+    changeStep(getLocation() + 1);
+    changeButtonData();
+    window.scrollTo(0, 0);
+  };
+
   // ------------------------------------------------------
 
   useEffect(() => {
-    changeStatusStep1(checkForm());
+    try {changeStatusStep1(listFinalPoint.some(formSome))} catch {};
   }, [city, point]);
 
-  useEffect(() => {
-    checkButton();
-  }, [
+  useEffect(checkButton, [
     step, 
     statusStep1, 
     car, 
@@ -369,9 +348,7 @@ function OrderPageData(props) {
     rate
   ]);
 
-  useEffect(() => {
-    redirectStep();
-  }, [location])
+  useEffect(redirectStep, [location])
 
   return ( 
     <div className='order-page-data'>
@@ -384,12 +361,7 @@ function OrderPageData(props) {
         to={`/order/${linkChange()}`}      
         className='main-button main-button_homepage main-button_bloked main-button_order'
         id='order-page-data__button' 
-        onClick={
-          () => {
-            changeStep(getLocation() + 1);
-            changeButtonData();
-          }
-        }
+        onClick={orderButtonOnClick}
       >
         <p className='main-button__title'>
           {titleChange()}
@@ -400,22 +372,7 @@ function OrderPageData(props) {
 };
 
 const putStateToProps = (state) => {
-  return {
-    step: state.step,
-    listFinalPoint: state.listFinalPoint,
-    point: state.point,
-    city: state.city,
-    statusStep1: state.statusStep1,
-    orderData: state.orderData,
-    car: state.car,
-    color: state.color,
-    startDate: state.startDate,
-    endDate: state.endDate,
-    rate: state.rate,
-    fullTank: state.fullTank,
-    childChair: state.childChair,
-    rightWheel: state.rightWheel,
-  };
+  return {...state};
 };
 
 const putActionToProps = (dispatch) => {
