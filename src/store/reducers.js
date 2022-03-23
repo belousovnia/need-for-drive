@@ -25,6 +25,7 @@ import {
   ACTION_CHANGE_FULL_TANK,
   ACTION_CHANGE_CHILD_CHAIR,
   ACTION_CHANGE_RIGHT_WHEEL,
+  ACTION_CHANGE_ORDER_INFORMATION,
 } from "./type";
 
 const initialState = {
@@ -56,9 +57,11 @@ const initialState = {
   fullTank: false,
   childChair: false,
   rightWheel: false,
+  orderInformation: 1,
 };
 
 export const rootReduser = (state = initialState, action) => {
+  console.log(action);
   switch (action.type) {
     case ACTION_CHANGE_SHOW:
       return {...state, headHiding: action.payload};
@@ -111,7 +114,9 @@ export const rootReduser = (state = initialState, action) => {
     case ACTION_CHANGE_CHILD_CHAIR:
       return {...state, childChair: action.payload} 
     case ACTION_CHANGE_RIGHT_WHEEL:
-      return {...state, rightWheel: action.payload}      
+      return {...state, rightWheel: action.payload}
+    case ACTION_CHANGE_ORDER_INFORMATION:
+      return {...state, orderInformation: action.payload}     
     };
   return state;
 };

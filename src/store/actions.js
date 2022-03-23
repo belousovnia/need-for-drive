@@ -25,11 +25,21 @@ import {
   ACTION_CHANGE_FULL_TANK,
   ACTION_CHANGE_CHILD_CHAIR,
   ACTION_CHANGE_RIGHT_WHEEL,
+  ACTION_CHANGE_ORDER_INFORMATION,
 } from "./type";
 
 export function changeHeadHiding(newStatus) {
+  console.log(newStatus);
   return {
     type: ACTION_CHANGE_SHOW,
+    payload: newStatus
+  };
+};
+
+export function changeOrderInformation(newStatus) {
+  console.log(newStatus);
+  return {
+    type: ACTION_CHANGE_ORDER_INFORMATION,
     payload: newStatus
   };
 };

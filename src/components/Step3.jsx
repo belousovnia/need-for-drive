@@ -16,6 +16,7 @@ import { changeRateList } from '../store/actions';
 import { changeFullTank } from '../store/actions';
 import { changeChildChair } from '../store/actions';
 import { changeRightWheel } from '../store/actions';
+import { changeOrderInformation } from '../store/actions';
 
 function Step3(props) {
   registerLocale('ru', ru);
@@ -40,6 +41,7 @@ function Step3(props) {
     childChair,
     changeRightWheel,
     rightWheel,
+    orderInformation
   } = props;
 
   function buildColorList() {
@@ -324,25 +326,17 @@ function Step3(props) {
             <p className='radio-button__title'>Правый руль, 1600₽</p>
           </label>
         </div>
-
+        <button onClick={() => {
+          changeOrderInformation('color')
+          console.log(orderInformation)}
+        }>qweqweqweq</button>
       </div>
     </div>
   );
 };
 
 const putStateToProps = (state) => {
-  return {
-    colorList: state.colorList,
-    color: state.color,
-    orderData: state.orderData,
-    startDate: state.startDate,
-    endDate: state.endDate,
-    rate: state.rate,
-    rateList: state.rateList,
-    fullTank: state.fullTank,
-    childChair: state.childChair,
-    rightWheel: state.rightWheel,
-  };
+  return {...state};
 };
 
 const putActionToProps = (dispatch) => {
@@ -356,10 +350,8 @@ const putActionToProps = (dispatch) => {
     changeFullTank: bindActionCreators(changeFullTank, dispatch),
     changeChildChair: bindActionCreators(changeChildChair, dispatch),
     changeRightWheel: bindActionCreators(changeRightWheel, dispatch),
+    changeOrderInformation: bindActionCreators(changeOrderInformation, dispatch),
   };
 };
 
-const WrappedStep3Component 
-  = connect(putStateToProps, putActionToProps)(Step3);
-
-export default connect(putStateToProps, putActionToProps)(WrappedStep3Component);
+export default connect(putStateToProps, putActionToProps)(Step3);
