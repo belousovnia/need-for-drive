@@ -54,8 +54,6 @@ function OrderPageData(props) {
         nowStep = 5;
         break;
     };
-    console.log('now ' + nowStep);
-    console.log('step ' + step);
     if (nowStep > step) {
       window.location = '#/order/step-1';
     };
