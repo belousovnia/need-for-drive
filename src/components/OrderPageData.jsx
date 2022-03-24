@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import { changeStatusStep1 } from '../store/actions';
 import { changeOrderData } from '../store/actions';
 import { prettify } from './dataFunction/generalFunction';
+import { changeModalWindow } from '../store/actions';
 
 function OrderPageData(props) {
   const { 
@@ -26,12 +27,14 @@ function OrderPageData(props) {
     fullTank,
     childChair,
     rightWheel,
+    changeModalWindow,
   } = props;
 
   let location = useLocation().pathname;
   
   const formSome = (i) => i[0].toUpperCase() === city.toUpperCase() &&
   i[1].toUpperCase() === point.toUpperCase()
+
 
   function redirectStep() {
     let nowStep = 1;
@@ -51,10 +54,13 @@ function OrderPageData(props) {
         nowStep = 5;
         break;
     };
+    console.log('now ' + nowStep);
+    console.log('step ' + step);
     if (nowStep > step) {
       window.location = '#/order/step-1';
     };
   };
+
 
   function getLocation() {
     switch (location) {
@@ -70,10 +76,15 @@ function OrderPageData(props) {
         return 5;
     };
   };
-  
+
   function linkChange() {
-    return `step-${getLocation() + 1}`;
+    if (getLocation() < 4) {
+      return `/order/step-${getLocation() + 1}`;
+    } else {
+      return `/order/step-${getLocation()}`
+    }
   };
+
 
   function titleChange() {
     switch (getLocation()) {
@@ -90,6 +101,7 @@ function OrderPageData(props) {
     };
   };
 
+
   function getAddress() {
     for (let i in listFinalPoint) {
       let item = listFinalPoint[i]
@@ -98,6 +110,7 @@ function OrderPageData(props) {
       };
     };
   };
+
 
   function getRentalPrice() {
     let periot = endDate - startDate;
@@ -124,6 +137,7 @@ function OrderPageData(props) {
     return rentalPrice;
   };
 
+
   function getRentalPeriod() {
     let periot = endDate - startDate;
 
@@ -145,6 +159,7 @@ function OrderPageData(props) {
  
     return rentalPeriod;
   };
+
 
   function changeButtonData() {
     switch (getLocation()) {
@@ -180,10 +195,25 @@ function OrderPageData(props) {
           'rentalPeriod': getRentalPeriod(),
         });
         break;
+      case 4:
+        changeModalWindow(true);
+        break;
     };
   };
 
+
+  function checkColor() {
+    for (let i in car.colors) {
+      if (color == car.colors[i]) {
+        return true;
+      };
+    };
+    return false;
+  };
+
+
   // ------------------------------------------------------
+
 
   function buildOrderTitle() {
     let listTitle = [];
@@ -270,6 +300,7 @@ function OrderPageData(props) {
     return listTitle;
   };
 
+
   function checkButton() {
     let button = document.getElementById('order-page-data__button');
     switch (getLocation()) {
@@ -289,7 +320,7 @@ function OrderPageData(props) {
         break;
       case 3:
         if (
-          color == undefined ||
+          checkColor() == false ||
           startDate == null ||
           endDate == null ||
           startDate >= endDate ||
@@ -302,6 +333,7 @@ function OrderPageData(props) {
         break;
     };   
   };
+
 
   function buildPrise() {
     if(orderData.price != undefined) {
@@ -329,7 +361,11 @@ function OrderPageData(props) {
     changeStep(getLocation() + 1);
     changeButtonData();
     window.scrollTo(0, 0);
+    console.log('-------------------');
   };
+
+  console.log(step);
+
 
   // ------------------------------------------------------
 
@@ -345,10 +381,11 @@ function OrderPageData(props) {
     endDate, 
     startDate, 
     color, 
-    rate
+    rate,
   ]);
 
-  useEffect(redirectStep, [location])
+  useEffect(redirectStep, [location]);
+
 
   return ( 
     <div className='order-page-data'>
@@ -358,7 +395,7 @@ function OrderPageData(props) {
       </ul>
       {buildPrise()}
       <Link 
-        to={`/order/${linkChange()}`}      
+        to={linkChange()}  
         className='main-button main-button_homepage main-button_bloked main-button_order'
         id='order-page-data__button' 
         onClick={orderButtonOnClick}
@@ -380,6 +417,7 @@ const putActionToProps = (dispatch) => {
     changeStep: bindActionCreators(changeStep, dispatch),
     changeStatusStep1: bindActionCreators(changeStatusStep1, dispatch),
     changeOrderData: bindActionCreators(changeOrderData, dispatch),
+    changeModalWindow: bindActionCreators(changeModalWindow, dispatch),
   };
 };
 

@@ -26,20 +26,12 @@ import {
   ACTION_CHANGE_CHILD_CHAIR,
   ACTION_CHANGE_RIGHT_WHEEL,
   ACTION_CHANGE_ORDER_INFORMATION,
+  ACTION_CHANGE_MODAL_WINDOW,
 } from "./type";
 
 export function changeHeadHiding(newStatus) {
-  console.log(newStatus);
   return {
     type: ACTION_CHANGE_SHOW,
-    payload: newStatus
-  };
-};
-
-export function changeOrderInformation(newStatus) {
-  console.log(newStatus);
-  return {
-    type: ACTION_CHANGE_ORDER_INFORMATION,
     payload: newStatus
   };
 };
@@ -239,6 +231,20 @@ export function changeChildChair(newStatus) {
 export function changeRightWheel(newStatus) {
   return {
     type: ACTION_CHANGE_RIGHT_WHEEL,
+    payload: newStatus
+  };
+};
+
+export function changeOrderInformation(newStatus) {
+  return {
+    type: ACTION_CHANGE_ORDER_INFORMATION,
+    payload: newStatus
+  };
+};
+
+export function changeModalWindow(newStatus) {
+  return {
+    type: ACTION_CHANGE_MODAL_WINDOW,
     payload: newStatus
   };
 };

@@ -326,10 +326,6 @@ function Step3(props) {
             <p className='radio-button__title'>Правый руль, 1600₽</p>
           </label>
         </div>
-        <button onClick={() => {
-          changeOrderInformation('color')
-          console.log(orderInformation)}
-        }>qweqweqweq</button>
       </div>
     </div>
   );
@@ -350,7 +346,6 @@ const putActionToProps = (dispatch) => {
     changeFullTank: bindActionCreators(changeFullTank, dispatch),
     changeChildChair: bindActionCreators(changeChildChair, dispatch),
     changeRightWheel: bindActionCreators(changeRightWheel, dispatch),
-    changeOrderInformation: bindActionCreators(changeOrderInformation, dispatch),
   };
 };
 

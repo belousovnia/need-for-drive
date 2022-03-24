@@ -78,7 +78,7 @@ function Step2(props) {
     for (let i in dataCar) {
       let item = dataCar[i];
 
-      if ( item.category == categoryFilter || 
+      if ( item.categoryId.name == categoryFilter || 
         categoryFilter == 'Все модели') {
           let defaultInput = 
             <input
@@ -117,7 +117,7 @@ function Step2(props) {
                 <div className='step-2__tile-img-wrapped'>
                   <img 
                     className='step-2__tile-img' 
-                    src={item.imagePath}
+                    src={item.thumbnail.path}
                     onError={(i) => {
                       i.target.src = require('../media/car.jpg')
                     }}
