@@ -7,7 +7,20 @@ export async function pushOrder(pushData) {
     headers: {
       'X-Api-Factory-Application-Id': secret,
     },
-    body: JSON.stringify(pushData),
+    body: JSON.stringify({
+      "orderStatusId": '5e26a191099b810b946c5d89',
+      "cityId": {},
+      "pointId": {},
+      "carId": {},
+      "color": "string",
+      "dateFrom": 0,
+      "dateTo": 0,
+      "rateId": {},
+      "price": 0,
+      "isFullTank": true,
+      "isNeedChildChair": true,
+      "isRightWheel": true
+    }),
   }).then((response) => {
     console.log(response);
     return response.json();
