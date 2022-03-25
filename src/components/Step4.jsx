@@ -1,9 +1,7 @@
-import { React, useState, useEffect } from 'react';
+import { React, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import classNames from 'classnames';
 import { changeOrderInformation } from '../store/actions';
-import { changeModalWindow } from '../store/actions';
 
 function Step4(props) {
   const { 
@@ -12,13 +10,13 @@ function Step4(props) {
     changeOrderInformation,
   } = props;
 
-  function checkTank(tank) {
-    if (tank) {
-      if (orderData.fullTank) {
-        return '100%';
-      } else {
-        return `${tank}%`;
-      };
+  console.log(orderData);
+
+  function checkTank() {
+    if (orderData.fullTank) {
+      return '100%';
+    } else if (orderData.car.tank) {
+      return `${orderData.car.tank}%`;
     } else {
       return '-';
     };
@@ -50,7 +48,7 @@ function Step4(props) {
           </div>
           <div className='step-4__information-line'>
             <p className='step-4__information-p'>Топливо</p>
-            <p className='step-4__information-p-number'>{checkTank(orderData.car.tank)}</p>
+            <p className='step-4__information-p-number'>{checkTank()}</p>
           </div>
           <div className='step-4__information-line'>
             <p className='step-4__information-p'>Достуана с</p>
@@ -70,7 +68,11 @@ function Step4(props) {
 
   // ------------------------------------------------------
 
-  useEffect(() => {try {buildInformation(); } catch {}}, []);
+  useEffect(() => {
+    try {buildInformation(); } catch {};
+    let button = document.getElementById('order-page-data__button');
+    button.classList.remove('main-button_bloked');
+  }, []);
 
   return ( 
     <div className='step-4'>

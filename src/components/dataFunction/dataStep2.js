@@ -3,7 +3,6 @@ import { getData } from "./generalFunction";
 export async function getCar() {
   let data = await getData('car');
   let carList = [];
-  console.log(data);
 
   for (let i in data) {
 

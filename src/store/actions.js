@@ -27,6 +27,7 @@ import {
   ACTION_CHANGE_RIGHT_WHEEL,
   ACTION_CHANGE_ORDER_INFORMATION,
   ACTION_CHANGE_MODAL_WINDOW,
+  ACTION_CHANGE_TITLE_PRICE,
 } from "./type";
 
 export function changeHeadHiding(newStatus) {
@@ -245,6 +246,13 @@ export function changeOrderInformation(newStatus) {
 export function changeModalWindow(newStatus) {
   return {
     type: ACTION_CHANGE_MODAL_WINDOW,
+    payload: newStatus
+  };
+};
+
+export function changeTitlePrice(newStatus) {
+  return {
+    type: ACTION_CHANGE_TITLE_PRICE,
     payload: newStatus
   };
 };

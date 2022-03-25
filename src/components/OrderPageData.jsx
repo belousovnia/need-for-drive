@@ -7,6 +7,7 @@ import { changeStatusStep1 } from '../store/actions';
 import { changeOrderData } from '../store/actions';
 import { prettify } from './dataFunction/generalFunction';
 import { changeModalWindow } from '../store/actions';
+import { changeTitlePrice } from '../store/actions';
 
 function OrderPageData(props) {
   const { 
@@ -28,6 +29,8 @@ function OrderPageData(props) {
     childChair,
     rightWheel,
     changeModalWindow,
+    changeTitlePrice,
+    titlePrice,
   } = props;
 
   let location = useLocation().pathname;
@@ -35,30 +38,7 @@ function OrderPageData(props) {
   const formSome = (i) => i[0].toUpperCase() === city.toUpperCase() &&
   i[1].toUpperCase() === point.toUpperCase()
 
-
-  function redirectStep() {
-    let nowStep = 1;
-    switch (location) {
-      case '/order/step-1':
-        break;
-      case '/order/step-2':
-        nowStep = 2;
-        break;
-      case '/order/step-3':
-        nowStep = 3;
-        break;
-      case '/order/step-4':
-        nowStep = 4;
-        break;
-      case '/order/step-5':
-        nowStep = 5;
-        break;
-    };
-    if (nowStep > step) {
-      window.location = '#/order/step-1';
-    };
-  };
-
+  console.log(orderData);
 
   function getLocation() {
     switch (location) {
@@ -129,7 +109,6 @@ function OrderPageData(props) {
     if (fullTank) rentalPrice = rentalPrice + 500;
     if (childChair) rentalPrice = rentalPrice + 200;
     if (rightWheel) rentalPrice = rentalPrice + 1600;
-    if (rentalPrice > car.priceMax) rentalPrice = car.priceMax;
     if (rentalPrice < car.priceMin) rentalPrice = car.priceMin;
 
     return rentalPrice;
@@ -322,7 +301,8 @@ function OrderPageData(props) {
           startDate == null ||
           endDate == null ||
           startDate >= endDate ||
-          rate == ''
+          rate == '' ||
+          getRentalPrice() > car.priceMax
         ) {
           button.classList.add('main-button_bloked');  
         } else {
@@ -334,23 +314,56 @@ function OrderPageData(props) {
 
 
   function buildPrise() {
-    if(orderData.price != undefined) {
-      return (
-        <p className='order-page-data__price'>
-          <b>Цена: </b>{`${prettify(orderData.price)}₽`} 
-        </p>
+    if(
+      getLocation() == 3 && 
+      rate &&
+      startDate &&
+      endDate &&
+      startDate < endDate 
+    ) {
+      if (getRentalPrice() > car.priceMax) {
+        changeTitlePrice(
+          <div className='order-page-data__price-wrapped'>
+            <p className='order-page-data__price'>
+              <b>Цена: </b>{`${prettify(getRentalPrice())}₽`} 
+            </p>
+            <p className='order-page-data__price-alert'>
+              {`Цена не должна превышать ${prettify(car.priceMax)} ₽`}
+            </p> 
+          </div>
+        );
+      } else {
+        changeTitlePrice(
+          <div className='order-page-data__price-wrapped'>
+            <p className='order-page-data__price'>
+              <b>Цена: </b>{`${prettify(getRentalPrice())}₽`} 
+            </p>
+          </div>
+        );
+      };
+    } else if (orderData.price) {
+      changeTitlePrice(
+        <div className='order-page-data__price-wrapped'>
+          <p className='order-page-data__price'>
+            <b>Цена: </b>{`${prettify(orderData.price)} ₽`}
+          </p>
+        </div>
       );
-    } else if (orderData.car != undefined) {
-      return (
-        <p className='order-page-data__price'>
-          <b>Цена: </b>{`от ${prettify(orderData.car.priceMin)} до ${prettify(orderData.car.priceMax)} ₽`}
-        </p>
+    } else if (orderData.car) {
+      changeTitlePrice(
+        <div className='order-page-data__price-wrapped'>
+          <p className='order-page-data__price'>
+            <b>Цена: </b>{`от ${prettify(orderData.car.priceMin)} до ${prettify(orderData.car.priceMax)} ₽`}
+          </p>
+        </div>
       );
     } else  {
-      return (
-        <p className='order-page-data__price'>
-          <b>Цена: </b>от 8 000 до 12 000 ₽
-        </p>
+      changeTitlePrice(
+        <div className='order-page-data__price-wrapped'>
+          <p className='order-page-data__price'>
+            <b>Цена: </b>от 8 000 до 12 000 ₽
+          </p>
+        </div>
       );
     };
   }; 
@@ -359,10 +372,7 @@ function OrderPageData(props) {
     changeStep(getLocation() + 1);
     changeButtonData();
     window.scrollTo(0, 0);
-    console.log('-------------------');
   };
-
-  console.log(step);
 
 
   // ------------------------------------------------------
@@ -371,7 +381,10 @@ function OrderPageData(props) {
     try {changeStatusStep1(listFinalPoint.some(formSome))} catch {};
   }, [city, point]);
 
-  useEffect(checkButton, [
+  useEffect(() => {
+    try {checkButton()} catch {};
+    buildPrise()
+  }, [
     step, 
     statusStep1, 
     car, 
@@ -380,10 +393,14 @@ function OrderPageData(props) {
     startDate, 
     color, 
     rate,
+    fullTank,
+    childChair,
+    rightWheel,
+    orderData,
   ]);
 
-  useEffect(redirectStep, [location]);
-
+  useEffect(buildPrise, [
+  ]);
 
   return ( 
     <div className='order-page-data'>
@@ -391,7 +408,7 @@ function OrderPageData(props) {
       <ul className="information-list">
         {buildOrderTitle()}
       </ul>
-      {buildPrise()}
+      {titlePrice}
       <Link 
         to={linkChange()}  
         className='main-button main-button_homepage main-button_bloked main-button_order'
@@ -416,6 +433,7 @@ const putActionToProps = (dispatch) => {
     changeStatusStep1: bindActionCreators(changeStatusStep1, dispatch),
     changeOrderData: bindActionCreators(changeOrderData, dispatch),
     changeModalWindow: bindActionCreators(changeModalWindow, dispatch),
+    changeTitlePrice: bindActionCreators(changeTitlePrice, dispatch),
   };
 };
 

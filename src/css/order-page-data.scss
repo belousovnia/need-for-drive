@@ -14,9 +14,21 @@
   margin-bottom: 32px;
 }
 
+.order-page-data__price-wrapped {
+  margin-bottom: 16px;
+}
+
+.order-page-data__price-alert {
+  font-family: $mainFont;
+  margin: 0;
+  font-size: 14px;
+  color: red;
+}
+
 .order-page-data__price {
   font-family: $mainFont;
   font-size: 16px;
+  margin: 0;
 }
 
 .order-page-data__container-title {

@@ -66,7 +66,7 @@ function Step2(props) {
       count = count + 1;  
       listButton.push(newItem);
     };
-    changeCategoryList(listButton)
+    changeCategoryList(listButton);
   };
 
 
@@ -135,9 +135,11 @@ function Step2(props) {
   // ------------------------------------------------------
 
   useEffect(() => {
-    changeTiles([<div className="loading" key="loading-1"></div>]);
-    buildTile();
-    buildButton();
+    try {
+      changeTiles([<div className="loading" key="loading-1"></div>]);
+      buildTile();
+      buildButton();
+    } catch {};
   }, [categoryFilter]);
 
 

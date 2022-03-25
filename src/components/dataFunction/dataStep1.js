@@ -1,9 +1,6 @@
 import { getData } from "./generalFunction";
 import { secretMap } from "./secret";
 
-//  Получает данные с сервера и формирует массив из данных
-// городов со свойством points в котором находятся данные 
-// всех пунктов выдачи в этом городе.
 export async function getCityPoint() {
   let dataCity = await getData('city');
   let dataPoint = await getData('point');
@@ -27,6 +24,7 @@ export async function getCityPoint() {
     };
   };
 
+  console.log(newData);
   return newData;
 };
 

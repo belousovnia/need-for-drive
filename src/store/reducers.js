@@ -27,6 +27,7 @@ import {
   ACTION_CHANGE_RIGHT_WHEEL,
   ACTION_CHANGE_ORDER_INFORMATION,
   ACTION_CHANGE_MODAL_WINDOW,
+  ACTION_CHANGE_TITLE_PRICE,
 } from "./type";
 
 const initialState = {
@@ -53,13 +54,14 @@ const initialState = {
   color: undefined,
   startDate: null,
   endDate: null,
-  rate: '',
+  rate: undefined,
   rateList: [],
   fullTank: false,
   childChair: false,
   rightWheel: false,
   orderInformation: [],
   modalWindow: false,
+  titlePrice: [],
 };
 
 export const rootReduser = (state = initialState, action) => {
@@ -120,6 +122,8 @@ export const rootReduser = (state = initialState, action) => {
       return {...state, orderInformation: action.payload}
     case ACTION_CHANGE_MODAL_WINDOW:
       return {...state, modalWindow: action.payload}     
+    case ACTION_CHANGE_TITLE_PRICE:
+      return {...state, titlePrice: action.payload}     
     };
   return state;
 };

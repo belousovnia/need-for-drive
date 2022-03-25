@@ -11,12 +11,37 @@
   top: 0;
   width: 100vw;
   height: 100Vh;
-  background-color: rgba(13, 161, 0, 0.788);
+  background-color: rgba(255, 255, 255, 0.9);
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .step-4__modalWindow_active {
   display: flex;
+}
+
+.step-4__modalWindow-title {
+  font-family: $mainFont;
+  font-size: 24px;
+}
+
+.step-4__modalWindow-button-container {
+  display: flex;
+}
+
+.step-4__modalWindow-main-button {
+  margin-right: 16px;
+  width: auto;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.step-4__modalWindow-back-button {
+  background: linear-gradient(to left, #7B0C3B, #493013);
+  width: auto;
+  padding-left: 40px;
+  padding-right: 40px;
 }
 
 .step-4__data-car-block {
@@ -29,6 +54,7 @@
 
 .step-4__information {
   font-family: $mainFont;
+  height: 116px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -80,5 +106,24 @@
 @media screen and (max-width: $widthTable) {
   .step-4__data-car-block {
     max-width: 736px;
+  }
+}
+
+
+@media screen and (max-width: $widthModile) {
+  .step-4__data-car-block {
+    height: auto;
+    flex-direction: column;
+    max-width: 250px;
+  }
+
+  .step-4__modalWindow-button-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .step-4__modalWindow-main-button {
+    margin-right: 0;
+    margin-bottom: 16px;
   }
 }

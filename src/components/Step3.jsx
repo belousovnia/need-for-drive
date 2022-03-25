@@ -152,7 +152,7 @@ function Step3(props) {
 
     for (let i in data) {
       let defaultInput;
-      if (rate.id == data[i].id) {
+      if (rate && rate.id == data[i].id) {
         defaultInput =  
           <input
             type='radio' 
@@ -208,7 +208,6 @@ function Step3(props) {
   useEffect(() => {
     try {
       buildColorList()
-      
     } catch {};
     buildRateList();
     checkAdditionalServices();

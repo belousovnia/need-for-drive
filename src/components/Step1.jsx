@@ -8,8 +8,7 @@ import { bindActionCreators } from 'redux';
 import { changeListFinalPoint } from '../store/actions';
 
 function Step1({changeListFinalPoint}) {
-
-  const dataStep1 = useMemo(() => getCityPoint(), []); 
+  const dataStep1 = useMemo(getCityPoint, []); 
   
   async function buildingNewListFinalPoint() {
     const data = await dataStep1;
@@ -22,6 +21,8 @@ function Step1({changeListFinalPoint}) {
         newList.push([nameCity, itemPoint.name, itemPoint.address]);
       };
     };
+
+    console.log(newList);
     changeListFinalPoint(newList);
   };
 
