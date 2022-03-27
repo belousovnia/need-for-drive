@@ -24,7 +24,6 @@ export async function getCityPoint() {
     };
   };
 
-  console.log(newData);
   return newData;
 };
 

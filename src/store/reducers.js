@@ -10,7 +10,6 @@ import {
   ACTION_CHANGE_FOCUS_LIST,
   ACTION_CHANGE_STEP,
   ACTION_CHANGE_LIST_FINAL_POINT,
-  ACTION_CHANGE_STATUS_STEP1,
   ACTION_CHANGE_ORDER_DATA,
   ACTION_CHANGE_TILES,
   ACTION_CHANGE_CATEGORY_LIST,
@@ -28,6 +27,7 @@ import {
   ACTION_CHANGE_ORDER_INFORMATION,
   ACTION_CHANGE_MODAL_WINDOW,
   ACTION_CHANGE_TITLE_PRICE,
+  ACTION_CHANGE_RECRIVED_ORDER,
 } from "./type";
 
 const initialState = {
@@ -42,7 +42,6 @@ const initialState = {
   focusList: [],
   step: 1,
   address: '',
-  statusStep1: false,
   orderData: {},
   tiles: [
     <div className="loading" key="loading-1"></div>
@@ -62,6 +61,7 @@ const initialState = {
   orderInformation: [],
   modalWindow: false,
   titlePrice: [],
+  receivedOrder: undefined,
 };
 
 export const rootReduser = (state = initialState, action) => {
@@ -88,8 +88,6 @@ export const rootReduser = (state = initialState, action) => {
       return {...state, step: action.payload};
     case ACTION_CHANGE_LIST_FINAL_POINT:
       return {...state, listFinalPoint: action.payload};  
-    case ACTION_CHANGE_STATUS_STEP1:
-      return {...state, statusStep1: action.payload};
     case ACTION_CHANGE_ORDER_DATA: 
       return {...state, orderData: action.payload}
     case ACTION_CHANGE_TILES: 
@@ -124,7 +122,9 @@ export const rootReduser = (state = initialState, action) => {
       return {...state, modalWindow: action.payload}     
     case ACTION_CHANGE_TITLE_PRICE:
       return {...state, titlePrice: action.payload}     
-    };
+    case ACTION_CHANGE_RECRIVED_ORDER:
+      return {...state, receivedOrder: action.payload}     
+  };
   return state;
 };
 

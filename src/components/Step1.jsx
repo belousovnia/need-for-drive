@@ -9,24 +9,8 @@ import { changeListFinalPoint } from '../store/actions';
 
 function Step1({changeListFinalPoint}) {
   const dataStep1 = useMemo(getCityPoint, []); 
-  
-  async function buildingNewListFinalPoint() {
-    const data = await dataStep1;
-    let newList = [];
+  dataStep1.then((data) => changeListFinalPoint(data));
 
-    for (let city in data) {
-      let nameCity = data[city].name;
-      for (let point in data[city].points) {
-        let itemPoint = data[city].points[point];
-        newList.push([nameCity, itemPoint.name, itemPoint.address]);
-      };
-    };
-
-    console.log(newList);
-    changeListFinalPoint(newList);
-  };
-
-  useEffect(buildingNewListFinalPoint, []);
 
   return ( 
     <div className='step-1'> 

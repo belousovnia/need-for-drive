@@ -3,6 +3,16 @@
 .step-4 {
 }
 
+.step-4__title {
+  font-family: $mainFont;
+  font-size: 24px;
+  margin-top: 0;
+}
+
+.step-4__title_off {
+  display: none;
+}
+
 .step-4__modalWindow {
   display: none;
   position: absolute;
@@ -109,7 +119,6 @@
   }
 }
 
-
 @media screen and (max-width: $widthModile) {
   .step-4__data-car-block {
     height: auto;
@@ -125,5 +134,9 @@
   .step-4__modalWindow-main-button {
     margin-right: 0;
     margin-bottom: 16px;
+  }
+
+  .step-4__information {
+    margin-bottom: 32px;
   }
 }

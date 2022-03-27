@@ -142,13 +142,6 @@ function Step2(props) {
     } catch {};
   }, [categoryFilter]);
 
-
-
-  useEffect(() => {
-    buildTile();
-    buildButton(); 
-  }, []);
-
   return ( 
     <div className='step-2'>
       <div className='step-2__category-wrapped'>

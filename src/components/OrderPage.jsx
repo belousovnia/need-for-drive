@@ -2,14 +2,15 @@ import {React, useEffect} from 'react';
 import HomepageHeader from './HomepageHeader';
 import Header from './Header';
 import StepLine from './StepLine';
-import { useLocation, Outlet } from 'react-router-dom';
+import { useLocation, Outlet, useNavigate } from 'react-router-dom';
 import OrderPageData from './OrderPageData';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { changeModalWindow } from '../store/actions';
 import classNames from 'classnames';
 import { pushOrder } from './dataFunction/dataStep4';
-import { getOrderData } from './dataFunction/dataStep4';
+import { changeStep } from '../store/actions';
+import { changeOrderData } from '../store/actions';
 
 
 function OrderPage(props) {
@@ -20,7 +21,11 @@ function OrderPage(props) {
     modalWindow, 
     step,
     orderData,
+    changeStep,
+    changeOrderData,
   } = props;
+
+  const goStep = useNavigate();
 
   function redirectStep() {
     let nowStep = 1;
@@ -36,12 +41,9 @@ function OrderPage(props) {
       case '/order/step-4':
         nowStep = 4;
         break;
-      case '/order/step-5':
-        nowStep = 5;
-        break;
     };
     if (nowStep > step) {
-      window.location = '#/order/step-1';
+      goStep('/order/step-1');
     };
   };
 
@@ -49,6 +51,16 @@ function OrderPage(props) {
     'step-4__modalWindow': true,
     'step-4__modalWindow_active': modalWindow,
   });
+
+  async function pushOrderGetId(){  
+    const newIdOrder = await pushOrder(orderData);
+    changeModalWindow(false);
+    changeStep(1);
+    changeOrderData({});
+    goStep(`/order/step-5/${newIdOrder.id}`);
+  };
+
+  // ------------------------------------------------------
   
   useEffect(redirectStep, [location]);
 
@@ -57,20 +69,17 @@ function OrderPage(props) {
       <div className={modalWindowClass}>
         <p className='step-4__modalWindow-title'>Подтвердить заказ</p>
         <div className='step-4__modalWindow-button-container'>
-          <button 
-          className='main-button step-4__modalWindow-main-button'
-            onClick={() => {
-              pushOrder(orderData);
-              changeModalWindow(false);
-            }}
+          <button
+            className='main-button step-4__modalWindow-main-button'
+            onClick={pushOrderGetId}
           >
             <p className='main-button__title'>
               Подтвердить
             </p>
-          </button><button 
+          </button>
+          <button 
           className='main-button step-4__modalWindow-back-button'
             onClick={() => {
-              getOrderData();
               changeModalWindow(false);
             }}
           >
@@ -109,6 +118,8 @@ const putStateToProps = (state) => {
 const putActionToProps = (dispatch) => {
   return {
     changeModalWindow: bindActionCreators(changeModalWindow, dispatch),
+    changeStep: bindActionCreators(changeStep, dispatch),
+    changeOrderData: bindActionCreators(changeOrderData, dispatch),
   };
 };
 

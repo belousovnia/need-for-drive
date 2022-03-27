@@ -10,7 +10,6 @@ import {
   ACTION_CHANGE_FOCUS_LIST,
   ACTION_CHANGE_STEP,
   ACTION_CHANGE_LIST_FINAL_POINT,
-  ACTION_CHANGE_STATUS_STEP1,
   ACTION_CHANGE_ORDER_DATA,
   ACTION_CHANGE_TILES,
   ACTION_CHANGE_CATEGORY_LIST,
@@ -28,6 +27,7 @@ import {
   ACTION_CHANGE_ORDER_INFORMATION,
   ACTION_CHANGE_MODAL_WINDOW,
   ACTION_CHANGE_TITLE_PRICE,
+  ACTION_CHANGE_RECRIVED_ORDER,
 } from "./type";
 
 export function changeHeadHiding(newStatus) {
@@ -127,13 +127,6 @@ export function changeStep(newStatus) {
 export function changeListFinalPoint(newStatus) {
   return {
     type: ACTION_CHANGE_LIST_FINAL_POINT,
-    payload: newStatus
-  };
-};
-
-export function changeStatusStep1(newStatus) {
-  return {
-    type: ACTION_CHANGE_STATUS_STEP1,
     payload: newStatus
   };
 };
@@ -253,6 +246,13 @@ export function changeModalWindow(newStatus) {
 export function changeTitlePrice(newStatus) {
   return {
     type: ACTION_CHANGE_TITLE_PRICE,
+    payload: newStatus
+  };
+};
+
+export function changeReceivedOrder (newStatus) {
+  return {
+    type: ACTION_CHANGE_RECRIVED_ORDER,
     payload: newStatus
   };
 };

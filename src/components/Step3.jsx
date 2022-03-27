@@ -16,7 +16,6 @@ import { changeRateList } from '../store/actions';
 import { changeFullTank } from '../store/actions';
 import { changeChildChair } from '../store/actions';
 import { changeRightWheel } from '../store/actions';
-import { changeOrderInformation } from '../store/actions';
 
 function Step3(props) {
   registerLocale('ru', ru);

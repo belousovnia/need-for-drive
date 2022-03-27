@@ -3,11 +3,11 @@ import { Link, useLocation } from 'react-router-dom';
 import { changeStep } from '../store/actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { changeStatusStep1 } from '../store/actions';
 import { changeOrderData } from '../store/actions';
 import { prettify } from './dataFunction/generalFunction';
 import { changeModalWindow } from '../store/actions';
 import { changeTitlePrice } from '../store/actions';
+import classNames from 'classnames';
 
 function OrderPageData(props) {
   const { 
@@ -16,8 +16,6 @@ function OrderPageData(props) {
     listFinalPoint, 
     point, 
     city,
-    changeStatusStep1,
-    statusStep1,
     orderData,
     changeOrderData,
     car,
@@ -31,13 +29,12 @@ function OrderPageData(props) {
     changeModalWindow,
     changeTitlePrice,
     titlePrice,
+    receivedOrder,
   } = props;
 
   let location = useLocation().pathname;
-  
-  const formSome = (i) => i[0].toUpperCase() === city.toUpperCase() &&
-  i[1].toUpperCase() === point.toUpperCase()
 
+  console.log(step);
   console.log(orderData);
 
   function getLocation() {
@@ -50,17 +47,19 @@ function OrderPageData(props) {
         return 3;
       case '/order/step-4':
         return 4;
-      case '/order/step-5':
-        return 5;
     };
+    if (location.includes('/order/step-5/')) return 5;
   };
+
 
   function linkChange() {
     if (getLocation() < 4) {
       return `/order/step-${getLocation() + 1}`;
-    } else {
-      return `/order/step-${getLocation()}`
-    }
+    } else if (getLocation() == 4) {
+      return `/order/step-${getLocation()}`;
+    } else if (getLocation() == 5) {
+      return `/`;
+    };
   };
 
 
@@ -82,9 +81,17 @@ function OrderPageData(props) {
 
   function getAddress() {
     for (let i in listFinalPoint) {
-      let item = listFinalPoint[i]
-      if (city == item[0] && point == item[1]) {
-        return item[2];
+      let itemCity = listFinalPoint[i]
+      if (city.toLowerCase() == itemCity.name.toLowerCase()) {
+        for (let i2 in itemCity.points) {
+          let itemPoint = itemCity.points[i2];
+          if (point.toLowerCase() == itemPoint.name.toLowerCase()) {
+            return {
+              ...itemPoint,
+              'address': `${itemCity.name}, ${itemPoint.address}`,
+            };
+          };
+        };
       };
     };
   };
@@ -142,24 +149,18 @@ function OrderPageData(props) {
     switch (getLocation()) {
       case 1:
         changeOrderData({
-          city,
-          point,
-          'address': getAddress(),
+          'point': getAddress(),
         });
         break;
       case 2:
         changeOrderData({
-          city,
-          point,
-          'address': getAddress(),
+          'point': getAddress(),
           car,
         });
         break;
       case 3:
         changeOrderData({
-          city,
-          point,
-          'address': getAddress(),
+          'point': getAddress(),
           car,
           color,     
           startDate,
@@ -175,31 +176,38 @@ function OrderPageData(props) {
       case 4:
         changeModalWindow(true);
         break;
+      case 5:
+        break;
     };
   };
 
 
   function checkColor() {
-    for (let i in car.colors) {
-      if (color == car.colors[i]) {
-        return true;
+    try {
+      for (let i in car.colors) {
+        if (color == car.colors[i]) {
+          return true;
+        };
       };
+      return false;
+    } catch {
+      return false;
     };
-    return false;
   };
 
 
-  // ------------------------------------------------------
-
-
-  function buildOrderTitle() {
+  function buildOrderTitle(orderData) {
     let listTitle = [];
-    if (orderData.address && orderData.city && orderData.point) {
+    if (getLocation() == 5) {
+      orderData = receivedOrder;
+      if (orderData == undefined) return listTitle;
+    };
+    if (orderData.point) {
       listTitle.push(
         <li key={'lt1'} className='information-list__line'>
           <span className="information-list__title">Пункт выдачи</span>
           <span className="information-list__chapter">
-            {`${orderData.city}, ${orderData.address}`}
+            {orderData.point.address}
           </span>
         </li>
       );
@@ -279,42 +287,40 @@ function OrderPageData(props) {
 
 
   function checkButton() {
-    let button = document.getElementById('order-page-data__button');
     switch (getLocation()) {
       case 1: 
-        if (statusStep1) {
-          button.classList.remove('main-button_bloked');
-        } else {
-          button.classList.add('main-button_bloked');
-        };
-        break;
+        return checkStep1();
       case 2: 
-        if (car == undefined) {
-          button.classList.add('main-button_bloked');
-        } else {
-          button.classList.remove('main-button_bloked');
-        };
-        break;
-      case 3:
-        if (
+        return car == undefined;
+      case 3: 
+        return (
           checkColor() == false ||
           startDate == null ||
           endDate == null ||
           startDate >= endDate ||
-          rate == '' ||
-          getRentalPrice() > car.priceMax
-        ) {
-          button.classList.add('main-button_bloked');  
-        } else {
-          button.classList.remove('main-button_bloked');
-        };
-        break;
+          rate == undefined ||
+          getRentalPrice() > car.priceMax 
+        );
+      case 4:
+        return false
+      case 5:
+        return false
     };   
   };
 
 
-  function buildPrise() {
-    if(
+  function buildPrise(car) {
+    if (getLocation() == 5) {
+      if (receivedOrder) {
+        changeTitlePrice(
+          <div className='order-page-data__price-wrapped'>
+            <p className='order-page-data__price'>
+              <b>Цена: </b>{`${prettify(receivedOrder.price)} ₽`} 
+            </p>
+          </div>
+        );
+      }; 
+    } else if(
       getLocation() == 3 && 
       rate &&
       startDate &&
@@ -325,7 +331,7 @@ function OrderPageData(props) {
         changeTitlePrice(
           <div className='order-page-data__price-wrapped'>
             <p className='order-page-data__price'>
-              <b>Цена: </b>{`${prettify(getRentalPrice())}₽`} 
+              <b>Цена: </b>{`${prettify(getRentalPrice())} ₽`} 
             </p>
             <p className='order-page-data__price-alert'>
               {`Цена не должна превышать ${prettify(car.priceMax)} ₽`}
@@ -368,25 +374,49 @@ function OrderPageData(props) {
     };
   }; 
 
+
   function orderButtonOnClick() {
-    changeStep(getLocation() + 1);
+    if (getLocation() < 4) {
+      changeStep(getLocation() + 1);
+    };
     changeButtonData();
     window.scrollTo(0, 0);
   };
 
+  function checkStep1() { 
+    for (let i in listFinalPoint) {
+      let itemCity = listFinalPoint[i]
+      if (city.toLowerCase() == itemCity.name.toLowerCase()) {
+        for (let i2 in itemCity.points) {
+          let itemPoint = itemCity.points[i2];
+          if (point.toLowerCase() == itemPoint.name.toLowerCase()) {
+            return false;
+          };
+        };
+      };
+    };
+    return true;
+  };
+
+
+  const buttonClass = classNames({
+    'main-button': true,
+    'main-button_homepage': true,
+    'main-button_order': true,
+    'main-button_bloked': checkButton(),
+    'step-4__modalWindow-back-button': getLocation() == 5,
+  });
+
 
   // ------------------------------------------------------
 
-  useEffect(() => {
-    try {changeStatusStep1(listFinalPoint.some(formSome))} catch {};
-  }, [city, point]);
 
   useEffect(() => {
-    try {checkButton()} catch {};
-    buildPrise()
+    buildPrise(car);
   }, [
+    city,
+    point,
     step, 
-    statusStep1, 
     car, 
     location, 
     endDate, 
@@ -399,19 +429,17 @@ function OrderPageData(props) {
     orderData,
   ]);
 
-  useEffect(buildPrise, [
-  ]);
 
   return ( 
     <div className='order-page-data'>
       <h1 className='order-page-data__title'>Ваш заказ:</h1>
       <ul className="information-list">
-        {buildOrderTitle()}
+        {buildOrderTitle(orderData)}
       </ul>
       {titlePrice}
       <Link 
         to={linkChange()}  
-        className='main-button main-button_homepage main-button_bloked main-button_order'
+        className={buttonClass}
         id='order-page-data__button' 
         onClick={orderButtonOnClick}
       >
@@ -430,7 +458,6 @@ const putStateToProps = (state) => {
 const putActionToProps = (dispatch) => {
   return {
     changeStep: bindActionCreators(changeStep, dispatch),
-    changeStatusStep1: bindActionCreators(changeStatusStep1, dispatch),
     changeOrderData: bindActionCreators(changeOrderData, dispatch),
     changeModalWindow: bindActionCreators(changeModalWindow, dispatch),
     changeTitlePrice: bindActionCreators(changeTitlePrice, dispatch),

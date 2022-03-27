@@ -15,7 +15,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 .homepage {
   width: 50%;
   min-width: 614px;
@@ -658,6 +657,8 @@
   font-size: 32px;
   font-family: "Roboto", Medium;
   color: #0EC261;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 .location {
@@ -706,7 +707,7 @@
   border-bottom: 1px solid #EEEEEE;
 }
 
-.stage-line__content {
+.stage-line__link-container {
   padding-top: 8px;
   padding-bottom: 8px;
   max-width: 1272px;
@@ -719,6 +720,10 @@
   flex-wrap: wrap;
 }
 
+.stage-line__link-container_off {
+  display: none;
+}
+
 .stage-line__link {
   font-family: "Roboto", Medium;
   font-weight: Bold;
@@ -729,12 +734,36 @@
 
 .stage-line__link_active {
   pointer-events: auto;
+  color: black;
+}
+
+.stage-line__link_now {
   color: #0EC261;
 }
 
 .stage-line__arrow {
   padding-left: 16px;
   padding-right: 16px;
+}
+
+.stage-line__number {
+  max-width: 1272px;
+  display: none;
+  font-family: "Roboto", Medium;
+  margin: 0;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: bold;
+  font-size: 14px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 32px;
+  padding-right: 32px;
+  box-sizing: border-box;
+}
+
+.stage-line__number_active {
+  display: block;
 }
 
 .order-page-data {
@@ -1145,6 +1174,16 @@
   margin-bottom: 32px;
 }
 
+.step-4__title {
+  font-family: "Roboto", Medium;
+  font-size: 24px;
+  margin-top: 0;
+}
+
+.step-4__title_off {
+  display: none;
+}
+
 .step-4__modalWindow {
   display: none;
   position: absolute;
@@ -1265,6 +1304,10 @@
   .step-4__modalWindow-main-button {
     margin-right: 0;
     margin-bottom: 16px;
+  }
+
+  .step-4__information {
+    margin-bottom: 32px;
   }
 }
 .my-map {
