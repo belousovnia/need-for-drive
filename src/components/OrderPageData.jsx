@@ -33,9 +33,7 @@ function OrderPageData(props) {
   } = props;
 
   let location = useLocation().pathname;
-
-  console.log(step);
-  console.log(orderData);
+  
 
   function getLocation() {
     switch (location) {
