@@ -37,7 +37,7 @@ function Step2(props) {
         defaultInput =  
           <input
             type='radio' 
-            className='step-2__category-input'
+            className='radio-button__input'
             name='inputCategory'
             id={`category${count}`} 
             defaultChecked
@@ -46,27 +46,27 @@ function Step2(props) {
         defaultInput =  
           <input
             type='radio' 
-            className='step-2__category-input'
+            className='radio-button__input'
             name='inputCategory'
             id={`category${count}`} 
           />
       };
       let newItem = 
-        <div className='step-2__category' key={receivedData[i].id}>
+        <div className='radio-button__container' key={receivedData[i].id}>
           {defaultInput}
           <label
-            className='step-2__category-label' 
+            className='radio-button__label' 
             htmlFor={`category${count}`}
             onClick={() => changeCategoryFilter(receivedData[i].name)}
           >
-            <div className='step-2__category-point'/>
-            <p className='step-2__category-title'>{receivedData[i].name}</p>
+            <div className='radio-button__point'/>
+            <p className='radio-button__title'>{receivedData[i].name}</p>
           </label>
         </div>  
       count = count + 1;  
       listButton.push(newItem);
     };
-    changeCategoryList(listButton)
+    changeCategoryList(listButton);
   };
 
 
@@ -78,7 +78,7 @@ function Step2(props) {
     for (let i in dataCar) {
       let item = dataCar[i];
 
-      if ( item.category == categoryFilter || 
+      if ( item.categoryId.name == categoryFilter || 
         categoryFilter == 'Все модели') {
           let defaultInput = 
             <input
@@ -113,11 +113,11 @@ function Step2(props) {
                 }}
               >
                 <p className='step-2__tile-name'>{item.name}</p>
-                <p className='step-2__tile-price'>{prettify(item.priceMin)} - {prettify(item.priceMin)}₽</p>
+                <p className='step-2__tile-price'>{prettify(item.priceMin)} - {prettify(item.priceMax)}₽</p>
                 <div className='step-2__tile-img-wrapped'>
                   <img 
                     className='step-2__tile-img' 
-                    src={item.imagePath}
+                    src={item.thumbnail.path}
                     onError={(i) => {
                       i.target.src = require('../media/car.jpg')
                     }}
@@ -135,17 +135,12 @@ function Step2(props) {
   // ------------------------------------------------------
 
   useEffect(() => {
-    changeTiles([<div className="step-2__loading" key="step-2__loading-1"></div>]);
-    buildTile();
-    buildButton();
+    try {
+      changeTiles([<div className="loading" key="loading-1"></div>]);
+      buildTile();
+      buildButton();
+    } catch {};
   }, [categoryFilter]);
-
-
-
-  useEffect(() => {
-    buildTile();
-    buildButton(); 
-  }, []);
 
   return ( 
     <div className='step-2'>
@@ -160,12 +155,7 @@ function Step2(props) {
 };
 
 const putStateToProps = (state) => {
-  return {
-    tiles: state.tiles,
-    categoryList: state.categoryList,
-    categoryFilter: state.categoryFilter,
-    car: state.car,
-  };
+  return {...state};
 };
 
 const putActionToProps = (dispatch) => {

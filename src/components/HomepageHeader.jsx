@@ -1,20 +1,17 @@
-import React, { useLayoutEffect } from 'react';
+import React from 'react';
 import Location from './Location';
+import { Link } from 'react-router-dom';
 
 function HomepageHeader(props) {
-  let modifier;
-
-  if (props.modifier == undefined) {
-    modifier = '';
-  } else {
-    modifier = props.modifier;
-  };
-
+  
   return ( 
-    <header className={`homepage-header ${modifier}`} >
-      <h1 className='homepage-header__logo'>
+    <header className={`homepage-header ${props.modifier ||''}`} >
+      <Link 
+        to='/'
+        className='homepage-header__logo'
+      >
         Need for drive
-      </h1>
+      </Link>
       <Location/>
     </header>
   );

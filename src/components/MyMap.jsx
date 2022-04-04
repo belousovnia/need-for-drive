@@ -86,12 +86,7 @@ function MyMap(props) {
 };
 
 const putStateToProps = (state) => {
-  return {
-    pointMap: state.pointMap,
-    point: state.point,
-    focus: state.focus,
-    focusList: state.focusList,
-  };
+  return {...state};
 };
 
 const putActionToProps = (dispatch) => {

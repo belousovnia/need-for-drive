@@ -6,7 +6,6 @@ import Step1 from './components/Step1';
 import Step2 from './components/Step2';
 import Step3 from './components/Step3';
 import Step4 from './components/Step4';
-import Step5 from './components/Step5';
 
 function App() {
   return (
@@ -18,7 +17,7 @@ function App() {
           <Route path='step-2' element={<Step2/>}/>
           <Route path='step-3' element={<Step3/>}/>
           <Route path='step-4' element={<Step4/>}/>
-          <Route path='step-5' element={<Step5/>}/>
+          <Route path='step-5/:orderId' element={<Step4/>}/>
         </Route>
       </Routes>
     </div>

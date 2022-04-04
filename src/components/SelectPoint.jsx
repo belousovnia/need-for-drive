@@ -32,36 +32,35 @@ function SelectPoint(props) {
   };
 
   async function changeAutocomplete() {
+    const dataAwait = await data;
     const strSearch = document.getElementById("input-point").value;
     let cityName = document.getElementById("input-city").value;
     let pattern = new RegExp(strSearch, 'i');
     let newAutocomplete = [];
     
-    data.then((i) => {
-      for (let city in i){
-        if ( i[city].name.toUpperCase() == cityName.toUpperCase()){
-          for (let item in i[city].points){
-            const dataItem = i[city].points[item];
-            if (pattern.test(dataItem.name)){
-              let newItem = 
-                  <button 
-                    key={dataItem.id}
-                    className='select__item'
-                    onClick={() => {
-                      changeSelectValue(dataItem.name);
-                      checkCross();
-                      changePoint(dataItem.name);
-                    }}
-                  >
-                    {dataItem.name}
-                  </button>
-              newAutocomplete.push(newItem);
-            };
+    for (let city in dataAwait){
+      if ( dataAwait[city].name.toUpperCase() == cityName.toUpperCase()){
+        for (let item in dataAwait[city].points){
+          const dataItem = dataAwait[city].points[item];
+          if (pattern.test(dataItem.name)){
+            let newItem = 
+                <button 
+                  key={dataItem.id}
+                  className='select__item'
+                  onClick={() => {
+                    changeSelectValue(dataItem.name);
+                    checkCross();
+                    changePoint(dataItem.name);
+                  }}
+                >
+                  {dataItem.name}
+                </button>
+            newAutocomplete.push(newItem);
           };
         };
       };
-      changePointAutocomplete(newAutocomplete);
-    });
+    };
+    changePointAutocomplete(newAutocomplete);
   };
 
   function checkCross() {
@@ -89,9 +88,8 @@ function SelectPoint(props) {
       changeSelectActive(true);
       changeAutocomplete();
     });
-    document.addEventListener('click', (e) => {
+    document.addEventListener('click', ({target}) => {
       let targetSelect = document.getElementById('input-point');
-      let target = e.target;
 
       if (targetSelect !== target) {
         try {

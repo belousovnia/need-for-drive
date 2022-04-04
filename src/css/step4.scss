@@ -1,5 +1,142 @@
 @import 'general.scss';
 
 .step-4 {
-  
-} 
+}
+
+.step-4__title {
+  font-family: $mainFont;
+  font-size: 24px;
+  margin-top: 0;
+}
+
+.step-4__title_off {
+  display: none;
+}
+
+.step-4__modalWindow {
+  display: none;
+  position: absolute;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100Vh;
+  background-color: rgba(255, 255, 255, 0.9);
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.step-4__modalWindow_active {
+  display: flex;
+}
+
+.step-4__modalWindow-title {
+  font-family: $mainFont;
+  font-size: 24px;
+}
+
+.step-4__modalWindow-button-container {
+  display: flex;
+}
+
+.step-4__modalWindow-main-button {
+  margin-right: 16px;
+  width: auto;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.step-4__modalWindow-back-button {
+  background: linear-gradient(to left, #7B0C3B, #493013);
+  width: auto;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.step-4__data-car-block {
+  width: 100%;
+  height: 116px;
+  min-width: 126px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.step-4__information {
+  font-family: $mainFont;
+  height: 116px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.step-4__information-title {
+  font-size: 18px;
+  margin: 0;
+}
+
+.step-4__information-line {
+  display: flex;
+}
+
+.step-4__car-img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.step-4__information-number-wrapped {
+  display: flex;
+  width: auto;
+}
+
+.step-4__information-number {
+  font-size: 14px;
+  margin: 0;
+  border: 1px solid $grayLight;
+  border-radius: 4px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.step-4__information-p {
+  margin: 0;
+  margin-right: 5px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.step-4__information-p-number {
+  margin: 0;
+  font-weight: 300;
+  font-size: 14px;
+}
+
+@media screen and (max-width: $widthTable) {
+  .step-4__data-car-block {
+    max-width: 736px;
+  }
+}
+
+@media screen and (max-width: $widthModile) {
+  .step-4__data-car-block {
+    height: auto;
+    flex-direction: column;
+    max-width: 250px;
+  }
+
+  .step-4__modalWindow-button-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .step-4__modalWindow-main-button {
+    margin-right: 0;
+    margin-bottom: 16px;
+  }
+
+  .step-4__information {
+    margin-bottom: 32px;
+  }
+}

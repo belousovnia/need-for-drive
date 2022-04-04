@@ -10,12 +10,24 @@ import {
   ACTION_CHANGE_FOCUS_LIST,
   ACTION_CHANGE_STEP,
   ACTION_CHANGE_LIST_FINAL_POINT,
-  ACTION_CHANGE_STATUS_STEP1,
   ACTION_CHANGE_ORDER_DATA,
   ACTION_CHANGE_TILES,
   ACTION_CHANGE_CATEGORY_LIST,
   ACTION_CHANGE_CATEGORY_FILTER,
   ACTION_CHANGE_CAR,
+  ACTION_CHANGE_COLOR_LIST,
+  ACTION_CHANGE_COLOR,
+  ACTION_CHANGE_START_DATE,
+  ACTION_CHANGE_END_DATE,
+  ACTION_CHANGE_RATE,
+  ACTION_CHANGE_RATE_LIST,
+  ACTION_CHANGE_FULL_TANK,
+  ACTION_CHANGE_CHILD_CHAIR,
+  ACTION_CHANGE_RIGHT_WHEEL,
+  ACTION_CHANGE_ORDER_INFORMATION,
+  ACTION_CHANGE_MODAL_WINDOW,
+  ACTION_CHANGE_TITLE_PRICE,
+  ACTION_CHANGE_RECRIVED_ORDER,
 } from "./type";
 
 const initialState = {
@@ -30,14 +42,26 @@ const initialState = {
   focusList: [],
   step: 1,
   address: '',
-  statusStep1: false,
   orderData: {},
   tiles: [
-    <div className="step-2__loading" key="step-2__loading-1"></div>
+    <div className="loading" key="loading-1"></div>
   ],
   categoryList: [],
   categoryFilter: 'Все модели',
   car: undefined,
+  colorList: [],
+  color: undefined,
+  startDate: null,
+  endDate: null,
+  rate: undefined,
+  rateList: [],
+  fullTank: false,
+  childChair: false,
+  rightWheel: false,
+  orderInformation: [],
+  modalWindow: false,
+  titlePrice: [],
+  receivedOrder: undefined,
 };
 
 export const rootReduser = (state = initialState, action) => {
@@ -64,8 +88,6 @@ export const rootReduser = (state = initialState, action) => {
       return {...state, step: action.payload};
     case ACTION_CHANGE_LIST_FINAL_POINT:
       return {...state, listFinalPoint: action.payload};  
-    case ACTION_CHANGE_STATUS_STEP1:
-      return {...state, statusStep1: action.payload};
     case ACTION_CHANGE_ORDER_DATA: 
       return {...state, orderData: action.payload}
     case ACTION_CHANGE_TILES: 
@@ -75,8 +97,34 @@ export const rootReduser = (state = initialState, action) => {
     case ACTION_CHANGE_CATEGORY_FILTER: 
       return {...state, categoryFilter: action.payload}
     case ACTION_CHANGE_CAR: 
-      return {...state, car: action.payload}    
-    };
+      return {...state, car: action.payload}
+    case ACTION_CHANGE_COLOR_LIST:
+      return {...state, colorList: action.payload}
+    case ACTION_CHANGE_COLOR:
+      return {...state, color: action.payload}
+    case ACTION_CHANGE_START_DATE:
+      return {...state, startDate: action.payload}
+    case ACTION_CHANGE_END_DATE:
+      return {...state, endDate: action.payload}
+    case ACTION_CHANGE_RATE:
+      return {...state, rate: action.payload}
+    case ACTION_CHANGE_RATE_LIST:
+      return {...state, rateList: action.payload}
+    case ACTION_CHANGE_FULL_TANK:
+      return {...state, fullTank: action.payload}
+    case ACTION_CHANGE_CHILD_CHAIR:
+      return {...state, childChair: action.payload} 
+    case ACTION_CHANGE_RIGHT_WHEEL:
+      return {...state, rightWheel: action.payload}
+    case ACTION_CHANGE_ORDER_INFORMATION:
+      return {...state, orderInformation: action.payload}
+    case ACTION_CHANGE_MODAL_WINDOW:
+      return {...state, modalWindow: action.payload}     
+    case ACTION_CHANGE_TITLE_PRICE:
+      return {...state, titlePrice: action.payload}     
+    case ACTION_CHANGE_RECRIVED_ORDER:
+      return {...state, receivedOrder: action.payload}     
+  };
   return state;
 };
 
