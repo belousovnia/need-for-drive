@@ -75,10 +75,7 @@ function AdminOrderList(props) {
   };
 
   function changeFilter() {
-    console.log("Фильтр");
-
     const windowWidth = document.documentElement.clientWidth;
-    console.log(windowWidth);
 
     let hide;
     if (windowWidth <= 767) {

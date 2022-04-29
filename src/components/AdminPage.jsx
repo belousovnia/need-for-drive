@@ -92,10 +92,8 @@ function AdminPage(props) {
   },[login]);
 
   useEffect(() => {
-    if (!checkLogin()) {
-      checkLocation();
-    };
-  } , [location]);
+    checkLocation();
+  } , []);
 
   // ------------------------------------------------------
 
