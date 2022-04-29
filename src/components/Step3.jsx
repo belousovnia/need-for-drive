@@ -1,4 +1,4 @@
-import { React, useEffect, forwardRef, useMemo } from 'react';
+import { React, useEffect, forwardRef } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { changeColor} from '../store/actions';
@@ -189,16 +189,16 @@ function Step3(props) {
 
   function checkAdditionalServices() {
     if (fullTank) {
-      const elementTank = document.getElementById('tank')
-      elementTank.checked = 1;
+      const element = document.getElementById('tank')
+      element.checked = 1;
     };
     if (childChair) {
-      const elementTank = document.getElementById('childChair')
-      elementTank.checked = 1;
+      const element = document.getElementById('childChair')
+      element.checked = 1;
     };
     if (rightWheel) {
-      const elementTank = document.getElementById('rightWheel')
-      elementTank.checked = 1;
+      const element = document.getElementById('rightWheel')
+      element.checked = 1;
     };
   };
 

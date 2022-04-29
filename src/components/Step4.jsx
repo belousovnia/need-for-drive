@@ -8,6 +8,7 @@ import { changeOrderData } from '../store/actions';
 import { changeReceivedOrder } from '../store/actions';
 import classNames from 'classnames';
 import { getOrderData } from './dataFunction/dataStep4';
+import { getDate } from './dataFunction/generalFunction';
 
 function Step4(props) {
   const { 
@@ -93,20 +94,6 @@ function Step4(props) {
     };
   };
 
-  function getDate(orderData) {
-    const date = orderData.startDate;
-    let mount = date.getMonth();
-    let day = date.getDate();
-    let minutes = date.getMinutes();
-
-    if (mount <= 9) mount = '0' + mount;
-    if (day <= 9) day = '0' + day;
-    if (minutes <= 9) minutes = '0' + minutes;
-
-    let strDate = `${day}.${mount}.${date.getFullYear()} ${date.getHours()}:${minutes}`
-    return strDate
-  }
-
   function buildInformation(orderData) {
     changeOrderInformation(
       <div className='step-4__data-car-block'>
@@ -123,11 +110,11 @@ function Step4(props) {
           </div>
           <div className='step-4__information-line'>
             <p className='step-4__information-p'>Достуана с</p>
-            <p className='step-4__information-p-number'>{getDate(orderData)}</p>
+            <p className='step-4__information-p-number'>{getDate(orderData.startDate)}</p>
           </div>
         </div>
         <img
-          className='step-4_car-img' 
+          className='step-4__car-img' 
           src={orderData.car.thumbnail.path}
           onError={(i) => {
             i.target.src = require('../media/car.jpg')

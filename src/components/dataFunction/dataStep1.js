@@ -27,6 +27,7 @@ export async function getCityPoint() {
   return newData;
 };
 
+
 export async function getGeocoderPoint(data) {
   let responseData = [];
   data = await data;

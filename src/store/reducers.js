@@ -28,6 +28,7 @@ import {
   ACTION_CHANGE_MODAL_WINDOW,
   ACTION_CHANGE_TITLE_PRICE,
   ACTION_CHANGE_RECRIVED_ORDER,
+  ACTION_CHANGE_LOGIN,
 } from "./type";
 
 const initialState = {
@@ -62,6 +63,7 @@ const initialState = {
   modalWindow: false,
   titlePrice: [],
   receivedOrder: undefined,
+  login: undefined,
 };
 
 export const rootReduser = (state = initialState, action) => {
@@ -121,9 +123,11 @@ export const rootReduser = (state = initialState, action) => {
     case ACTION_CHANGE_MODAL_WINDOW:
       return {...state, modalWindow: action.payload}     
     case ACTION_CHANGE_TITLE_PRICE:
-      return {...state, titlePrice: action.payload}     
+      return {...state, titlePrice: action.payload}
     case ACTION_CHANGE_RECRIVED_ORDER:
-      return {...state, receivedOrder: action.payload}     
+      return {...state, receivedOrder: action.payload}
+    case ACTION_CHANGE_LOGIN:
+      return {...state, login: action.payload}    
   };
   return state;
 };

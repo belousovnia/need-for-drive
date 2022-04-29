@@ -15,6 +15,16 @@
 @import "my-map.scss";
 @import "radio-button.scss";
 @import "loading.scss";
+@import "admin-login.scss";
+@import "admin-logo.scss";
+@import "admin-button.scss";
+@import "admin-page.scss";
+@import "bell.scss";
+@import "admin-order-list.scss";
+@import "selection-list.scss";
+@import "admin-order-tile.scss";
+@import "admin-order-editor.scss";
+@import "admin-page-table.scss";
 
 html {
     overflow-x: hidden;
@@ -44,7 +54,7 @@ body {
     z-index: 0;
 }
 
-@media screen and (max-width: $widthModile) {
+@media screen and (max-width: $widthMobile) {
     .content {
         margin-left: 0;
         width: 100%;
