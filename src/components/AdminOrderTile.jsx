@@ -1,7 +1,6 @@
 import { React, useEffect } from 'react';
-import { getDate } from './dataFunction/generalFunction';
+import { getDate, deleteSubject } from './dataFunction/generalFunction';
 import { useNavigate } from 'react-router-dom';
-import { deleteOrder } from './dataFunction/dataAdminOrder';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -37,7 +36,7 @@ function AdminOrderTile(props) {
   async function callBackDelete() {
     const question =  window.confirm(`Удалить заказ ${data.id}`);
     if (question) {
-      await deleteOrder(login.data.access_token, data.id);
+      await deleteSubject(login.data.access_token, data.id, 'order');
       update(data.id);
     };
   };

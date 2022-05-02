@@ -11,6 +11,7 @@ import AdminPage from './components/AdminPage';
 import AdminOrderList from './components/AdminOrderList';
 import AdminOrderEditor from './components/AdminOrderEditor';
 import AdminCar from './components/AdminCar';
+import AdminCarEditor from './components/AdminCarEditor';
 
 function App() {
   const location = useLocation().pathname
@@ -33,6 +34,7 @@ function App() {
           <Route path='order' element={<AdminOrderList/>}/>
           <Route path='order/:orderId' element={<AdminOrderEditor/>}/>
           <Route path='car' element={<AdminCar/>}/>
+          <Route path='car/:carId' element={<AdminCarEditor/>}/>
         </Route>
       </Routes>
     </div>

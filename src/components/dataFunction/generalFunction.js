@@ -20,6 +20,23 @@ export async function getData(address, paramsData = {}){
   };
 };
 
+export async function deleteSubject(authorization, id, type) {
+  const token = `Bearer ${authorization}`;
+
+  const headers = { 
+    'X-Api-Factory-Application-Id': secret,
+    'Authorization': token,
+  };
+  
+  try {
+    const response = await axios.delete(`https://api-factory.simbirsoft1.com/api/db/${type}/${id}`, { headers });
+    console.log(response);
+    return response;
+  } catch (error){
+    return 'error';
+  };
+};
+
 // Принимает строку и возвращает строку с пробелами через каждые 3 символа с конца.
 export function prettify(num) {
   let n = num.toString();

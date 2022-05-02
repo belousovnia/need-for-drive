@@ -9,3 +9,36 @@
   padding-left: 16px;
   box-sizing: border-box;
 }
+
+.admin-page-table__car {
+  display: grid;
+  grid-template-columns: 0.7fr 1fr 0.6fr 1fr 0.6fr 0.6fr 0.6fr 0.4fr 1.5fr 0.9fr ;
+}
+
+.admin-page-table__car_name {
+  .admin-page-table__tile {
+    font-size: 14px;
+    min-height: 40px;
+    height: 40px;
+  };
+}
+
+.admin-page-table__tile {
+  font-family: $mainFont;
+  height: auto;
+  min-height: 60px;
+  display: flex;
+  padding-left: 8px;
+  align-items: center;
+  border-bottom: 1px solid $grayLight;
+  flex-wrap: wrap;
+  font-size: 12px;
+}
+
+.admin-page-table__car-img {
+  max-width: 100%;
+  max-height: 60px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+

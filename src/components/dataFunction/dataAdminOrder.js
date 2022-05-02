@@ -24,23 +24,6 @@ export async function getListOrder(authorization, page, paramsData = {}) {
   };
 };
 
-export async function deleteOrder(authorization, id) {
-  const token = `Bearer ${authorization}`;
-
-  const headers = { 
-    'X-Api-Factory-Application-Id': secret,
-    'Authorization': token,
-  };
-  
-  try {
-    const response = await axios.delete(`https://api-factory.simbirsoft1.com/api/db/order/${id}`, { headers });
-    console.log(response);
-    return response;
-  } catch (error){
-    return 'error';
-  };
-};
-
 export async function getOrderById(authorization, id) {
   const token = `Bearer ${authorization}`;
 
