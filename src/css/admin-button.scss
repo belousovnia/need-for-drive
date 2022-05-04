@@ -1,0 +1,43 @@
+@import "general";
+
+.admin-button {
+  color: $grayLight;
+  background: $blue;
+  border: 0;
+  border-radius: 4px;
+  width: auto;
+  height: auto;
+  min-width: 95px;
+  min-height: 32px;
+  text-decoration: none;
+  display: block;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.admin-button__title {
+  margin: 0;
+  font-size: 12px;
+  font-family: $mainFont;
+  text-align: center;
+}
+
+.admin-button:hover {
+  filter: brightness(90%);
+}
+
+.admin-button:focus {
+  filter: brightness(90%);
+}
+
+.admin-button:active {
+  filter: brightness(80%);
+}
+
+.admin-button_bloked {
+  background: $grayLight;
+  color: #ffffff;
+  pointer-events: none;
+}

@@ -136,7 +136,7 @@ function Step2(props) {
 
   useEffect(() => {
     try {
-      changeTiles([<div className="loading" key="loading-1"></div>]);
+      changeTiles([<div className="loading" key="loading-1"/>]);
       buildTile();
       buildButton();
     } catch {};

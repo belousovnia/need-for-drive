@@ -1,0 +1,25 @@
+@import "general.scss";
+
+.admin-logo {
+  display: flex;
+  height: 45px;
+  margin-bottom: 16px;
+  align-items: center;
+  font-size: 24px;
+}
+
+.admin-logo__svg {
+  margin-right: 12px;
+  height: 100%;
+  width: auto;
+}
+
+.admin-logo__title{
+  font-family: $mainFont;
+}
+
+.admin-logo_small {
+  height: 22px;
+  margin: 0;
+  font-size: 16px;
+}

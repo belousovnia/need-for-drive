@@ -11,7 +11,6 @@ function Step1({changeListFinalPoint}) {
   const dataStep1 = useMemo(getCityPoint, []); 
   dataStep1.then((data) => changeListFinalPoint(data));
 
-
   return ( 
     <div className='step-1'> 
       <div className='step-1__items-block'>

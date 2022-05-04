@@ -28,6 +28,7 @@ import {
   ACTION_CHANGE_MODAL_WINDOW,
   ACTION_CHANGE_TITLE_PRICE,
   ACTION_CHANGE_RECRIVED_ORDER,
+  ACTION_CHANGE_LOGIN,
 } from "./type";
 
 export function changeHeadHiding(newStatus) {
@@ -253,6 +254,13 @@ export function changeTitlePrice(newStatus) {
 export function changeReceivedOrder (newStatus) {
   return {
     type: ACTION_CHANGE_RECRIVED_ORDER,
+    payload: newStatus
+  };
+};
+
+export function changeLogin (newStatus) {
+  return {
+    type: ACTION_CHANGE_LOGIN,
     payload: newStatus
   };
 };

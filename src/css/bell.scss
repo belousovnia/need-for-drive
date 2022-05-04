@@ -1,0 +1,28 @@
+@import "general.scss";
+
+.bell {
+  width: 18px;
+  height: 21px;
+}
+
+.bell__svg {
+  width: 100%;
+  height: auto;
+}
+
+.bell__alert {
+  height: 14px;
+  width: 14px;
+  background-color: #C4183C;
+  font-family: $mainFont;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 9px;
+  border-radius: 50%;
+  position: relative;
+  left: 12.5px;
+  bottom: 11px;
+  user-select: none;
+}

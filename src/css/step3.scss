@@ -67,11 +67,12 @@
   padding-right: 6px;
   box-sizing: border-box;
   border-bottom: 1px solid $grayDark;
+  position: relative;
 }
 
 .step-3__placeholder{
   margin: 0;
-  position:absolute;
+  position: absolute;
   width: 224px;
   height: 24px;
   font-size: 14px;

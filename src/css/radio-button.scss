@@ -14,7 +14,7 @@
 .radio-button__input {
   width: 0;
   height: 0;
-  position: fixed;
+  position: absolute;
   opacity: 0;
   z-index: -3;
 }
@@ -53,6 +53,14 @@
       display: block;
     }
   }
+
+  .checkbox-button__point_admin {
+    border: 1px solid $blue;
+    background-color: $blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .checkbox-button__point {
@@ -63,10 +71,19 @@
   box-sizing: border-box;
 }
 
+.checkbox-button__point_admin {
+  border-radius: 2px;
+}
+
 .checkbox-button__check {
   width: 13px;
   height: 10px;
-  position: absolute;
   display: none;
+}
+
+.checkbox-button__check_admin {
+  width: 8px;
+  height: 8px;
+  fill: #fff;
 }
 
