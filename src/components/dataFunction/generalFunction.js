@@ -20,6 +20,57 @@ export async function getData(address, paramsData = {}){
   };
 };
 
+export async function getSimpleData(address, page = 0, limit = null, paramsData = {}){
+  const headers = { 
+    'X-Api-Factory-Application-Id': secret,
+  };
+
+  const params = {
+    ...paramsData,
+    page,
+    limit,
+  };
+
+  try {
+    const response = await axios.get(`https://api-factory.simbirsoft1.com/api/db/${address}`, { headers, params });
+    return response;
+  } catch (error){
+    return 'error';
+  };
+};
+
+export async function putData(authorization, type, id, data) {
+  const token = `Bearer ${authorization}`;
+
+  const headers = { 
+    'X-Api-Factory-Application-Id': secret,
+    'Authorization': token,
+  };
+
+  try {
+    const response = await axios.put(`https://api-factory.simbirsoft1.com/api/db/${type}/${id}`, data, { headers });
+    return response;
+  } catch (error){
+    return 'error';
+  };
+};
+
+export async function addData(authorization, type, data) {
+  const token = `Bearer ${authorization}`;
+
+  const headers = { 
+    'X-Api-Factory-Application-Id': secret,
+    'Authorization': token,
+  };
+
+  try {
+    const response = await axios.post(`https://api-factory.simbirsoft1.com/api/db/${type}`, data, { headers });
+    return response;
+  } catch (error){
+    return 'error';
+  };
+};
+
 export async function deleteSubject(authorization, id, type) {
   const token = `Bearer ${authorization}`;
 

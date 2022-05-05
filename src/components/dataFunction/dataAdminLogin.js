@@ -15,8 +15,7 @@ export async function postLogin(username, password) {
   };
    
   try {
-    const response = await axios.post('https://api-factory.simbirsoft1.com/api/auth/login', dataAdmin, {headers});
-    return response
+    return await axios.post('https://api-factory.simbirsoft1.com/api/auth/login', dataAdmin, {headers});
   } catch {
     return 'error'
   };
