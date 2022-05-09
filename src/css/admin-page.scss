@@ -305,6 +305,10 @@
   max-height: 100%;
 }
 
+.admin-page__simple-bar_table {
+  height: calc(100% - 41px);
+}
+
 .admin-page__main-window-footer {
   width: 100%;
   height: 60px;
