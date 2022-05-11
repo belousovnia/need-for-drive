@@ -1,5 +1,5 @@
 import { React, useEffect, useMemo } from 'react';
-import { getCar, getCategory} from './dataFunction/dataStep2';
+import { getCategory} from './dataFunction/dataStep2';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { changeTiles } from '../store/actions';
@@ -7,6 +7,7 @@ import { changeCategoryList } from '../store/actions';
 import { prettify } from './dataFunction/generalFunction';
 import { changeCategoryFilter } from '../store/actions';
 import { changeCar } from '../store/actions';
+import { getData } from "./dataFunction/generalFunction";
 
 function Step2(props) {
   const {
@@ -20,9 +21,8 @@ function Step2(props) {
     changeCar,
   } = props;
 
-  const data = useMemo(() => getCar(), []);
+  const data = useMemo(() => getData('car'), []);
   const categoryData = useMemo(() => getCategory(), []);
-
   async function buildButton() {
     let receivedData = [...await categoryData];
     let count = 0; 
@@ -78,56 +78,57 @@ function Step2(props) {
     for (let i in dataCar) {
       let item = dataCar[i];
 
-      if ( item.categoryId.name == categoryFilter || 
-        categoryFilter == 'Все модели') {
-          let defaultInput = 
-            <input
-              type='radio' 
-              className='step-2__tile-input'
-              name='inputCar'
-              id={`tileCar${count}`} 
-            />
-          if (car != undefined){
-            if (item.id == car.id){
-            defaultInput =
+      if (item.categoryId) {
+        if ( item.categoryId.name == categoryFilter || categoryFilter == 'Все модели') {
+            let defaultInput = 
               <input
                 type='radio' 
                 className='step-2__tile-input'
                 name='inputCar'
-                id={`tileCar${count}`}
-                defaultChecked 
+                id={`tileCar${count}`} 
               />
+            if (car != undefined){
+              if (item.id == car.id){
+              defaultInput =
+                <input
+                  type='radio' 
+                  className='step-2__tile-input'
+                  name='inputCar'
+                  id={`tileCar${count}`}
+                  defaultChecked 
+                />
+              };
             };
-          };
-  
-          let newTile =
-            <div key={item.id}>
-              {defaultInput}
-              <label 
-                className='step-2__tile' 
-                htmlFor={`tileCar${count}`}
-                onClick={() => {
-                  const element = document.getElementById('order-page-data__button');
-                  element.scrollIntoView({block: "center", behavior: "smooth"});
-                  changeCar(item);
-                }}
-              >
-                <p className='step-2__tile-name'>{item.name}</p>
-                <p className='step-2__tile-price'>{prettify(item.priceMin)} - {prettify(item.priceMax)}₽</p>
-                <div className='step-2__tile-img-wrapped'>
-                  <img 
-                    className='step-2__tile-img' 
-                    src={item.thumbnail.path}
-                    onError={(i) => {
-                      i.target.src = require('../media/car.jpg')
-                    }}
-                  />
-                </div>     
-              </label>
-            </div> 
-          newTiles.push(newTile);
-          count = count + 1;
+    
+            let newTile =
+              <div key={item.id}>
+                {defaultInput}
+                <label 
+                  className='step-2__tile' 
+                  htmlFor={`tileCar${count}`}
+                  onClick={() => {
+                    const element = document.getElementById('order-page-data__button');
+                    element.scrollIntoView({block: "center", behavior: "smooth"});
+                    changeCar(item);
+                  }}
+                >
+                  <p className='step-2__tile-name'>{item.name}</p>
+                  <p className='step-2__tile-price'>{prettify(item.priceMin)} - {prettify(item.priceMax)}₽</p>
+                  <div className='step-2__tile-img-wrapped'>
+                    <img 
+                      className='step-2__tile-img' 
+                      src={item.thumbnail.path}
+                      onError={(i) => {
+                        i.target.src = require('../media/car.jpg')
+                      }}
+                    />
+                  </div>     
+                </label>
+              </div> 
+            newTiles.push(newTile);
+            count = count + 1;
         };
+      };
     };
     changeTiles(newTiles);
   };

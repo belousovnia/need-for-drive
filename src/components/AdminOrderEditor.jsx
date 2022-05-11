@@ -1,7 +1,6 @@
 import { React, useEffect, useState, forwardRef} from 'react';
 import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { getOrderById } from './dataFunction/dataAdminOrder';
 import SelectListCallBack from './SelectListCallBack';
 import { getCityPoint } from './dataFunction/dataStep1';
@@ -11,6 +10,7 @@ import classNames from 'classnames';
 import DatePicker from "react-datepicker";
 import ru from 'date-fns/locale/ru';
 import { registerLocale } from  "react-datepicker";
+import { useNavigate } from 'react-router-dom';
 
 function AdminOrderEditor(props) {
   const {
@@ -18,9 +18,10 @@ function AdminOrderEditor(props) {
   } = props;
 
   registerLocale('ru', ru);
+  
+  const navigate = useNavigate();
 
   const { orderId } = useParams();
-
   const [ errorCarId, setErrorCarId ] = useState(false);
 
   const [ city, setCity] = useState(null);
@@ -59,9 +60,13 @@ function AdminOrderEditor(props) {
 
   async function getDataOrder() {
     const data = await getOrderById(login.data.access_token, orderId);
+    if (data.response) {
+      navigate(`/admin/error/${data.response.status}`)
+    };
+    
+
     const returnData = data.data.data;
     const newListCity = await getCityList();
-    console.log(returnData);
 
     for (let i in newListCity) {
       if (newListCity[i][1].id === returnData.cityId.id) {
@@ -72,7 +77,9 @@ function AdminOrderEditor(props) {
 
     setDefaultPoint([returnData.pointId.name, returnData.pointId]);
     setDefaultOrderStatus([returnData.orderStatusId.name, returnData.orderStatusId]);
-    setDefaultRate([`${returnData.rateId.rateTypeId.name} ${returnData.rateId.price}₽`, returnData.rateId]);
+    if (returnData.rateId) {
+      setDefaultRate([`${returnData.rateId.rateTypeId.name} ${returnData.rateId.price}₽`, returnData.rateId]);
+    };
     setDefaultCar([returnData.carId.name, returnData.carId]);
     setDefaultColor([returnData.color, returnData.color]);
     changeStartDate(new Date(returnData.dateFrom));
@@ -168,7 +175,6 @@ function AdminOrderEditor(props) {
     const rateList = [];
     data.forEach((i) => rateList.push([`${i.rateTypeId.name} ${i.price}₽`, i]));
     setListRate(rateList);
-    console.log(data);
   };
 
   async function getCar() {
@@ -557,9 +563,7 @@ const putStateToProps = (state) => {
 };
 
 const putActionToProps = (dispatch) => {
-  return {
-    // changeLogin: bindActionCreators(changeLogin, dispatch),
-  };
+  return {};
 };
 
 export default connect(putStateToProps, putActionToProps)(AdminOrderEditor);

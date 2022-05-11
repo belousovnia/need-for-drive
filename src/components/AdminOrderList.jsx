@@ -9,17 +9,19 @@ import { getData } from './dataFunction/generalFunction';
 import SelectListCallBack from './SelectListCallBack';
 import classNames from 'classnames';
 import PageButton from './PageButton';
+import { useNavigate } from 'react-router-dom';
 
 function AdminOrderList(props) {
   const {
     login,
   } = props;
+
+  const navigate = useNavigate();
   
   const [ listOrder, setListOrder ] = useState([<div className="loading loading_center" key="loading-3"/>]);
   const [ page, setPage ] = useState(1);
   const [ data, setData ] = useState(false);
   const [ params, setParams ] = useState({});
-  const [ listButtonPage, setListButtonPage ] = useState([]);
   const [ city, setSity] = useState(null);
   const [ listCity, setListSity] = useState([]);
   const [ car, setCar ] = useState(null);
@@ -48,6 +50,9 @@ function AdminOrderList(props) {
 
   async function getCityList() {
     const data = await getData('city', {'sort[name]': 1,});
+    if (data.response) {
+      navigate(`/admin/error/${data.response.status}`)
+    };
     const list = [];
     data.forEach((i) => list.push([i.name, i.id]));
     setListSity(list);
@@ -71,7 +76,6 @@ function AdminOrderList(props) {
     setListOrder([<div className="loading loading_center" key="loading-3"/>]);
     const newData = await getListOrder(login.data.access_token, page - 1, params);
     setData(newData);
-    console.log(newData);
   };
 
   function changeFilter() {
@@ -180,11 +184,11 @@ function AdminOrderList(props) {
             />
           </div>
           <button 
-            className='admin-button'
+            className='admin-button admin-button_filter-table'
             onClick={changeFilter}
           >Фильтр</button>
         </div>
-        <div className='admin-page__main-window-content'>
+        <div className='admin-page__main-window-content admin-page__main-window-content_no-reduction'>
           <SimpleBar 
             className='admin-page__simple-bar'
             autoHide = { false }

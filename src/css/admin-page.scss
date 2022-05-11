@@ -8,18 +8,19 @@
 
 .admin-page__menu {
   width: 280px;
-  height: 100%;
+  height: 100vh;
   background-color: #fff;
   border-left: 1px solid $grayLight;
   box-shadow:  5px 0 10px rgba(0,0,0,0.15);
   z-index: 4;
   flex-shrink: 0;
+  overflow: hidden;
 }
 
 .admin-page__menu-container {
   display: flex;
+  height: calc(100% - 70px);
   transition: 0.08s;
-  height: 100%;
 }
 
 .admin-page__button-menu {
@@ -260,6 +261,8 @@
   display: flex;
   flex-direction: column;
   box-shadow:  0 0 5px rgba(0,0,0,0.10);
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .admin-page__main-window-header {
@@ -299,14 +302,14 @@
   overflow: hidden;
 }
 
+.admin-page__main-window-content_no-footer {
+  height: calc(100% - 60px);
+}
+
 .admin-page__simple-bar {
   width: 100%;
   height: 100%;
   max-height: 100%;
-}
-
-.admin-page__simple-bar_table {
-  height: calc(100% - 41px);
 }
 
 .admin-page__main-window-footer {
@@ -327,6 +330,9 @@
 .admin-page__main-window-footer_editor {
   justify-content: end;
   padding-right: 16px;
+  padding-left: 16px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .admin-page__window-namber-page {
@@ -460,9 +466,20 @@
   .admin-page__footer-link {
     font-size: 10px;
   }
+
+  .admin-page__main-window-footer {
+    height: 40px;
+  }
 }
 
 @media screen and (max-width: $widthMobile) {
+  .admin-page__menu {
+    width: 250px;
+  }
+
+  .admin-page__menu-container_hide {
+    left: -252px;
+  }
   .admin-page__main-window-header {
     width: calc(100vw - 32px);
     box-sizing: border-box;
@@ -472,8 +489,17 @@
   }
 
   .admin-page__main-window-content {
+    height: calc(100% - 40px);
+    margin-top: 40px;
+  }
+
+  .admin-page__main-window-content_no-reduction {
     height: calc(100% - 60px);
     margin-top: 60px;
+  }
+
+  .admin-page__main-window-content_no-footer {
+    margin: 0;
   }
 
   .admin-page__selector-container {

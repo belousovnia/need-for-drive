@@ -113,7 +113,7 @@ function PageButton(props) {
       for (let i = 1; i <= lengthPage; i++) {
         if (page === i) {
           listButton.push(
-            <div>
+            <div key={getId()}>
               <button className='admin-page__window-namber-page admin-page__window-namber-page_active' key={getId()}>{i}</button>
             </div>
           );

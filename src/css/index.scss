@@ -25,7 +25,8 @@
 @import "admin-order-tile.scss";
 @import "admin-order-editor.scss";
 @import "admin-page-table.scss";
-@import "admin-car-editor.scss";
+@import "admin-table-editor.scss";
+@import "admin-error.scss";
 
 html {
     overflow-x: hidden;
@@ -53,6 +54,10 @@ body {
     background-color: $mainBlack;
     display: flex;
     z-index: 0;
+}
+
+.react-datepicker {
+    width: 327px;
 }
 
 @media screen and (max-width: $widthMobile) {

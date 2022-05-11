@@ -12,12 +12,21 @@ import AdminOrderList from './components/AdminOrderList';
 import AdminOrderEditor from './components/AdminOrderEditor';
 import AdminCar from './components/AdminCar';
 import AdminCarEditor from './components/AdminCarEditor';
+import AdminCategory from './components/AdminCategory';
+import AdminCategoryEditor from './components/AdminCategoryEditor';
+import AdminRateType from './components/AdminRateType';
+import AdminRateTypeEditor from './components/AdminRateTypeEditor';
+import AdminRate from './components/AdminRate';
+import AdminRateEditor from './components/AdminRateEditor';
+import AdminCity from './components/AdminCity';
+import AdminCityEditor from './components/AdminCityEditor';
+import AdminPoint from './components/AdminPoint';
+import AdminPointEditor from './components/AdminPointEditor';
+import AdminOrderStatus from './components/AdminOrderStatus';
+import AdminOrderStatusEditor from './components/AdminOrderStatusEditor';
+import AdminError from './components/AdminError';
 
 function App() {
-  const location = useLocation().pathname
-  
-
-
   return (
     <div className='app'>
       <Routes>
@@ -35,6 +44,20 @@ function App() {
           <Route path='order/:orderId' element={<AdminOrderEditor/>}/>
           <Route path='car' element={<AdminCar/>}/>
           <Route path='car/:carId' element={<AdminCarEditor/>}/>
+          <Route path='category' element={<AdminCategory/>}/>
+          <Route path='category/:categoryId' element={<AdminCategoryEditor/>}/>
+          <Route path='rate-type' element={<AdminRateType/>}/>
+          <Route path='rate-type/:rateTypeId' element={<AdminRateTypeEditor/>}/>
+          <Route path='rate' element={<AdminRate/>}/>
+          <Route path='rate/:rateId' element={<AdminRateEditor/>}/>
+          <Route path='city' element={<AdminCity/>}/>
+          <Route path='city/:cityId' element={<AdminCityEditor/>}/>
+          <Route path='point' element={<AdminPoint/>}/>
+          <Route path='point/:pointId' element={<AdminPointEditor/>}/>
+          <Route path='order-status' element={<AdminOrderStatus/>}/>
+          <Route path='order-status/:orderStatusId' element={<AdminOrderStatusEditor/>}/>
+          <Route path='error/:errorCode' element={<AdminError/>}/>
+          <Route path='*' element={<AdminError/>}/>
         </Route>
       </Routes>
     </div>
