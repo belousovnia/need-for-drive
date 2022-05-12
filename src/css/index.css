@@ -1925,6 +1925,7 @@
   padding-left: 16px;
   display: flex;
   justify-content: space-between;
+  height: 60px;
 }
 
 .admin-page__window-namber-page {
@@ -2006,6 +2007,10 @@
 }
 
 @media screen and (max-width: 1024px) {
+  .admin-page__main-window_admin-page-editor {
+    height: auto;
+  }
+
   .admin-page__header {
     height: 45px;
   }
@@ -2056,10 +2061,6 @@
   .admin-page__footer-link {
     font-size: 10px;
   }
-
-  .admin-page__main-window-footer {
-    height: 40px;
-  }
 }
 @media screen and (max-width: 767px) {
   .admin-page__menu {
@@ -2076,6 +2077,8 @@
     height: auto;
     position: absolute;
     background-color: #fff;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 
   .admin-page__main-window-content {
@@ -2398,30 +2401,9 @@
   flex-direction: column;
 }
 
-@media screen and (max-width: 767px) {
-  .admin-page-editor {
-    width: 100%;
-    height: calc(100% - 90px);
-  }
-
-  .admin-page-editor {
-    padding: 8px;
-  }
-}
 .selection-list_admin-order-editor {
   margin-bottom: 8px;
   margin-right: 16px;
-}
-
-.admin-page-editor__main-window-content {
-  width: 100%;
-  padding-top: 28px;
-  padding-bottom: 28px;
-  padding-right: 16px;
-  padding-left: 16px;
-  box-sizing: border-box;
-  height: calc(100% - 60px);
-  overflow: auto;
 }
 
 .admin-page-editor__p {
@@ -2470,6 +2452,16 @@
   margin-bottom: 8px;
 }
 
+@media screen and (max-width: 767px) {
+  .admin-page-editor {
+    width: 100%;
+    height: calc(100% - 90px);
+  }
+
+  .admin-page-editor {
+    padding: 8px;
+  }
+}
 .admin-page-table {
   width: 100%;
   height: calc(100% - 140px);
@@ -2494,6 +2486,10 @@
   padding-left: 16px;
   width: 100%;
   height: 100%;
+}
+
+.admin-page-table__wrapped_editor {
+  min-width: 384px;
 }
 
 .admin-page-table__car {
@@ -2596,6 +2592,7 @@
   .admin-table-editor__content-container {
     display: block;
     height: auto;
+    margin-bottom: 24px;
   }
 
   .admin-page__main-window_admin-page-editor-car {
@@ -2760,7 +2757,15 @@
 }
 
 .admin-page-editor__input_alert {
-  border: 1px solid #CB3656;
+  border-color: #CB3656;
+}
+.admin-page-editor__input_alert * {
+  border-color: #CB3656;
+}
+
+.admin-page-editor__input_car-id {
+  margin-bottom: 8px;
+  margin-right: 16px;
 }
 
 .admin-page-editor__input-title-alert {

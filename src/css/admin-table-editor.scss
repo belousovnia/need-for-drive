@@ -31,6 +31,7 @@
   .admin-table-editor__content-container {
     display: block;
     height: auto;
+    margin-bottom: 24px;
   }
 
   .admin-page__main-window_admin-page-editor-car {
@@ -40,6 +41,12 @@
   .admin-table-editor {
     height: calc(100% - 90px);
     overflow: auto;
+  }
+}
+
+@media screen and (max-width: $widthMobile) {
+  .admin-page-editor__main-window-content {
+
   }
 }
 
@@ -197,7 +204,15 @@
 }
 
 .admin-page-editor__input_alert {
-  border: 1px solid $red;
+  border-color: $red;
+  * {
+    border-color: $red;
+  }
+}
+
+.admin-page-editor__input_car-id {
+  margin-bottom: 8px;
+  margin-right: 16px;
 }
 
 .admin-page-editor__input-title-alert {

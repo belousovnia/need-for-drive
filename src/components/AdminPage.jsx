@@ -24,6 +24,7 @@ function AdminPage(props) {
 
   function checkLocation() {
     let myLocation = location;
+    if (location.includes('/admin/order/')) myLocation = '/admin/order/id';
     if (location.includes('/admin/car/')) myLocation = '/admin/car/id';
     if (location.includes('/admin/category/')) myLocation = '/admin/category/id';
     if (location.includes('/admin/rate-type/')) myLocation = '/admin/rate-type/id';
@@ -35,6 +36,9 @@ function AdminPage(props) {
       switch (myLocation) {
         case '/admin/order':
           document.getElementById('admin-page__radio-input-order').checked = true;
+          break;
+        case '/admin/order/id':
+          document.getElementById('admin-page__radio-input-order-editor').checked = true;
           break;
         case '/admin/car':
           document.getElementById('admin-page__radio-input-car').checked = true;
@@ -86,6 +90,9 @@ function AdminPage(props) {
     switch (type) {
       case 'order':
         navigate('order');
+        break;
+      case 'order/new':
+        navigate('order/new');
         break;
       case 'car':
         navigate('car');
@@ -220,6 +227,35 @@ function AdminPage(props) {
                   </svg>
                   <p className='admin-page__radio-p'>
                     Список заказов
+                  </p>
+                </label>
+              </div>
+
+              <div className='admin-page__radio-container'>
+                <input
+                  type='radio' 
+                  className='admin-page__radio-input'
+                  id='admin-page__radio-input-order-editor' 
+                  name='admin-menu'
+                />
+                <label
+                  className='admin-page__radio-label' 
+                  htmlFor='admin-page__radio-input-order-editor'
+                  onClick={() => {changePage('order/new')}}
+                >
+                  <svg
+                    className='admin-page__radio-svg-list'
+                    viewBox="0 0 15 15"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M13.3213 4.10853C13.5596 4.34683 13.5596 4.73177 13.3213 4.97007L12.2031 6.08825L9.91174 3.7969L11.0299 2.67873C11.2682 2.44042 11.6532 2.44042 11.8915 2.67873L13.3213 4.10853ZM2.5 13.5V11.2086L9.25795 4.4507L11.5493 6.74205L4.79135 13.5H2.5Z"
+                    />
+                  </svg>
+                  <p className='admin-page__radio-p'>
+                    Редактор заказов
                   </p>
                 </label>
               </div>

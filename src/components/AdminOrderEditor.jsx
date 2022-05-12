@@ -5,12 +5,14 @@ import { getOrderById } from './dataFunction/dataAdminOrder';
 import SelectListCallBack from './SelectListCallBack';
 import { getCityPoint } from './dataFunction/dataStep1';
 import { getData } from './dataFunction/generalFunction';
-import { putOrder } from './dataFunction/dataAdminOrder';
+import { putData } from './dataFunction/generalFunction';
+import { addData } from './dataFunction/generalFunction';
 import classNames from 'classnames';
 import DatePicker from "react-datepicker";
 import ru from 'date-fns/locale/ru';
 import { registerLocale } from  "react-datepicker";
 import { useNavigate } from 'react-router-dom';
+import { deleteSubject } from './dataFunction/generalFunction';
 
 function AdminOrderEditor(props) {
   const {
@@ -20,53 +22,106 @@ function AdminOrderEditor(props) {
   registerLocale('ru', ru);
   
   const navigate = useNavigate();
-
   const { orderId } = useParams();
+
   const [ errorCarId, setErrorCarId ] = useState(false);
 
   const [ city, setCity] = useState(null);
   const [ listCity, setListCity] = useState([]);
   const [ defaultCity, setDefaultCity] = useState();
+  const [ alertCity, setAlertCity ] = useState();
   
   const [ point, setPoint] = useState(null);
   const [ listPoint, setListPoint] = useState([]);
   const [ defaultPoint, setDefaultPoint] = useState();
+  const [ alertPoint, setAlertPoint ] = useState();
 
   const [ orderStatus, setOrderStatus] = useState(null);
   const [ listOrderStatus, setListOrderStatus] = useState([]);
   const [ defaultOrderStatus, setDefaultOrderStatus] = useState();
+  const [ alertOrderStatus, setAlertOrderStatus ] = useState();
   
   const [ rate, setRate] = useState(null);
   const [ listRate, setListRate] = useState([]);
   const [ defaultRate, setDefaultRate] = useState();
+  const [ alertRate, setAlertRate ] = useState();
 
   const [ car, setCar] = useState(null);
   const [ listCar, setListCar] = useState([]);
   const [ defaultCar, setDefaultCar] = useState();
+  const [ alertCar, setAlertCar ] = useState();
 
-  
   const [ color, setColor] = useState(null);
   const [ listColor, setListColor] = useState([]);
   const [ defaultColor, setDefaultColor] = useState();
+  const [ alertColor, setAlertColor ] = useState();
 
   const [ startDate, changeStartDate] = useState();
   const [ endDate, changeEndDate] = useState();
+  const [ alertDate, setAlertDate ] = useState();
 
   const [ fullTank, setFullTank ] = useState(false);
   const [ childChair, setChildChair ] = useState(false);
   const [ rightWheel, setRightWheel ] = useState(false);
 
+  const [ price, setPrice ] = useState(null);
+  const [ alertPrice, setAlertPrice ] = useState();
+
   // ------------------------------------------------------
 
   async function getDataOrder() {
+    const inputCity = document.getElementById('admin-order-editor-city');
+    const inputPoint = document.getElementById('admin-order-editor-point');
+    const inputStatus = document.getElementById('admin-order-editor-status');
+    const inputRate = document.getElementById('admin-order-editor-rate');
+    const inputCar = document.getElementById('admin-order-editor-car');
+    const inputColor = document.getElementById('admin-order-editor-color');
+    const inputTank = document.getElementById('admin-page-tile-tank-editor');
+    const inputChildChair = document.getElementById('admin-page-tile-childChair-editor');
+    const inputRightWheel = document.getElementById('admin-page-tile-rightWheel-editor');
+    const inputPrice = document.getElementById('editor-price-id');
+    const newListCity = await getCityList();
+    
+    if (orderId === 'new') {
+      setCity(null);
+      setDefaultCity();
+      setPoint(null);
+      setDefaultPoint();
+      setOrderStatus(null);
+      setDefaultOrderStatus();
+      setRate(null);
+      setDefaultRate();
+      setCar(null);
+      setDefaultCar();
+      setColor(null);
+      setDefaultColor();
+      changeStartDate();
+      changeEndDate();
+      setFullTank(false);
+      setChildChair(false);
+      setRightWheel(false);
+      setPrice(null);
+      inputCity.value = null;
+      inputPoint.value = null;
+      inputStatus.value = null;
+      inputRate.value = null;
+      inputCar.value = null;
+      inputColor.value = null;
+      inputPrice.value = null;
+      inputTank.checked = 0;
+      inputChildChair.checked = 0;
+      inputRightWheel.checked = 0;
+      changeEndDate(null);
+      changeStartDate(null);
+      return;
+    };
+
     const data = await getOrderById(login.data.access_token, orderId);
     if (data.response) {
       navigate(`/admin/error/${data.response.status}`)
     };
     
-
     const returnData = data.data.data;
-    const newListCity = await getCityList();
 
     for (let i in newListCity) {
       if (newListCity[i][1].id === returnData.cityId.id) {
@@ -76,7 +131,9 @@ function AdminOrderEditor(props) {
     };
 
     setDefaultPoint([returnData.pointId.name, returnData.pointId]);
-    setDefaultOrderStatus([returnData.orderStatusId.name, returnData.orderStatusId]);
+    if (returnData.orderStatusId) {
+      setDefaultOrderStatus([returnData.orderStatusId.name, returnData.orderStatusId]);
+    };
     if (returnData.rateId) {
       setDefaultRate([`${returnData.rateId.rateTypeId.name} ${returnData.rateId.price}₽`, returnData.rateId]);
     };
@@ -84,21 +141,19 @@ function AdminOrderEditor(props) {
     setDefaultColor([returnData.color, returnData.color]);
     changeStartDate(new Date(returnData.dateFrom));
     changeEndDate(new Date(returnData.dateTo));
-    document.getElementById('editor-price-id').value = returnData.price;
+    setPrice(returnData.price);
+    inputPrice.value = returnData.price;
 
     if (returnData.isFullTank) {
-      const element = document.getElementById('admin-page-tile-tank-editor')
-      element.checked = 1;
+      inputTank.checked = 1;
       setFullTank(true);
     };
     if (returnData.isNeedChildChair) {
-      const element = document.getElementById('admin-page-tile-childChair-editor')
-      element.checked = 1;
+      inputChildChair.checked = 1;
       setChildChair(true);
     };
     if (returnData.isRightWheel) {
-      const element = document.getElementById('admin-page-tile-rightWheel-editor')
-      element.checked = 1;
+      inputRightWheel.checked = 1;
       setRightWheel(true);
     };
   };
@@ -276,17 +331,82 @@ function AdminOrderEditor(props) {
     if (childChair) rentalPrice = rentalPrice + 200;
     if (rightWheel) rentalPrice = rentalPrice + 1600;
     if (rentalPrice < car.priceMin) rentalPrice = car.priceMin;
-
     return rentalPrice;
   };
 
   function getPrice() {
     const newPrice = getRentalPrice();
     document.getElementById('editor-price-id').value = newPrice;
+    setPrice(newPrice);
+  };
+  
+  async function deleteOrder() {
+    const question =  window.confirm(`Удалить заказ ${orderId} ?`);
+    if (question) {
+      await deleteSubject(login.data.access_token, orderId, 'order');
+      navigate('/admin/order');
+    };
   };
 
-  async function putData() {
-    const putData = {
+  async function putDataOrder() {
+    let checkField = true;
+    const inputPrice = document.getElementById('editor-price-id');
+    if (city) {
+      setAlertCity(false);
+    } else {
+      setAlertCity(true);
+      checkField = false;
+    };
+    if (point) {
+      setAlertPoint(false);
+    } else {
+      setAlertPoint(true);
+      checkField = false;
+    };
+    if (orderStatus) {
+      setAlertOrderStatus(false);
+    } else {
+      setAlertOrderStatus(true);
+      checkField = false;
+    };
+    if (rate) {
+      setAlertRate(false);
+    } else {
+      setAlertRate(true);
+      checkField = false;
+    };
+    if (car) {
+      setAlertCar(false);
+    } else {
+      setAlertCar(true);
+      checkField = false;
+    };
+    if (color) {
+      setAlertColor(false);
+    } else {
+      setAlertColor(true);
+      checkField = false;
+    };
+    if (startDate && endDate && startDate < endDate) {
+      setAlertDate(false);
+    } else {
+      setAlertDate(true);
+      checkField = false;
+    };
+    if (price) {
+      if (price < car.priceMax) {
+        setAlertPrice(false);
+      } else {
+        setAlertPrice(true);
+        checkField = false;
+      };
+    } else {
+      setAlertPrice(true);
+      checkField = false;
+    };
+
+    if (checkField)  {
+      const newData = {
       'orderStatusId': orderStatus,
       'cityId': city,
       'pointId': point,
@@ -295,14 +415,33 @@ function AdminOrderEditor(props) {
       'dateFrom': startDate.getTime(),
       'dateTo': endDate.getTime(),
       'rateId': rate.id,
-      'price': document.getElementById('editor-price-id').value,
+      'price': inputPrice.value,
       'isFullTank': fullTank,
       'isNeedChildChair': childChair,
       'isRightWheel': rightWheel,
-    };
-    putOrder(login.data.access_token, orderId, putData);
+      };
+      if (orderId === 'new') {
+        await addData(login.data.access_token, 'order', newData);
+        navigate('/admin/order');
+      } else {
+        await putData(login.data.access_token, 'order', orderId, newData);
+        navigate('/admin/order');
+      };
+    }; 
   };
 
+  function addListener() {
+    const inputPrice = document.getElementById('editor-price-id');
+    inputPrice.addEventListener('change', () => {
+      setPrice(Number(inputPrice.value));
+    });
+  };
+
+  function getMaxPrice() {
+    if (car) {
+      return car.priceMax;
+    };
+  };
   
   // ------------------------------------------------------
 
@@ -311,6 +450,37 @@ function AdminOrderEditor(props) {
     'admin-login__input_editor': true,
     'admin-login__input_order-editor': true,
     'admin-login__input_error': errorCarId,
+  });
+  const inputCityClass = {
+    'admin-page-editor__input_alert': alertCity,
+  };
+  const inputPointClass = {
+    'admin-page-editor__input_alert': alertPoint,
+  };
+  const inputStatusClass = {
+    'admin-page-editor__input_alert': alertOrderStatus,
+  };
+  const inputRateClass = {
+    'admin-page-editor__input_alert': alertRate,
+  };
+  const inputCarClass = {
+    'admin-page-editor__input_alert': alertCar,
+    'admin-page-editor__input_car-id': true,
+  };
+  const inputColorClass = {
+    'admin-page-editor__input_alert': alertColor,
+  };
+  const inputPriceClass = classNames({
+    'admin-login__input admin-login__input_editor': true,
+    'admin-page-editor__input_alert': alertPrice,
+  });
+  const titleAlertPriceClass = classNames({
+    'admin-page-editor__input-title-alert': true,
+    'off': !alertPrice,
+  });
+  const titleAlertDataClass = classNames({
+    'admin-page-editor__input-title-alert': true,
+    'off': !alertDate,
   });
 
   // ------------------------------------------------------
@@ -323,6 +493,7 @@ function AdminOrderEditor(props) {
   useEffect(getCar, []);
   useEffect(changeColorList, [car]);
   useEffect(checkColor, [listColor]);
+  useEffect(addListener, []);
   
 
   return (
@@ -335,7 +506,7 @@ function AdminOrderEditor(props) {
           <div className='admin-page-editor__select-container'>
             <p className='admin-page-editor__p'>Город:</p>
             <SelectListCallBack
-              classNameProps={{'selection-list_admin-order-editor': true}}
+              classNameProps={inputCityClass}
               listValue={listCity}
               collBack={setCity}
               placeholder='город'
@@ -347,7 +518,7 @@ function AdminOrderEditor(props) {
           <div className='admin-page-editor__select-container'>
             <p className='admin-page-editor__p'>Пункт:</p>
             <SelectListCallBack
-              classNameProps={{'selection-list_admin-order-editor': true}}
+              classNameProps={inputPointClass}
               listValue={listPoint}
               collBack={setPoint}
               placeholder='пункт'
@@ -359,9 +530,7 @@ function AdminOrderEditor(props) {
           <div className='admin-page-editor__select-container'>
             <p className='admin-page-editor__p'>Статус:</p>
             <SelectListCallBack
-              classNameProps={{
-                'selection-list_admin-order-editor': true,
-              }}
+              classNameProps={inputStatusClass}
               listValue={listOrderStatus}
               collBack={setOrderStatus}
               placeholder='статус'
@@ -373,9 +542,7 @@ function AdminOrderEditor(props) {
           <div className='admin-page-editor__select-container'>
             <p className='admin-page-editor__p'>Тариф:</p>
             <SelectListCallBack
-              classNameProps={{
-                'selection-list_admin-order-editor': true,
-              }}
+              classNameProps={inputRateClass}
               listValue={listRate}
               collBack={setRate}
               placeholder='тариф'
@@ -385,11 +552,9 @@ function AdminOrderEditor(props) {
           </div>
 
           <div className='admin-page-editor__select-container'>
-            <p className='admin-page-editor__p'>Автомобиль:</p>
+            <p className='admin-page-editor__p admin-page-editor__input_car-id'>Автомобиль:</p>
             <SelectListCallBack
-              classNameProps={{
-                'selection-list_admin-order-editor': true,
-              }}
+              classNameProps={inputCarClass}
               listValue={listCar}
               collBack={setCar}
               placeholder='автомобиль'
@@ -415,9 +580,7 @@ function AdminOrderEditor(props) {
           <div className='admin-page-editor__select-container'>
             <p className='admin-page-editor__p'>Цвет:</p>
             <SelectListCallBack
-              classNameProps={{
-                'selection-list_admin-order-editor': true,
-              }}
+              classNameProps={inputColorClass}
               listValue={listColor}
               collBack={setColor}
               placeholder='любой'
@@ -527,13 +690,14 @@ function AdminOrderEditor(props) {
               <div className='step-3__data-container-line'>
                 <p className='step-3__data-title'>По</p> {buildDateInput(endDate, changeEndDate)}
               </div>
+              <p className={titleAlertDataClass}>Некорректная дата</p>
           </div>
           
           <div className='admin-page-editor__select-container'>
             <p className='admin-page-editor__p-price'>Цена:</p>
             <input 
               type="number" 
-              className='admin-login__input admin-login__input_editor'
+              className={inputPriceClass}
               id='editor-price-id'
               placeholder='цена'
             />
@@ -544,13 +708,30 @@ function AdminOrderEditor(props) {
               <p className='admin-button__title'>Расчет цены</p>
             </button>
           </div>
+          <p className={titleAlertPriceClass}>Некорректная цена или цена превышает максимальную {getMaxPrice()}</p>
         </div>
+
         <div className='admin-page__main-window-footer admin-page__main-window-footer_editor'>
+          <div className='admin-page-editor__footer-button-container'>
+            <button 
+              className='admin-button admin-button_margin' 
+              onClick={putDataOrder}
+            >
+              <p className='admin-button__title '>Сохранить</p>
+            </button>
+            <button 
+              className='admin-button admin-button_gray'
+              onClick={getDataOrder}
+            >
+              <p className='admin-button__title '>Отменить</p>
+            </button>
+          </div>
+          
           <button 
-            className='admin-button'
-            onClick={putData}
+            className='admin-button admin-button_red'
+            onClick={deleteOrder}
           >
-            <p className='admin-button__title'>Сохранить</p>
+            <p className='admin-button__title '>Удалить</p>
           </button>
         </div>
       </div>
@@ -562,8 +743,4 @@ const putStateToProps = (state) => {
   return {...state};
 };
 
-const putActionToProps = (dispatch) => {
-  return {};
-};
-
-export default connect(putStateToProps, putActionToProps)(AdminOrderEditor);
+export default connect(putStateToProps)(AdminOrderEditor);

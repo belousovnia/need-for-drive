@@ -333,6 +333,7 @@
   padding-left: 16px;
   display: flex;
   justify-content: space-between;
+  height: 60px;
 }
 
 .admin-page__window-namber-page {
@@ -412,10 +413,16 @@
   .admin-page__radio-svg-list {
     fill: $blue;
   }
+}
 
+.admin-page__main-window_admin-page-editor {
 }
 
 @media screen and (max-width: $widthTable) {
+  .admin-page__main-window_admin-page-editor {
+    height: auto;
+  }
+
   .admin-page__header {
     height: 45px;
   }
@@ -466,10 +473,6 @@
   .admin-page__footer-link {
     font-size: 10px;
   }
-
-  .admin-page__main-window-footer {
-    height: 40px;
-  }
 }
 
 @media screen and (max-width: $widthMobile) {
@@ -486,6 +489,8 @@
     height: auto;
     position: absolute;
     background-color: #fff;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 
   .admin-page__main-window-content {

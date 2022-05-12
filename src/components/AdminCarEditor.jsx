@@ -1,7 +1,6 @@
 import { React, useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import classNames from 'classnames';
 import SelectListCallBack from './SelectListCallBack';
 import { 
@@ -66,6 +65,7 @@ function AdminCarEditor(props) {
     const inputName = document.getElementById('admin-page-editor__input-name');
     const inputPriceMax = document.getElementById('admin-page-editor__input-price-max');
     const inputTank = document.getElementById('admin-page-editor__input-tank');
+    const selectCategory = document.getElementById('admin-page-editor__input-price-category');
 
     if (carId === 'new') {
       setImage(null);
@@ -87,10 +87,9 @@ function AdminCarEditor(props) {
       inputPriceMin.value = null;
       inputPriceMax.value = null;
       inputTank.value = null;
-      const select = document.getElementById('admin-page-editor__input-price-category');
-      select.value = null;
+      selectCategory.value = null;
       return;
-    } ;
+    };
 
     const data = await getSimpleData(`car/${carId}`)
     if (data.response) {
@@ -285,7 +284,6 @@ function AdminCarEditor(props) {
     };
   };
 
-  
   async function deleteCar() {
     const question =  window.confirm(`Удалить заказ ${carId} ?`);
     if (question) {
@@ -304,7 +302,6 @@ function AdminCarEditor(props) {
     'admin-page-editor__input-title-alert': true,
     'off': !alertName,
   });
-
   const inputNumberClass = classNames({
     'admin-page-editor__input': true,
     'admin-page-editor__input_alert': alertNumber,
@@ -313,7 +310,6 @@ function AdminCarEditor(props) {
     'admin-page-editor__input-title-alert': true,
     'off': !alertNumber,
   });
-
   const inputPriceClass = classNames({
     'admin-page-editor__input': true,
     'admin-page-editor__input_alert': alertPrice,
@@ -322,7 +318,6 @@ function AdminCarEditor(props) {
     'admin-page-editor__input-title-alert': true,
     'off': !alertPrice,
   });
-
   const inputTankClass = classNames({
     'admin-page-editor__input': true,
     'admin-page-editor__input_alert': alertTank,
@@ -331,7 +326,6 @@ function AdminCarEditor(props) {
     'admin-page-editor__input-title-alert': true,
     'off': !alertTank,
   });
-
   const inputCategoryClass = classNames({
     'selection-list_admin-page-editor': true,
     'admin-page-editor__input_alert': alertCategory,
@@ -340,7 +334,6 @@ function AdminCarEditor(props) {
     'admin-page-editor__input-title-alert': true,
     'off': !alertCategory,
   });
-
   const inputColorClass = classNames({
     'admin-page-editor__input': true,
     'admin-page-editor__input_alert': alertColorList,
@@ -362,7 +355,7 @@ function AdminCarEditor(props) {
 
   return (
     <div className='admin-table-editor'>
-      <div className='admin-page-table__wrapped'>
+      <div className='admin-page-table__wrapped admin-page-table__wrapped_editor'>
         <p className='admin-page__main-title'>
           Редактирование автомобиля
         </p>

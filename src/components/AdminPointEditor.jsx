@@ -160,7 +160,7 @@ function AdminPointEditor(props) {
   // --------------------------------------------------------
   return (
     <div className='admin-table-editor'>
-      <div className='admin-page-table__wrapped'>
+      <div className='admin-page-table__wrapped admin-page-table__wrapped_editor'>
         <p className='admin-page__main-title'>
           Редактирование пункта
         </p>
