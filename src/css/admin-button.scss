@@ -41,3 +41,20 @@
   color: #ffffff;
   pointer-events: none;
 }
+
+.admin-button_red {
+  background: $red;
+}
+
+.admin-button_gray {
+  background: $inputBorder;
+}
+
+.admin-button_margin {
+  margin-right: 16px;
+}
+
+.admin-button_filter-table {
+  margin-bottom: 4px;
+  margin-top: 4px;
+}

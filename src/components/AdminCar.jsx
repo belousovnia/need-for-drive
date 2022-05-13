@@ -1,11 +1,12 @@
 import { React, useEffect, useState, useRef } from 'react';
 import classNames from 'classnames';
 import SimpleBar from 'simplebar-react';
-import { getData, deleteSubject } from './dataFunction/generalFunction';
+import { getSimpleData, deleteSubject, getData } from './dataFunction/generalFunction';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { useNavigate } from 'react-router-dom';
-import { deleteOrder } from './dataFunction/dataAdminOrder';
+import PageButton from './PageButton';
+import SelectListCallBack from './SelectListCallBack';
 
 function AdminCar(props) {
   const { login } = props;
@@ -13,9 +14,29 @@ function AdminCar(props) {
   const navigate = useNavigate();
   
   const [ filterHide, setFilterHide ] = useState(true);
-  const [ mainData, setMainData ] = useState();
+  const [ mainData, setMainData ] = useState(false);
   const [ listCar, setListCar ] = useState();
   const [ update, setUpdate ] = useState();
+  const [ params, setParams ] = useState({'sort[name]': 1});
+  const [ page, setPage ] = useState(1);
+  
+  const [ category, setCategory] = useState(null);
+  const [ listCategory, setListCategory] = useState([]);
+  
+  const [ sort, setSort] = useState(null);
+
+  const listSort = [
+    ['Min цена по возрастанию', 'Min цена по возрастанию'],
+    ['Min цена по убыванию', 'Min цена по убыванию'],
+    ['Max цена по возрастанию', 'Max цена по возрастанию'],
+    ['Max цена по убыванию', 'Max цена по убыванию'],
+    ['Топлива по возрастанию', 'Топлива по возрастанию'],
+    ['Топлива по убыванию', 'Топлива по убыванию'],
+    ['Сначала новые машины', 'Сначала новые машины'],
+    ['Сначала старые машины', 'Сначала старые машины'],
+  ];
+
+  // ------------------------------------------------------
 
   const countNewId = useRef(0)
 
@@ -26,13 +47,15 @@ function AdminCar(props) {
 
   async function getDataCarList() {
     setListCar([<div className="loading loading_center" key="loading-3"/>]);
-    const data = await getData('car');
+    const data = await getSimpleData('car', page - 1, 40, params);
+    if (data.response) {
+      navigate(`/admin/error/${data.response.status}`)
+    };
     setMainData(data);
-    console.log(data);
   };
 
   async function callBackDelete(id) {
-    const question =  window.confirm(`Удалить заказ ${id}`);
+    const question =  window.confirm(`Удалить заказ ${id} ?`);
     if (question) {
       await deleteSubject(login.data.access_token, id, 'car');
       setUpdate(id);
@@ -41,13 +64,15 @@ function AdminCar(props) {
 
   async function buildCarList() {
     if (mainData) {
+      const data = mainData.data.data;
       const listCar = [];
-      for (let i in mainData) {
-        const item = mainData[i];
+      for (let i in data) {
+        const item = data[i];
         const colors = [];
         item.colors.forEach(i => {
-          colors.push(`${i}, `);
+          colors.push(`${i}  `);
         });
+        const categoryId = () => {if (item.categoryId) return item.categoryId.name}
         const tile = 
         <div className='admin-page-table__car' key={getId()}>
           <div className='admin-page-table__tile'>
@@ -63,7 +88,7 @@ function AdminCar(props) {
             /> 
           </div>
           <div className='admin-page-table__tile'>
-            {item.categoryId.name}
+            {categoryId()}
           </div>
           <div className='admin-page-table__tile'>
             {colors}
@@ -133,6 +158,67 @@ function AdminCar(props) {
     };
   };
 
+  async function getListCategory() {
+    const data = await getData('category');
+    const list = [];
+    data.forEach((i) => list.push([i.name, i.id]));
+    setListCategory(list);
+  };
+
+  function changeFilter() {
+    const windowWidth = document.documentElement.clientWidth;
+
+    let hide;
+    if (windowWidth <= 767) {
+      hide = filterHide;
+    } else {
+      hide = false;
+    };
+    
+    if (!hide) {
+      const listFilter = {};
+
+      if (category) {
+        listFilter['categoryId[id]'] = category;
+      };
+      if (sort) {
+        switch (sort){
+          case 'Min цена по возрастанию':
+            listFilter['sort[categoryId[priceMin]]'] = 1;
+            break;
+          case 'Min цена по убыванию':
+            listFilter['sort[categoryId[priceMin]]'] = -1;;
+            break;
+          case 'Max цена по возрастанию':
+            listFilter['sort[categoryId[priceMax]]'] = 1;
+            break;
+          case 'Max цена по убыванию':
+            listFilter['sort[categoryId[priceMax]]'] = -1;
+            break;
+          case 'Топлива по возрастанию':
+            listFilter['sort[tank]'] = 1;
+            break;
+          case 'Топлива по убыванию':
+            listFilter['sort[tank]'] = -1;
+            break;
+          case 'Сначала старые машины':
+            listFilter['sort[createdAt]'] = 1;
+            break;
+          case 'Сначала новые машины':
+            listFilter['sort[createdAt]'] = -1;
+            break;
+        };
+      } else {
+        listFilter['sort[name]'] = 1;
+      };
+      setParams(listFilter);
+    };
+    
+    if (windowWidth <= 767) {
+      setFilterHide(!filterHide);
+    };
+  };
+
   // ------------------------------------------------------
 
   const selectorContainerClass = classNames({
@@ -142,81 +228,90 @@ function AdminCar(props) {
 
   // ------------------------------------------------------
 
-  useEffect(getDataCarList, [update]);
-  useEffect(buildCarList, [mainData]);
+  useEffect(getDataCarList, [ update, page, params ]);
+  useEffect(buildCarList, [ mainData ]);
+  useEffect(getListCategory, []);
 
   // ------------------------------------------------------
 
   return (
     <div className='admin-page-table'>
-      <p className='admin-page__main-title'>
-        Список автомобилей 
-      </p>
-      <div className='admin-page__main-window'>
-        <div className='admin-page__main-window-header'>
-          <div className={selectorContainerClass}>
-            {/* <SelectListCallBack
-              listValue={listCity}
-              collBack={setSity}
-              placeholder='город'
-              id='admin-page-list__filter-city'
-            /> */}
+      <div className='admin-page-table__wrapped admin-page-table__wrapped_car'>
+        <p className='admin-page__main-title'>
+          Список автомобилей 
+        </p>
+        <div className='admin-page__main-window'>
+          <div className='admin-page__main-window-header'>
+            <div className={selectorContainerClass}>
+              <SelectListCallBack
+                listValue={listCategory}
+                collBack={setCategory}
+                placeholder='категория'
+                id='admin-page-list__filter-category'
+              />
+              <SelectListCallBack
+                listValue={listSort}
+                collBack={setSort}
+                placeholder='сортировка по'
+                id='admin-page-list__filter-sort'
+              />
+            </div>
+            <button 
+              className='admin-button admin-button_filter-table'
+              onClick={changeFilter}
+            >Фильтр</button>
           </div>
-          <button 
-            className='admin-button'
-            // onClick={changeFilter}
-          >Фильтр</button>
-        </div>
 
 
-        <div className='admin-page__main-window-content'>
-          <div className='admin-page-table__car admin-page-table__car_name'>
-            <div className='admin-page-table__tile'>
-              <b>Модель</b> 
-            </div>
-            <div className='admin-page-table__tile'>
-              <b>Изображение</b> 
-            </div>
-            <div className='admin-page-table__tile'>
-              <b>Категория</b>
-            </div>
-            <div className='admin-page-table__tile'>
-              <b>Цвет</b>
-            </div>
-            <div className='admin-page-table__tile'>
-              <b>Номер</b>
-            </div>
-            <div className='admin-page-table__tile'>
-              <b>Цена Min</b>
-            </div>
-            <div className='admin-page-table__tile'>
-              <b>Цена Max</b>
-            </div>
-            <div className='admin-page-table__tile'>
-              <b>Бензин</b>
-            </div>
-            <div className='admin-page-table__tile'>
-              <b>Описание</b>
-            </div>
-            <div className='admin-page-table__tile'/>
+          <div className='admin-page__main-window-content admin-page__main-window-content_no-reduction'>
+            <SimpleBar 
+              className='admin-page__simple-bar admin-page-table__simple-bar_table'
+              autoHide = { false }
+            >
+              <div className='admin-page-table__car admin-page-table__name'>
+                <div className='admin-page-table__tile'>
+                  <b>Модель</b> 
+                </div>
+                <div className='admin-page-table__tile'>
+                  <b>Изображение</b> 
+                </div>
+                <div className='admin-page-table__tile'>
+                  <b>Категория</b>
+                </div>
+                <div className='admin-page-table__tile'>
+                  <b>Цвет</b>
+                </div>
+                <div className='admin-page-table__tile'>
+                  <b>Номер</b>
+                </div>
+                <div className='admin-page-table__tile'>
+                  <b>Цена Min</b>
+                </div>
+                <div className='admin-page-table__tile'>
+                  <b>Цена Max</b>
+                </div>
+                <div className='admin-page-table__tile'>
+                  <b>Бензин</b>
+                </div>
+                <div className='admin-page-table__tile'>
+                  <b>Описание</b>
+                </div>
+                <div className='admin-page-table__tile'/>
+              </div>
+              {listCar}
+            </SimpleBar>
           </div>
-          <SimpleBar 
-            className='admin-page__simple-bar admin-page__simple-bar_table'
-            autoHide = { false }
-          >
-            {listCar}
-          </SimpleBar>
-        </div>
 
-        
-        <div className='admin-page__main-window-footer'>
-          {/* <PageButton
-            data = {data}
-            split = {40}
-            page = {page}
-            callBackPage = {setPage}
-            callBeckLoading = {setListOrder}
-          /> */}
+          
+          <div className='admin-page__main-window-footer'>
+            <PageButton
+              data = {mainData}
+              split = {40}
+              page = {page}
+              callBackPage = {setPage}
+              callBeckLoading = {setListCar}
+            />
+          </div>
         </div>
       </div>
     </div>

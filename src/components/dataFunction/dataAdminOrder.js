@@ -19,7 +19,7 @@ export async function getListOrder(authorization, page, paramsData = {}) {
   try {
     return await axios.get('https://api-factory.simbirsoft1.com/api/db/order', { headers, params });
   } catch (error){
-    return 'error';
+    return error;
   };
 };
 
@@ -34,7 +34,7 @@ export async function getOrderById(authorization, id) {
   try {
     return await axios.get(`https://api-factory.simbirsoft1.com/api/db/order/${id}`, { headers });
   } catch (error){
-    return 'error';
+    return error;
   };
 };
 
@@ -49,6 +49,6 @@ export async function putOrder(authorization, id, putData) {
   try {
     return await axios.put(`https://api-factory.simbirsoft1.com/api/db/order/${id}`, putData, { headers });
   } catch (error){
-    return 'error';
+    return error;
   };
 };

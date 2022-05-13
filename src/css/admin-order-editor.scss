@@ -14,31 +14,11 @@
   flex-direction: column;
 }
 
-@media screen and (max-width: $widthMobile) {
-  .admin-page-editor {
-    width: 100%;
-    height: calc(100% - 90px);
-  }
 
-  .admin-page-editor {
-    padding: 8px;
-  }
-};
 
 .selection-list_admin-order-editor {
   margin-bottom: 8px;
   margin-right: 16px;
-}
-
-.admin-page__main-window_admin-page-editor {
-}
-
-.admin-page-editor__main-window-content {
-  width: 100%;
-  padding: 16px;
-  box-sizing: border-box;
-  height: calc(100% - 60px);
-  overflow: auto;
 }
 
 .admin-page-editor__p {
@@ -86,3 +66,14 @@
 .admin-button_editor {
   margin-bottom: 8px;
 }
+
+@media screen and (max-width: $widthMobile) {
+  .admin-page-editor {
+    width: 100%;
+    height: calc(100% - 90px);
+  }
+
+  .admin-page-editor {
+    padding: 8px;
+  }
+};

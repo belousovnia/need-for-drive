@@ -16,7 +16,7 @@ export async function getData(address, paramsData = {}){
     const response = await axios.get(`https://api-factory.simbirsoft1.com/api/db/${address}`, { headers, params });
     return response.data.data;
   } catch (error){
-    return 'error';
+    return error;
   };
 };
 
@@ -32,10 +32,9 @@ export async function getSimpleData(address, page = 0, limit = null, paramsData 
   };
 
   try {
-    const response = await axios.get(`https://api-factory.simbirsoft1.com/api/db/${address}`, { headers, params });
-    return response;
+    return await axios.get(`https://api-factory.simbirsoft1.com/api/db/${address}`, { headers, params });
   } catch (error){
-    return 'error';
+    return error;
   };
 };
 
@@ -51,7 +50,7 @@ export async function putData(authorization, type, id, data) {
     const response = await axios.put(`https://api-factory.simbirsoft1.com/api/db/${type}/${id}`, data, { headers });
     return response;
   } catch (error){
-    return 'error';
+    return error;
   };
 };
 
@@ -67,7 +66,7 @@ export async function addData(authorization, type, data) {
     const response = await axios.post(`https://api-factory.simbirsoft1.com/api/db/${type}`, data, { headers });
     return response;
   } catch (error){
-    return 'error';
+    return error;
   };
 };
 
@@ -81,10 +80,9 @@ export async function deleteSubject(authorization, id, type) {
   
   try {
     const response = await axios.delete(`https://api-factory.simbirsoft1.com/api/db/${type}/${id}`, { headers });
-    console.log(response);
     return response;
   } catch (error){
-    return 'error';
+    return error;
   };
 };
 
