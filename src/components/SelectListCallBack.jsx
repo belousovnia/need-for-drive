@@ -54,6 +54,7 @@ function SelectListCallBack(props) {
   // ------------------------------------------------------
 
   const barWrappedClass = classNames({
+    'selection-list__bar': true,
     'selection-list__bar-wrapped': true,
     'selection-list__bar-wrapped_off': active,
   });
@@ -116,15 +117,13 @@ function SelectListCallBack(props) {
             <path d="M0 0.5L4.25 5L8.5 0.5H0Z" fill="#ABB6BF" />
           </svg>
         </div>
-        <div className={barWrappedClass}>
           <SimpleBar 
-            className='selection-list__bar'
+            className={barWrappedClass}
             autoHide = { false }
             id='selection-list__bar'
           >
             {buildList()}
           </SimpleBar>
-        </div>
       </div>
     </div>
   );

@@ -8,7 +8,7 @@
 }
 
 .admin-page-table__simple-bar_table {
-  height: calc(100% - 41px);
+  height: 100%;
 }
 
 @media screen and (max-width: $widthTable) {
@@ -35,6 +35,9 @@
   display: grid;
   grid-template-columns: 0.7fr 1fr 0.6fr 1fr 0.6fr 0.6fr 0.6fr 0.4fr 1.5fr 0.9fr ;
   min-width: 1120px;
+  border-bottom: 1px solid $grayLight;
+  padding-left: 12px;
+  box-sizing: border-box;
 }
 
 .admin-page-table__category {
@@ -42,6 +45,9 @@
   grid-template-columns: 120px calc(100% - 270px) 150px;
   min-width: 450px;
   width: 100%;
+  border-bottom: 1px solid $grayLight;
+  padding-left: 12px;
+  box-sizing: border-box;
 }
 
 .admin-page-table__rate-type {
@@ -49,6 +55,9 @@
   grid-template-columns: 120px calc(100% - 270px) 150px;
   min-width: 400px;
   width: 100%;
+  border-bottom: 1px solid $grayLight;
+  padding-left: 12px;
+  box-sizing: border-box;
 }
 
 .admin-page-table__rate {
@@ -56,6 +65,9 @@
   grid-template-columns: 120px 120px calc(100% - 390px) 150px;
   min-width: 500px;
   width: 100%;
+  border-bottom: 1px solid $grayLight;
+  padding-left: 12px;
+  box-sizing: border-box;
 }
 
 .admin-page-table__city {
@@ -63,6 +75,9 @@
   grid-template-columns: 120px calc(100% - 270px) 150px;
   min-width: 300px;
   width: 100%;
+  border-bottom: 1px solid $grayLight;
+  padding-left: 12px;
+  box-sizing: border-box;
 }
 
 .admin-page-table__order-status {
@@ -70,6 +85,9 @@
   grid-template-columns: 120px calc(100% - 270px) 150px;
   min-width: 300px;
   width: 100%;
+  border-bottom: 1px solid $grayLight;
+  padding-left: 12px;
+  box-sizing: border-box;
 }
 
 .admin-page-table__point {
@@ -77,9 +95,15 @@
   grid-template-columns: 120px 150px calc(100% - 420px) 150px;
   min-width: 600px;
   width: 100%;
+  border-bottom: 1px solid $grayLight;
+  padding-left: 12px;
+  box-sizing: border-box;
 }
 
 .admin-page-table__name {
+  background-color: #fff;
+  position: sticky;
+  top: 0px;
   .admin-page-table__tile {
     font-size: 14px;
     min-height: 40px;
@@ -94,7 +118,6 @@
   display: flex;
   padding-left: 8px;
   align-items: center;
-  border-bottom: 1px solid $grayLight;
   flex-wrap: wrap;
   font-size: 12px;
 }

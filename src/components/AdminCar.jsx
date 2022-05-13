@@ -264,40 +264,40 @@ function AdminCar(props) {
 
 
           <div className='admin-page__main-window-content admin-page__main-window-content_no-reduction'>
-            <div className='admin-page-table__car admin-page-table__name'>
-              <div className='admin-page-table__tile'>
-                <b>Модель</b> 
-              </div>
-              <div className='admin-page-table__tile'>
-                <b>Изображение</b> 
-              </div>
-              <div className='admin-page-table__tile'>
-                <b>Категория</b>
-              </div>
-              <div className='admin-page-table__tile'>
-                <b>Цвет</b>
-              </div>
-              <div className='admin-page-table__tile'>
-                <b>Номер</b>
-              </div>
-              <div className='admin-page-table__tile'>
-                <b>Цена Min</b>
-              </div>
-              <div className='admin-page-table__tile'>
-                <b>Цена Max</b>
-              </div>
-              <div className='admin-page-table__tile'>
-                <b>Бензин</b>
-              </div>
-              <div className='admin-page-table__tile'>
-                <b>Описание</b>
-              </div>
-              <div className='admin-page-table__tile'/>
-            </div>
             <SimpleBar 
               className='admin-page__simple-bar admin-page-table__simple-bar_table'
               autoHide = { false }
             >
+              <div className='admin-page-table__car admin-page-table__name'>
+                <div className='admin-page-table__tile'>
+                  <b>Модель</b> 
+                </div>
+                <div className='admin-page-table__tile'>
+                  <b>Изображение</b> 
+                </div>
+                <div className='admin-page-table__tile'>
+                  <b>Категория</b>
+                </div>
+                <div className='admin-page-table__tile'>
+                  <b>Цвет</b>
+                </div>
+                <div className='admin-page-table__tile'>
+                  <b>Номер</b>
+                </div>
+                <div className='admin-page-table__tile'>
+                  <b>Цена Min</b>
+                </div>
+                <div className='admin-page-table__tile'>
+                  <b>Цена Max</b>
+                </div>
+                <div className='admin-page-table__tile'>
+                  <b>Бензин</b>
+                </div>
+                <div className='admin-page-table__tile'>
+                  <b>Описание</b>
+                </div>
+                <div className='admin-page-table__tile'/>
+              </div>
               {listCar}
             </SimpleBar>
           </div>

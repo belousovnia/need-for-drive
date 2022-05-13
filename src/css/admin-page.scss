@@ -358,6 +358,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .admin-page__window-namber {
@@ -484,7 +485,7 @@
     left: -252px;
   }
   .admin-page__main-window-header {
-    width: calc(100vw - 32px);
+    width: calc(100vw - 34px);
     box-sizing: border-box;
     height: auto;
     position: absolute;

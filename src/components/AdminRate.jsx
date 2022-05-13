@@ -121,22 +121,23 @@ function AdminRate(props) {
         </p>
         <div className='admin-page__main-window'>
           <div className='admin-page__main-window-content admin-page__main-window-content_no-footer'>
-            <div className='admin-page-table__rate admin-page-table__name'>
-              <div className='admin-page-table__tile'>
-                <b>Название</b> 
-              </div>
-              <div className='admin-page-table__tile'>
-                <b>Стоимость</b>
-              </div>
-              <div className='admin-page-table__tile'>
-                <b>Продолжительность</b>
-              </div>
-              <div className='admin-page-table__tile'/>
-            </div>
+            
             <SimpleBar 
               className='admin-page__simple-bar admin-page-table__simple-bar_table'
               autoHide = { false }
             >
+              <div className='admin-page-table__rate admin-page-table__name'>
+                <div className='admin-page-table__tile'>
+                  <b>Название</b> 
+                </div>
+                <div className='admin-page-table__tile'>
+                  <b>Стоимость</b>
+                </div>
+                <div className='admin-page-table__tile'>
+                  <b>Продолжительность</b>
+                </div>
+                <div className='admin-page-table__tile'/>
+              </div>
               {listRate}
             </SimpleBar>
           </div>
