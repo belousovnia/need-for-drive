@@ -1895,7 +1895,7 @@
 }
 
 .admin-page__main-window-content_no-footer {
-  height: calc(100% - 60px);
+  height: calc(100% - 40px);
 }
 
 .admin-page__simple-bar {
@@ -1917,6 +1917,10 @@
   color: #007BFF;
   font-size: 12px;
   box-sizing: border-box;
+}
+
+.admin-page__main-window-footer_no-page-button {
+  height: 40px;
 }
 
 .admin-page__main-window-footer_editor {
@@ -2471,6 +2475,9 @@
 
 .admin-page-table__simple-bar_table {
   height: 100%;
+}
+.admin-page-table__simple-bar_table .simplebar-track {
+  margin-top: 41px;
 }
 
 @media screen and (max-width: 1024px) {

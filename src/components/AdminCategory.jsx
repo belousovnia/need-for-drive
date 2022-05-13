@@ -118,7 +118,6 @@ function AdminCategory(props) {
         </p>
         <div className='admin-page__main-window'>
           <div className='admin-page__main-window-content admin-page__main-window-content_no-footer'>
-            
             <SimpleBar 
               className='admin-page__simple-bar admin-page-table__simple-bar_table'
               autoHide = { false }
@@ -136,7 +135,7 @@ function AdminCategory(props) {
             </SimpleBar>
           </div>
 
-          <div className='admin-page__main-window-footer'>
+          <div className='admin-page__main-window-footer admin-page__main-window-footer_no-page-button'>
           </div>
         </div>
       </div>

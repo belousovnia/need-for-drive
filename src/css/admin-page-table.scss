@@ -9,6 +9,10 @@
 
 .admin-page-table__simple-bar_table {
   height: 100%;
+
+  .simplebar-track {
+    margin-top: 41px;
+  }
 }
 
 @media screen and (max-width: $widthTable) {

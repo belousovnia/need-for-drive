@@ -136,7 +136,7 @@ function AdminRateType(props) {
             </SimpleBar>
           </div>
 
-          <div className='admin-page__main-window-footer'>
+          <div className='admin-page__main-window-footer admin-page__main-window-footer_no-page-button'>
           </div>
         </div>
       </div>

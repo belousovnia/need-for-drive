@@ -303,7 +303,7 @@
 }
 
 .admin-page__main-window-content_no-footer {
-  height: calc(100% - 60px);
+  height: calc(100% - 40px);
 }
 
 .admin-page__simple-bar {
@@ -325,6 +325,10 @@
   color: $blue;
   font-size: 12px;
   box-sizing: border-box;
+}
+
+.admin-page__main-window-footer_no-page-button {
+  height: 40px;
 }
 
 .admin-page__main-window-footer_editor {
