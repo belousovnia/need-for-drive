@@ -1,0 +1,79 @@
+@import "general.scss";
+
+.admin-page-editor {
+  width: 100%;
+  height: calc(100% - 140px);
+  padding-top: 28px;
+  padding-bottom: 28px;
+  padding-left: 32px;
+  padding-right: 32px;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.selection-list_admin-order-editor {
+  margin-bottom: 8px;
+  margin-right: 16px;
+}
+
+.admin-page-editor__p {
+  font-family: $mainFont;
+  margin: 0;
+  margin-bottom: 4px;
+  font-size: 14px;
+  margin-right: 16px;
+}
+
+.admin-page-editor__p-title {
+  font-family: $mainFont;
+  margin: 0;
+  margin-bottom: 8px;
+  font-size: 14px;
+  margin-right: 16px;
+}
+
+.admin-page-editor__p-price {
+  font-family: $mainFont;
+  margin: 0;
+  margin-bottom: 8px;
+  margin-right: 16px;
+}
+
+.admin-page-editor__select-container {
+  display: flex;
+  align-items: center;
+  width: auto;
+  height: auto;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.admin-login__input_editor {
+  margin: 0;
+  margin-right: 16px;
+  margin-bottom: 8px;
+}
+
+.admin-page-editor__button-container {
+  margin-bottom: 16px;
+}
+
+.admin-button_editor {
+  margin-bottom: 8px;
+}
+
+@media screen and (max-width: $widthMobile) {
+  .admin-page-editor {
+    width: 100%;
+    height: calc(100% - 90px);
+  }
+
+  .admin-page-editor {
+    padding: 8px;
+  }
+};

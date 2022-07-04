@@ -1,0 +1,138 @@
+@import "general.scss";
+
+.selection-list {
+  width: 112px;
+  height: 32px;
+  box-sizing: border-box;
+  position: relative;
+  border: 1px solid $inputBorder;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+.selection-list__content {
+  min-height: 30px;
+  border-radius: 4px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  box-sizing: border-box;
+
+  
+  z-index: 2;
+}
+
+.selection-list__input-wrapper {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.selection-list__input {
+  font-size: 11px;
+  height: 30px;
+  font-family: $mainFont;
+  width: 100%;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: 4px;
+  margin: 0;
+  outline:none;
+  padding: 0;
+  padding-right: 4px;
+  margin-left: 8px;
+  box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0);
+  text-overflow: ellipsis;
+  user-select: none;
+  color: black;
+}
+
+.selection-list__arrow {
+  width: 9;
+  height: auto;
+  margin-right: 8px;
+}
+
+.selection-list__input-mask {
+  position: absolute;
+  width: 110px;
+  height: 30px;
+}
+
+.selection-list__arrow-flip {
+  transform: rotate(180deg);
+}
+
+.selection-list__bar-wrapped {
+  width: calc(100%) ;
+  max-height: 100px;
+  height: auto;
+  transition-duration: 0.1s;
+  position: relative;
+  z-index: 2;
+  right: 1px;
+  top: 0;
+
+  
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border: 1px solid $inputBorder;
+}
+
+.selection-list__bar {
+  width: 100%;
+  height: 100%;
+
+  .simplebar-track {
+    max-width: 5px;
+    border-left: 1px solid $inputBorder;
+  }
+
+  .simplebar-scrollbar:before {
+    margin-left: -1px;
+    width: 2px;
+  }
+
+  .simplebar-wrapper {
+    margin: 0;
+  }
+
+  .simplebar-content {
+    background-color: #fff;
+    overflow: hidden;
+  }
+}
+
+.selection-list__bar-wrapped_off {
+  transition-duration: 0.1s;
+  border: 0;
+  max-height: 0;
+}
+
+.selection-list__item {
+  // background-color: #fff;
+  background-color: rgba(255, 255, 255, 0);
+  width: 100%;
+  font-family: $mainFont;
+  font-size: 11px;
+  word-wrap: break-word; 
+  border: 0;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-right: 8px;
+  padding-left: 8px;
+  text-align: left;
+  position: relative;
+}
+
+.selection-list__item:hover {
+  filter: brightness(90%);
+}
+
+.selection-list__item:active {
+  filter: brightness(80%);
+}

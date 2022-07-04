@@ -1,0 +1,133 @@
+@import "general.scss";
+
+.admin-page-tile {
+  width: 100%;
+  height: 90px;
+  padding-left: 22px;
+  padding-right: 22px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  margin-bottom: 8px;
+}
+
+.admin-page-tile__car-img {
+  max-width: 100%;
+  max-height: 100%;
+  margin-right: 16px;
+}
+
+.admin-page-tile__text-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-right: 16px;
+  width: auto;
+}
+
+.admin-page-tile__p {
+  margin: 0;
+  font-family: $mainFont;
+  font-size: 13px;
+  color: $grayDark;
+
+  b {
+    color: black;
+  }
+}
+
+.admin-page-tile__check-box-container {
+  margin-right: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.admin-page-tile__button-label {
+  margin: 0;
+}
+
+.admin-page-tile__price {
+  font-family: $mainFont;
+  font-size: 24px;
+  margin-top: auto;
+  margin-bottom: auto;
+  word-wrap: none;
+  width: auto;
+}
+
+.admin-page-tile__button-container {
+  height: 24px;
+  width: 140px;
+  display: flex;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.admin-page-tile__button-container_table {
+  width: 90px;
+  height: 20px;
+}
+
+.admin-page-tile__button {
+  width: 100%;
+  height: 100%;
+  font-family: $mainFont;
+  background-color: #fff;
+  border: 1px solid $grayDark;
+  color: $grayDark;
+  font-size: 11px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin-page-tile__button_table {
+  font-size: 8px;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.admin-page-tile__button:active {
+  filter: brightness(80%);
+}
+
+.admin-page-tile__button_ready {
+}
+
+.admin-page-tile__button_cansel{
+  border: 0;
+  border-top: 1px solid $grayDark;
+  border-bottom: 1px solid $grayDark;
+  border-left: 1px solid $grayDark;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.admin-page-tile__button_change{
+  border: 1px solid $grayDark;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+@media screen and (max-width: $widthTable) {
+  .admin-page-tile__car-img {
+    display: none;
+  };
+
+  .admin-page-tile {
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+  }
+};
+
+@media screen and (max-width: $widthMobile) {
+  .admin-page-tile {
+    height: auto;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1 1 1 1;
+    border-bottom: 1px solid $grayLight;
+  }
+};

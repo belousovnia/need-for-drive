@@ -1,0 +1,89 @@
+@import 'general.scss';
+
+.radio-button__container {
+
+}
+
+.radio-button__label {
+  display: flex;
+  align-items: center;
+  margin-right: 16px;
+  margin-bottom: 8px;
+}
+
+.radio-button__input {
+  width: 0;
+  height: 0;
+  position: absolute;
+  opacity: 0;
+  z-index: -3;
+}
+
+.radio-button__point {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border: 1px solid $grayDark;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+.radio-button__title {
+  font-family: $mainFont;
+  font-size: 14px;
+  font-weight: 300;
+  margin: 0;
+  margin-left: 8px;
+  color: $grayDark;
+}
+
+.radio-button__input:checked + .radio-button__label {
+  .radio-button__point{
+    border: 3px solid $mainAccent;
+  }
+
+  .radio-button__title {
+    color: black;
+  }
+
+  .checkbox-button__point {
+    border: 1px solid $mainAccent;
+
+    .checkbox-button__check {
+      display: block;
+    }
+  }
+
+  .checkbox-button__point_admin {
+    border: 1px solid $blue;
+    background-color: $blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.checkbox-button__point {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border: 1px solid $grayDark;
+  box-sizing: border-box;
+}
+
+.checkbox-button__point_admin {
+  border-radius: 2px;
+}
+
+.checkbox-button__check {
+  width: 13px;
+  height: 10px;
+  display: none;
+}
+
+.checkbox-button__check_admin {
+  width: 8px;
+  height: 8px;
+  fill: #fff;
+}
+

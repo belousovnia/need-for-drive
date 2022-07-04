@@ -1,0 +1,93 @@
+@import 'general.scss';
+
+.step-2 {
+  width: 100%;
+}
+
+.step-2__category-wrapped {
+  display: flex;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.step-2__block-tile {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 32px;
+}
+
+.step-2__tile {
+  border: 1px solid $grayLight;
+  height: 192px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.step-2__tile:hover {
+  border: 1px solid $grayDark;
+}
+
+.step-2__tile-input {
+  width: 0;
+  height: 0;
+  position: fixed;
+  opacity: 0;
+  z-index: -3;
+}
+
+.step-2__tile-input:checked + .step-2__tile{
+  border: 1px solid $mainAccent;
+}
+
+.step-2__tile-name {
+  font-family: $mainFont;
+  font-size: 18px;
+  margin: 0;
+}
+
+.step-2__tile-price {
+  font-family: $mainFont;
+  font-size: 14px;
+  color: $grayDark;
+  margin: 0;
+  margin-bottom: 36px;
+}
+
+.step-2__tile-img-wrapped {
+  width: 100%;
+  height: 120px;
+  padding-left: 80px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: end;
+  align-items: end;
+}
+
+.step-2__tile-img {
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  box-sizing: border-box;
+  position: relative;
+  right: 0;
+  bottom: 0;
+}
+
+@media screen and (max-width: $widthTable) {
+  .step-2__tile-input {
+    top: auto;
+    bottom: 0;
+  }
+}
+
+@media screen and (max-width: $widthMobile) {
+  .step-2__block-tile {
+    grid-template-columns: 1fr;
+  }
+
+  .loading{
+    left: calc(50% - 30px);
+  }
+}

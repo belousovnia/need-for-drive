@@ -1,0 +1,53 @@
+@import "general.scss";
+
+.admin-page-table_error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin-page-error__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 15px;
+  padding-right: 16px;
+}
+
+.admin-page-error__title-code {
+  font-size: 75px;
+  font-family: $mainFont;
+  color: $inputBorder;
+  font-weight: 500;
+  margin: 0;
+}
+
+.admin-page-error__title {
+  font-family: $mainFont;
+  font-size: 50px;
+  margin: 0;
+  text-align: center;
+}
+
+.admin-page-error__p {
+  font-size: 20px;
+  font-family: $mainFont;
+  margin: 0;
+  color: $inputBorder;
+  text-align: center;
+}
+
+.admin-page-error__admin-button {
+  margin-top: 24px;
+}
+
+@media screen and (max-width: $widthMobile){
+  .admin-page-error__title {
+    font-size: 32px;
+  }
+
+  .admin-page-error__p {
+    font-size: 16px;
+  }
+}
