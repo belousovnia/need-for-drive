@@ -741,7 +741,7 @@ function AdminPage(props) {
               </Link>  
             </div>
             <p className='admin-page__footer-info'>
-              Copyright © 2020 Simbirsoft
+              Copyright © 2020 digital marketing
             </p>
           </div>
         </div>
